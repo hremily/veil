@@ -1,0 +1,4 @@
+{
+  "singleQuote": true,//одинарні лапки
+  "trailingComma": "all"//кома після останнього елемента
+}

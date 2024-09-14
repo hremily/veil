@@ -1,0 +1,16 @@
+{
+  "name": "veil",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://milunchik: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@github.com/hremily/veil.git",
+  "author": "milunchik <emili061116@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "scripts": {
+    "start:server": "yarn --cwd server start:dev",
+    "start:client": "yarn --cwd client dev",
+    "start": "concurrently \"yarn start:server\" \"yarn start:client\""
+  }
+}
