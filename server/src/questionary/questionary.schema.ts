@@ -1,5 +1,6 @@
 import { Schema } from "@nestjs/mongoose";
 import mongoose, { SchemaTypes } from "mongoose";
+import { ObjectId } from "mongodb";
 
 Schema()
 export const QuestionarySchema = new mongoose.Schema({
@@ -15,5 +16,5 @@ export type QuestionaryType={
     phone_number: {type: String,},
     email: {type: String, },
     age: {type: Number, },
-    userId: {type: Object,}
+    userId: {type: ObjectId,}
 }
