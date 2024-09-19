@@ -1,5 +1,5 @@
 import { Schema } from "@nestjs/mongoose";
-import mongoose from "mongoose";
+import mongoose, {  SchemaTypes } from "mongoose";
 
 Schema()
 export const TeacherSchema = new mongoose.Schema({
@@ -10,7 +10,8 @@ export const TeacherSchema = new mongoose.Schema({
     experience: {type: String, required: true, default: ''},
     lessons: {type: String, required: true, default: ''},
     desciption: {type :String, required: true, default: ''},
-    price: {type: Number, required: true, default: 0}
+    price: {type: Number, required: true, default: 0},
+    questionaries: [{type: SchemaTypes.ObjectId, ref: "Questionary", required: true}]
 })
 
 export type TeacherType = {
@@ -20,5 +21,6 @@ export type TeacherType = {
     phone_number: {type: String,},
     experience: {type: String, },
     lessons: {type: String, },
-    desciption: {type :String, }
+    desciption: {type :String, },
+    questionaries: {type: Object}
 }

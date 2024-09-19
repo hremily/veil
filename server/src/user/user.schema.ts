@@ -6,7 +6,8 @@ export const UserSchema = new mongoose.Schema({
     email: {type: String, unique: true, required: true},
     password: {type: String, required: true,},
     fullname: {type: String, required: true,  default: ''},
-    phone_number: {type: String, required: true, default: ''}
+    phone_number: {type: String, required: true, default: ''},
+    questionaries: [{type: Object, ref: "Questionary", required: true}]
 }
 )
 
@@ -16,5 +17,3 @@ export type UserType = {
     fullname: {type:String},
     phone_number: {type: String}
 }
-
-//for students
