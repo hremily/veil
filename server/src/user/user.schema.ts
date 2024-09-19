@@ -7,7 +7,8 @@ export const UserSchema = new mongoose.Schema({
     password: {type: String, required: true,},
     fullname: {type: String, required: true,  default: ''},
     phone_number: {type: String, required: true, default: ''},
-    questionaries: [{type: Object, ref: "Questionary", required: true}]
+    questionaries: [{type: Object, ref: "Questionary", required: true}],
+    role: {type: String, ref: "User" }
 }
 )
 

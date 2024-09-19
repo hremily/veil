@@ -11,7 +11,8 @@ export const TeacherSchema = new mongoose.Schema({
     lessons: {type: String, required: true, default: ''},
     desciption: {type :String, required: true, default: ''},
     price: {type: Number, required: true, default: 0},
-    questionaries: [{type: SchemaTypes.ObjectId, ref: "Questionary", required: true}]
+    questionaries: [{type: SchemaTypes.ObjectId, ref: "Questionary", required: true}],
+    role: {type: String, ref: "User" }
 })
 
 export type TeacherType = {
