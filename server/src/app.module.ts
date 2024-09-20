@@ -13,10 +13,14 @@ import {ConfigModule, ConfigService} from '@nestjs/config'
     MongooseModule.forRootAsync({
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => {
-        return {
-          uri: `mongodb+srv://milunchik:${config.get<string>('DB_PASSWORD')}@${config.get<string>('DB_CLUSTER')}.xw8xy.mongodb.net/?retryWrites=true&w=majority&appName=VeilCluster`,
-        };
-      }
+        const uri = config.get<string>("NODE_ENV") === 'local' ? 
+        `mongodb://${config.get<string>("DB_USER")}:${config.get<string>("DB_PASSWORD")}@${config.get<string>("DB_HOST")}:${config.get<string>("DB_PORT")}/${config.get<string>("DB_NAME")}` : 
+        `mongodb+srv://${config.get<string>("DB_USER")}:${config.get<string>("DB_PASSWORD")}@${config.get<string>("DB_CLUSTER")}.${config.get<string>("DB_HASH")}.mongodb.net/${config.get<string>("DB_NAME")}?retryWrites=true&w=majority&appName=VeilCluster`;
+
+      return {
+        uri
+
+  }}
     }),
     
   ],
