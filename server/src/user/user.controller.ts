@@ -63,4 +63,9 @@ export class UserController {
   async delete(@Param('id') id: string) {
     return this.userService.delete(id);
   }
+
+  @Post('/signout')
+  async signout(@Session() session: any) {
+    session.userId = null;
+  }
 }

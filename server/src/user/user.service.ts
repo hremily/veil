@@ -3,13 +3,17 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserType } from './user.schema';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
+import { randomBytes, scrypt as _scrypt } from 'crypto';
+import { promisify } from 'util';
+
+const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel('User') private userModel: Model<UserType>) {}
 
   async create(email: string, password: string) {
-    return await this.userModel.create({ email, password });
+    return await this.userModel.create({ email, password, role: 'user' });
   }
 
   async findOne(id: string) {
@@ -40,9 +44,14 @@ export class UserService {
 
     const { email, password, fullname, phone_number } = body;
 
+    const salt = randomBytes(8).toString('hex');
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
+
+    const hashedPassword = salt + '.' + hash.toString('hex');
+
     const updatedUser = {
       email: email || currentUser.email,
-      password: password || currentUser.password,
+      password: hashedPassword || currentUser.password,
       fullname: fullname || currentUser.fullname,
       phone_number: phone_number || currentUser.phone_number,
     };
