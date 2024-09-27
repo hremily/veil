@@ -3,45 +3,52 @@ import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { BadRequestException } from '@nestjs/common';
 import { promisify } from 'util';
 import { UserService } from '../user.service';
+import { TeacherService } from 'src/teacher/teacher.service';
 
 const scrypt = promisify(_scrypt);
 
 @Injectable()
-    export class AuthService {
-    constructor(private usersService: UserService){}
-    
-   async signup (email: string, password: string){
-        const users = await this.usersService.findByEmail(email);
-        if(users){
-            throw new BadRequestException('Email already exist!');
-        }
+export class AuthService {
+  constructor(
+    private usersService: UserService,
+    private teacherService: TeacherService,
+  ) {}
 
-        const salt = randomBytes(8).toString('hex');
-        const hash = (await scrypt(password, salt, 32)as Buffer);
-
-        const hashedPassword = salt+'.'+hash.toString('hex');
-
-        const newUser = await this.usersService.create(email, hashedPassword);
-        return newUser;
+  async signup(email: string, password: string, role: string) {
+    const users = await this.usersService.findByEmail(email);
+    if (users) {
+      throw new BadRequestException('Email already exist!');
     }
 
-    async signin(email: string, password: string){
+    const salt = randomBytes(8).toString('hex');
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
 
-            const user = await this.usersService.findByEmail(email)
+    const hashedPassword = salt + '.' + hash.toString('hex');
 
-            if(!user){
-                throw new NotFoundException("User not found");
-            }
-            const userPassword: string = user.password.toString();
+    const newUser = await this.usersService.create(email, hashedPassword, role);
+    return newUser;
+  }
 
-            const [salt, storedHash] = userPassword.split('.');
+  async signin(email: string, password: string, role: string) {
+    let user;
+    if (role == 'user') {
+      user = await this.usersService.findByEmail(email);
+    } else if (role == 'teacher') {
+      user = await this.teacherService.findByEmail(email);
+    }
 
-            const hashedPassword = (await scrypt(password, salt, 32)as Buffer);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    const userPassword: string = user.password.toString();
 
-            if(storedHash !==hashedPassword.toString('hex')){
-                throw new BadRequestException('invalid password');
-            }
+    const [salt, storedHash] = userPassword.split('.');
 
-            return user;    
+    const hashedPassword = (await scrypt(password, salt, 32)) as Buffer;
+
+    if (storedHash !== hashedPassword.toString('hex')) {
+      throw new BadRequestException('invalid password');
+    }
+    return user;
+  }
 }
-    }

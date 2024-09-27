@@ -12,8 +12,8 @@ const scrypt = promisify(_scrypt);
 export class UserService {
   constructor(@InjectModel('User') private userModel: Model<UserType>) {}
 
-  async create(email: string, password: string) {
-    return await this.userModel.create({ email, password, role: 'user' });
+  async create(email: string, password: string, role: string) {
+    return await this.userModel.create({ email, password, role });
   }
 
   async findOne(id: string) {

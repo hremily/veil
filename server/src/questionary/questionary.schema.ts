@@ -11,7 +11,7 @@ export const QuestionarySchema = new mongoose.Schema({
   userId: { type: SchemaTypes.ObjectId, ref: 'User' },
   subject: { type: String, required: true },
   teacher: { type: String, required: true },
-  desciption: { type: String },
+  description: { type: String },
 });
 
 export type QuestionaryType = {

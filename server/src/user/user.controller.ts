@@ -16,24 +16,27 @@ import { AuthService } from './auth/auth.service';
 import { NotFoundException } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AdminGuard } from 'src/guards/admin.guard';
+import { TeacherService } from 'src/teacher/teacher.service';
 
 @Controller()
 export class UserController {
   constructor(
     private userService: UserService,
     private authService: AuthService,
+    private teacherService: TeacherService,
   ) {}
-
-  @Post('/signup')
+  @Post('/signupuser')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
-    const user = await this.authService.signup(body.email, body.password);
+    const role = 'user';
+    const user = await this.authService.signup(body.email, body.password, role);
     session.userId = user._id;
     return user;
   }
 
-  @Post('/signin')
+  @Post('/signinuser')
   async signin(@Body() body: CreateUserDTO, @Session() session: any) {
-    const user = await this.authService.signin(body.email, body.password);
+    const role = 'user';
+    const user = await this.authService.signin(body.email, body.password, role);
     session.userId = user._id;
     return user;
   }
