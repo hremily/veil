@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { join } from 'path';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserSchema } from './user/user.schema';
-import { RoleSchema } from './user/auth/role.schema';
 import { TeacherSchema } from './teacher/teacher.schema';
 import { UserService } from './user/user.service';
-import { UserController } from './user/user.controller';
+import { TeacherService } from './teacher/teacher.service';
 import { AuthModule } from './user/auth/auth.module';
+import { CustomMailerService } from './mail/mail.service';
 
 @Module({
   imports: [
@@ -16,6 +18,18 @@ import { AuthModule } from './user/auth/auth.module';
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+          user: 'emili061116@gmail.com',
+          pass: 'novuy parol',
+        },
+      },
+    }),
+
     MongooseModule.forRootAsync({
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => {
@@ -29,12 +43,11 @@ import { AuthModule } from './user/auth/auth.module';
     }),
     MongooseModule.forFeature([
       { name: 'User', schema: UserSchema },
-      { name: 'Role', schema: RoleSchema },
       { name: 'Teacher', schema: TeacherSchema },
     ]),
     AuthModule,
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserService],
+  controllers: [AppController],
+  providers: [AppService, UserService, TeacherService, CustomMailerService],
 })
 export class AppModule {}
