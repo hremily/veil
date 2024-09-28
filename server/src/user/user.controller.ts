@@ -16,14 +16,13 @@ import { AuthService } from './auth/auth.service';
 import { NotFoundException } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AdminGuard } from 'src/guards/admin.guard';
-import { TeacherService } from 'src/teacher/teacher.service';
+import mongoose from 'mongoose';
 
 @Controller()
 export class UserController {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private teacherService: TeacherService,
   ) {}
   @Post('/signupuser')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
@@ -33,11 +32,11 @@ export class UserController {
     return user;
   }
 
-  @Post('/signinuser')
+  @Post('/signin')
   async signin(@Body() body: CreateUserDTO, @Session() session: any) {
-    const role = 'user';
-    const user = await this.authService.signin(body.email, body.password, role);
+    const user = await this.authService.signin(body.email, body.password);
     session.userId = user._id;
+    session.userRole = user.role;
     return user;
   }
 
@@ -45,33 +44,33 @@ export class UserController {
   @Get('/user')
   async getProfile(@Session() session: any) {
     const userId = session.userId;
-    if (!userId) {
-      throw new NotFoundException('User not found in session');
-    }
-    return this.userService.findOne(userId);
+    return await this.authService.getUser(userId);
   }
 
   @UseGuards(AdminGuard)
   @Get('/users')
   async findAllUser() {
-    return this.userService.findAllUser();
+    return await this.userService.findAllUsers();
   }
 
   @Get('/:id')
   async findUser(@Param('id') id: string) {
-    return this.userService.findOne(id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new NotFoundException('Invalid user ID');
+    }
+    return await this.userService.findOne(id);
   }
 
   @UseGuards(AuthGuard)
   @Put('/:id')
   async updateProfile(@Param('id') id: string, @Body() body: UpdateProfileDto) {
-    return this.userService.updateProfile(id, body);
+    return await this.userService.updateProfile(id, body);
   }
 
   @UseGuards(AdminGuard)
   @Delete('/:id')
   async delete(@Param('id') id: string) {
-    return this.userService.delete(id);
+    return await this.userService.delete(id);
   }
 
   @Post('/signout')

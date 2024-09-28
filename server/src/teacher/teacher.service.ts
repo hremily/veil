@@ -14,20 +14,31 @@ export class TeacherService {
     @InjectModel('Teacher') private teacherModel: Model<TeacherType>,
   ) {}
 
-  async find() {
-    return await this.teacherModel.find();
+  async create(email: string, password: string, role: string) {
+    return await this.teacherModel.create({ email, password, role });
   }
 
-  async findByEmail(email: string){
-    return await this.teacherModel.findOne({email})
+  async findOne(id: string) {
+    if (!id) {
+      throw new NotFoundException('Unauthorized user');
+    }
+    const user = await this.teacherModel.findById(id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
+  async findByEmail(email: string) {
+    return await this.teacherModel.findOne({ email });
   }
 
   async findByName(name: string) {
     return await this.teacherModel.findOne({ name });
   }
 
-  async findById(id: string) {
-    return await this.teacherModel.findById(id);
+  async findAllTeachers() {
+    return await this.teacherModel.find();
   }
 
   async updateProfile(userId: string, body: UpdateTeacherProfileDTO) {
@@ -52,18 +63,19 @@ export class TeacherService {
 
     const hashedPassword = salt + '.' + hash.toString('hex');
 
-    await this.teacherModel.findByIdAndUpdate(
-      { userId },
-      {
-        email: email || user.email,
-        password: hashedPassword || user.password,
-        fullname: fullname || user.fullname,
-        phone_number: phone_number || phone_number || user.phone_number,
-        experience: experience || user.experience,
-        lessons: lessons || user.lessons,
-        description: description || user.description,
-      },
-    );
+    const updatedProfile = {
+      email: email || user.email,
+      password: hashedPassword || user.password,
+      fullname: fullname || user.fullname,
+      phone_number: phone_number || phone_number || user.phone_number,
+      experience: experience || user.experience,
+      lessons: lessons || user.lessons,
+      description: description || user.description,
+    };
+
+    await this.teacherModel.findByIdAndUpdate(userId, updatedProfile, {
+      new: true,
+    });
   }
 
   async delete(id: string) {

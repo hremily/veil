@@ -26,7 +26,7 @@ export class AuthService {
 
     const hashedPassword = salt + '.' + hash.toString('hex');
 
-    if (role == 'user' || role  ) {
+    if (role == 'user' || role == 'admin') {
       newUser = await this.usersService.create(email, hashedPassword, role);
     } else if (role == 'teacher') {
       newUser = await this.teacherService.create(email, hashedPassword, role);
@@ -36,17 +36,16 @@ export class AuthService {
   }
 
   async signin(email: string, password: string) {
-
     let user = await this.usersService.findByEmail(email);
 
-    if(!user){
+    if (!user) {
       user = await this.teacherService.findByEmail(email);
     }
 
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    
+
     const userPassword: string = user.password.toString();
 
     const [salt, storedHash] = userPassword.split('.');
@@ -56,7 +55,21 @@ export class AuthService {
     if (storedHash !== hashedPassword.toString('hex')) {
       throw new BadRequestException('invalid password');
     }
-    
+
+    return user;
+  }
+
+  async getUser(id: string) {
+    let user = await this.usersService.findOne(id);
+
+    if (!user) {
+      user = await this.teacherService.findOne(id);
+    }
+
+    if (!user) {
+      throw new NotFoundException('User not found in session');
+    }
+
     return user;
   }
 }
