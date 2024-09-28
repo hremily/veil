@@ -1,5 +1,5 @@
 import { Schema } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import mongoose, { SchemaTypes } from 'mongoose';
 
 Schema();
 export const UserSchema = new mongoose.Schema({
@@ -7,8 +7,10 @@ export const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   fullname: { type: String, default: '' },
   phone_number: { type: String, default: '' },
-  questionaries: [{ type: Object, ref: 'Questionary', required: true }],
-  role: { type: String, ref: 'Role',},
+  questionaries: [
+    { type: SchemaTypes.ObjectId, ref: 'Questionary', required: true },
+  ],
+  role: { type: String, ref: 'Role' },
 });
 
 export type UserType = {
@@ -16,4 +18,5 @@ export type UserType = {
   password: { type: String };
   fullname: { type: String };
   phone_number: { type: String };
+  role: { type: String };
 };

@@ -7,6 +7,7 @@ export class UpdateProfileDto {
 
   @IsOptional()
   @IsString()
+  @Min(6)
   password?: string;
 
   @IsOptional()

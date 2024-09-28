@@ -11,6 +11,8 @@ import { UserService } from './user/user.service';
 import { TeacherService } from './teacher/teacher.service';
 import { AuthModule } from './user/auth/auth.module';
 import { CustomMailerService } from './mail/mail.service';
+import { UserModule } from './user/user.module';
+import { TeacherModule } from './teacher/teacher.module';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { CustomMailerService } from './mail/mail.service';
       { name: 'Teacher', schema: TeacherSchema },
     ]),
     AuthModule,
+    UserModule,
+    TeacherModule,
   ],
   controllers: [AppController],
   providers: [AppService, UserService, TeacherService, CustomMailerService],

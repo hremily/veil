@@ -26,4 +26,5 @@ export type TeacherType = {
   lessons: { type: String };
   description: { type: String };
   questionaries: { type: Object };
+  role: { type: String };
 };

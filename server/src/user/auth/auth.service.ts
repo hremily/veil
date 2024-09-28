@@ -15,6 +15,7 @@ export class AuthService {
   ) {}
 
   async signup(email: string, password: string, role: string) {
+    let newUser;
     const users = await this.usersService.findByEmail(email);
     if (users) {
       throw new BadRequestException('Email already exist!');
@@ -25,21 +26,27 @@ export class AuthService {
 
     const hashedPassword = salt + '.' + hash.toString('hex');
 
-    const newUser = await this.usersService.create(email, hashedPassword, role);
+    if (role == 'user' || role  ) {
+      newUser = await this.usersService.create(email, hashedPassword, role);
+    } else if (role == 'teacher') {
+      newUser = await this.teacherService.create(email, hashedPassword, role);
+    }
+
     return newUser;
   }
 
-  async signin(email: string, password: string, role: string) {
-    let user;
-    if (role == 'user') {
-      user = await this.usersService.findByEmail(email);
-    } else if (role == 'teacher') {
+  async signin(email: string, password: string) {
+
+    let user = await this.usersService.findByEmail(email);
+
+    if(!user){
       user = await this.teacherService.findByEmail(email);
     }
 
     if (!user) {
       throw new NotFoundException('User not found');
     }
+    
     const userPassword: string = user.password.toString();
 
     const [salt, storedHash] = userPassword.split('.');
@@ -49,6 +56,7 @@ export class AuthService {
     if (storedHash !== hashedPassword.toString('hex')) {
       throw new BadRequestException('invalid password');
     }
+    
     return user;
   }
 }
