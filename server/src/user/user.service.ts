@@ -5,12 +5,16 @@ import { UserType } from './user.schema';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
+import { TeacherType } from 'src/teacher/teacher.schema';
 
 const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private userModel: Model<UserType>) {}
+  constructor(
+    @InjectModel('User') private userModel: Model<UserType>,
+    @InjectModel('Teacher') private teacherModel: Model<TeacherType>,
+  ) {}
 
   async create(email: string, password: string, role: string) {
     return await this.userModel.create({ email, password, role });
@@ -32,7 +36,11 @@ export class UserService {
   }
 
   async findAllUsers() {
-    return await this.userModel.find();
+    const users = await this.userModel.find();
+    const teachers = await this.teacherModel.find();
+
+    const allusers = { users, teachers };
+    return allusers;
   }
 
   async updateProfile(userId: string, body: UpdateProfileDto) {

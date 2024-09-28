@@ -40,6 +40,7 @@ import { TeacherModule } from './teacher/teacher.module';
             ? `mongodb://${config.get<string>('DB_USER')}:${config.get<string>('DB_PASSWORD')}@${config.get<string>('DB_HOST')}:${config.get<string>('DB_PORT')}/${config.get<string>('DB_NAME')}`
             : `mongodb+srv://${config.get<string>('DB_USER')}:${config.get<string>('DB_PASSWORD')}@${config.get<string>('DB_CLUSTER')}.${config.get<string>('DB_HASH')}.mongodb.net/${config.get<string>('DB_NAME')}?retryWrites=true&w=majority&appName=VeilCluster`;
 
+        console.log('MongoDB URI:', uri);
         return { uri };
       },
     }),

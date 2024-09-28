@@ -11,7 +11,7 @@ async function bootstrap() {
       secret: secret,
       resave: false,
       saveUninitialized: false,
-      cookie: { maxAge: 3600000 },
+      cookie: { httpOnly: true },
       //cookie: { secure: process.env.NODE_ENV === 'production' }
     }),
   );

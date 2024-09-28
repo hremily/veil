@@ -59,14 +59,14 @@ export class AuthService {
     return user;
   }
 
-  async getUser(id: string) {
-    let user = await this.usersService.findOne(id);
+  async getUser(id: string, userRole: string) {
+    let user;
 
-    if (!user) {
+    if (userRole == 'user' || userRole == 'admin') {
+      user = await this.usersService.findOne(id);
+    } else if (userRole == 'teacher') {
       user = await this.teacherService.findOne(id);
-    }
-
-    if (!user) {
+    } else {
       throw new NotFoundException('User not found in session');
     }
 

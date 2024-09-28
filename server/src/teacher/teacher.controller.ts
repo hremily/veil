@@ -8,6 +8,7 @@ import {
   Put,
   UseGuards,
   NotFoundException,
+  Delete,
 } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { AuthService } from 'src/user/auth/auth.service';
@@ -15,6 +16,7 @@ import { CreateUserDTO } from 'src/user/dtos/create-user.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { UpdateTeacherProfileDTO } from './dtos/update-profile.dto';
 import mongoose from 'mongoose';
+import { AdminGuard } from 'src/guards/admin.guard';
 
 @Controller()
 export class TeacherController {
@@ -22,11 +24,6 @@ export class TeacherController {
     private teacherService: TeacherService,
     private authService: AuthService,
   ) {}
-
-  @Get('/teachers')
-  async allTeachers() {
-    return await this.teacherService.findAllTeachers();
-  }
 
   @Get('/teacher/:id')
   async oneTeacher(@Param('id') id: string) {
@@ -58,5 +55,11 @@ export class TeacherController {
     @Body() body: UpdateTeacherProfileDTO,
   ) {
     return await this.teacherService.updateProfile(id, body);
+  }
+
+  @UseGuards(AdminGuard)
+  @Delete('/teacher/:id')
+  async delete(@Param('id') id: string) {
+    return await this.teacherService.delete(id);
   }
 }

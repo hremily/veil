@@ -37,6 +37,7 @@ export class UserController {
     const user = await this.authService.signin(body.email, body.password);
     session.userId = user._id;
     session.userRole = user.role;
+    console.log('Session after sign in:', session);
     return user;
   }
 
@@ -44,14 +45,21 @@ export class UserController {
   @Get('/user')
   async getProfile(@Session() session: any) {
     const userId = session.userId;
-    return await this.authService.getUser(userId);
+    const userRole = session.userRole;
+    return await this.authService.getUser(userId, userRole);
   }
 
   @UseGuards(AdminGuard)
   @Get('/users')
   async findAllUser() {
+  try {
+    console.log('Admin is trying to access all users');
     return await this.userService.findAllUsers();
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw new NotFoundException('Could not fetch users');
   }
+}
 
   @Get('/:id')
   async findUser(@Param('id') id: string) {
