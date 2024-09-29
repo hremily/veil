@@ -34,7 +34,7 @@ export class TeacherService {
   }
 
   async findByName(name: string) {
-    return await this.teacherModel.findOne({ name });
+    return await this.teacherModel.findOne({ fullname: name });
   }
 
   async findAllTeachers() {

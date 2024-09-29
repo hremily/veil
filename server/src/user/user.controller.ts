@@ -16,7 +16,7 @@ import { AuthService } from './auth/auth.service';
 import { NotFoundException } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AdminGuard } from 'src/guards/admin.guard';
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 
 @Controller()
 export class UserController {

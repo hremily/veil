@@ -15,7 +15,7 @@ import { AuthService } from 'src/user/auth/auth.service';
 import { CreateUserDTO } from 'src/user/dtos/create-user.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { UpdateTeacherProfileDTO } from './dtos/update-profile.dto';
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 import { AdminGuard } from 'src/guards/admin.guard';
 
 @Controller()

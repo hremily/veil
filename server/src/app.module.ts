@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { join } from 'path';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
@@ -13,6 +12,8 @@ import { AuthModule } from './user/auth/auth.module';
 import { CustomMailerService } from './mail/mail.service';
 import { UserModule } from './user/user.module';
 import { TeacherModule } from './teacher/teacher.module';
+import { QuestionaryModule } from './questionary/questionary.module';
+import mailerInfo from '../config/mailer';
 
 @Module({
   imports: [
@@ -26,8 +27,8 @@ import { TeacherModule } from './teacher/teacher.module';
         port: 587,
         secure: false,
         auth: {
-          user: 'emili061116@gmail.com',
-          pass: 'novuy parol',
+          user: mailerInfo.user,
+          pass: mailerInfo.pass,
         },
       },
     }),
@@ -51,6 +52,7 @@ import { TeacherModule } from './teacher/teacher.module';
     AuthModule,
     UserModule,
     TeacherModule,
+    QuestionaryModule,
   ],
   controllers: [AppController],
   providers: [AppService, UserService, TeacherService, CustomMailerService],

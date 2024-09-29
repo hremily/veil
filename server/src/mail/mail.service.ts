@@ -8,6 +8,7 @@ export class CustomMailerService {
   async sendEmail(
     email: string,
     fullname: string,
+    teacherName: string,
     currentTeacher: string,
     subject: string,
     age: number,
@@ -17,7 +18,7 @@ export class CustomMailerService {
     await this.mailerService.sendMail({
       from: 'Veil',
       to: currentTeacher,
-      subject: `Добрий день, ${currentTeacher}`,
+      subject: `Добрий день, ${teacherName}`,
       text: `Користувач: ${fullname} відправив вам заявку.\nПредмет: ${subject}.\nВік дитини: ${age}.\nПобажання: ${description}.\nКонтактні дані: ${phone_number}, ${email}`,
       context: {
         fullname,
