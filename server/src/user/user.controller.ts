@@ -8,6 +8,7 @@ import {
   Delete,
   Get,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
@@ -17,6 +18,8 @@ import { NotFoundException } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AdminGuard } from 'src/guards/admin.guard';
 import * as mongoose from 'mongoose';
+import { Role } from '../utils/user-roles.costans';
+import { PaginationDTO } from '../user/dtos/pagination.dto';
 
 @Controller()
 export class UserController {
@@ -26,9 +29,10 @@ export class UserController {
   ) {}
   @Post('/signupuser')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
-    const role = 'user';
+    const role = Role.USER;
     const user = await this.authService.signup(body.email, body.password, role);
     session.userId = user._id;
+    session.userRole = user.role;
     return user;
   }
 
@@ -37,29 +41,25 @@ export class UserController {
     const user = await this.authService.signin(body.email, body.password);
     session.userId = user._id;
     session.userRole = user.role;
-    console.log('Session after sign in:', session);
     return user;
   }
 
   @UseGuards(AuthGuard)
   @Get('/user')
   async getProfile(@Session() session: any) {
-    const userId = session.userId;
-    const userRole = session.userRole;
+    const { userId, userRole } = session;
     return await this.authService.getUser(userId, userRole);
   }
 
   @UseGuards(AdminGuard)
   @Get('/users')
-  async findAllUser() {
-  try {
-    console.log('Admin is trying to access all users');
-    return await this.userService.findAllUsers();
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    throw new NotFoundException('Could not fetch users');
+  async findAllUser(@Query() pagination: PaginationDTO) {
+    try {
+      return await this.userService.findAllUsers(pagination);
+    } catch (error) {
+      throw new NotFoundException('Could not fetch users');
+    }
   }
-}
 
   @Get('/:id')
   async findUser(@Param('id') id: string) {
@@ -84,5 +84,6 @@ export class UserController {
   @Post('/signout')
   async signout(@Session() session: any) {
     session.userId = null;
+    session.userRole = null;
   }
 }

@@ -9,6 +9,7 @@ import {
   UseGuards,
   NotFoundException,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { AuthService } from 'src/user/auth/auth.service';
@@ -17,6 +18,8 @@ import { AuthGuard } from 'src/guards/auth.guard';
 import { UpdateTeacherProfileDTO } from './dtos/update-profile.dto';
 import * as mongoose from 'mongoose';
 import { AdminGuard } from 'src/guards/admin.guard';
+import { Role } from '../utils/user-roles.costans';
+import { PaginationDTO } from '../user/dtos/pagination.dto';
 
 @Controller()
 export class TeacherController {
@@ -25,6 +28,12 @@ export class TeacherController {
     private authService: AuthService,
   ) {}
 
+  @Get('/teachers')
+  async allTeachers(@Query() pagination: PaginationDTO) {
+    return await this.teacherService.findAllTeachers(pagination);
+  }
+
+  @UseGuards(AuthGuard)
   @Get('/teacher/:id')
   async oneTeacher(@Param('id') id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -35,7 +44,7 @@ export class TeacherController {
 
   @Post('/signupteacher')
   async createTeacher(@Body() body: CreateUserDTO, @Session() session: any) {
-    const role = 'teacher';
+    const role = Role.TEACHER;
     const user = await this.authService.signup(body.email, body.password, role);
     session.userId = user._id;
     return user;

@@ -43,8 +43,6 @@ export class QuestionaryService {
       description,
     });
 
-    await newQuest.save();
-
     await this.userModel.findByIdAndUpdate(userId, {
       $push: { questionaries: newQuest._id },
     });

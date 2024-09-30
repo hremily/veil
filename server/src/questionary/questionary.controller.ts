@@ -17,8 +17,6 @@ export class QuestionaryController {
   @Post('/send')
   async create(@Body() body: QuestionaryCreateDTO, @Session() session: any) {
     const userId = session.userId;
-
-    console.log('UserID: ' + userId, 'teacher: ' + body.teacher);
     return this.questionaryService.create(
       body.email,
       body.fullname,

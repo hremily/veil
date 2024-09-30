@@ -3,11 +3,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserType } from './user.schema';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
-import { randomBytes, scrypt as _scrypt } from 'crypto';
-import { promisify } from 'util';
 import { TeacherType } from 'src/teacher/teacher.schema';
-
-const scrypt = promisify(_scrypt);
+import { hashPassword } from '../middleware/password-hash.middleware';
+import { PaginationDTO } from '../user/dtos/pagination.dto';
+import { paginationFunc } from '../middleware/pagination.middleware';
 
 @Injectable()
 export class UserService {
@@ -35,12 +34,14 @@ export class UserService {
     return await this.userModel.findOne({ email });
   }
 
-  async findAllUsers() {
-    const users = await this.userModel.find();
-    const teachers = await this.teacherModel.find();
-
-    const allusers = { users, teachers };
-    return allusers;
+  async findAllUsers(pagination: PaginationDTO) {
+    const { skip, limit } = pagination;
+    const { pageSize, pageSkip } = paginationFunc(limit, skip);
+    const [users, teachers] = await Promise.all([
+      this.userModel.find().skip(pageSkip).limit(pageSize),
+      this.teacherModel.find().skip(pageSkip).limit(pageSize),
+    ]);
+    return [users, teachers];
   }
 
   async updateProfile(userId: string, body: UpdateProfileDto) {
@@ -52,10 +53,7 @@ export class UserService {
 
     const { email, password, fullname, phone_number } = body;
 
-    const salt = randomBytes(8).toString('hex');
-    const hash = (await scrypt(password, salt, 32)) as Buffer;
-
-    const hashedPassword = salt + '.' + hash.toString('hex');
+    const hashedPassword = hashPassword(password);
 
     const updatedUser = {
       email: email || currentUser.email,

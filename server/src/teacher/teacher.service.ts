@@ -2,11 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { TeacherType } from './teacher.schema';
+import { hashPassword } from '../middleware/password-hash.middleware';
 import { UpdateTeacherProfileDTO } from './dtos/update-profile.dto';
-import { randomBytes, scrypt as _scrypt } from 'crypto';
-import { promisify } from 'util';
-
-const scrypt = promisify(_scrypt);
+import { PaginationDTO } from '../user/dtos/pagination.dto';
+import { paginationFunc } from '../middleware/pagination.middleware';
 
 @Injectable()
 export class TeacherService {
@@ -37,8 +36,16 @@ export class TeacherService {
     return await this.teacherModel.findOne({ fullname: name });
   }
 
-  async findAllTeachers() {
-    return await this.teacherModel.find();
+  async findAllTeachers(pagination: PaginationDTO) {
+    const { skip, limit } = pagination;
+    const { pageSize, pageSkip } = paginationFunc(limit, skip);
+
+    const teachers = await this.teacherModel
+      .find()
+      .skip(pageSkip)
+      .limit(pageSize);
+
+    return teachers;
   }
 
   async updateProfile(userId: string, body: UpdateTeacherProfileDTO) {
@@ -58,16 +65,13 @@ export class TeacherService {
       description,
     } = body;
 
-    const salt = randomBytes(8).toString('hex');
-    const hash = (await scrypt(password, salt, 32)) as Buffer;
-
-    const hashedPassword = salt + '.' + hash.toString('hex');
+    const hashedPassword = await hashPassword(password);
 
     const updatedProfile = {
       email: email || user.email,
       password: hashedPassword || user.password,
       fullname: fullname || user.fullname,
-      phone_number: phone_number || phone_number || user.phone_number,
+      phone_number: phone_number || user.phone_number,
       experience: experience || user.experience,
       lessons: lessons || user.lessons,
       description: description || user.description,
