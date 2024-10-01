@@ -16,7 +16,6 @@ export class AuthService {
   ) {}
 
   async signup(email: string, password: string, role: string) {
-    let newUser;
     const users = await this.usersService.findByEmail(email);
 
     if (users) {
@@ -26,20 +25,18 @@ export class AuthService {
     const hashedPassword = await hashPassword(password);
 
     if (role == Role.USER || role == Role.ADMIN) {
-      newUser = await this.usersService.create(
+      return await this.usersService.create(
         email,
         hashedPassword.toString(),
         role,
       );
     } else if (role == Role.TEACHER) {
-      newUser = await this.teacherService.create(
+      return await this.teacherService.create(
         email,
         hashedPassword.toString(),
         role,
       );
     }
-
-    return newUser;
   }
 
   async signin(email: string, password: string) {
@@ -62,16 +59,12 @@ export class AuthService {
   }
 
   async getUser(id: string, userRole: string) {
-    let user;
-
     if (userRole == Role.USER || userRole == Role.ADMIN) {
-      user = await this.usersService.findOne(id);
+      return await this.usersService.findOne(id);
     } else if (userRole == Role.TEACHER) {
-      user = await this.teacherService.findOne(id);
+      return await this.teacherService.findOne(id);
     } else {
       throw new NotFoundException('User not found in session');
     }
-
-    return user;
   }
 }

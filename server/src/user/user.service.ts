@@ -31,6 +31,9 @@ export class UserService {
   }
 
   async findByEmail(email: string) {
+    if (!email) {
+      throw new NotFoundException('Invalid email');
+    }
     return await this.userModel.findOne({ email });
   }
 
@@ -68,6 +71,9 @@ export class UserService {
   }
 
   async delete(id: string) {
-    await this.userModel.findByIdAndDelete(id);
+    if (!id) {
+      throw new NotFoundException('Unauthorized user');
+    }
+    return await this.userModel.findByIdAndDelete(id);
   }
 }

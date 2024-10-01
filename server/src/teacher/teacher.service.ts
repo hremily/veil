@@ -29,10 +29,16 @@ export class TeacherService {
   }
 
   async findByEmail(email: string) {
+    if (!email) {
+      throw new NotFoundException('Unauthorized user');
+    }
     return await this.teacherModel.findOne({ email });
   }
 
   async findByName(name: string) {
+    if (!name) {
+      throw new NotFoundException('Unauthorized user');
+    }
     return await this.teacherModel.findOne({ fullname: name });
   }
 
@@ -83,6 +89,9 @@ export class TeacherService {
   }
 
   async delete(id: string) {
-    await this.teacherModel.findByIdAndDelete(id);
+    if (!id) {
+      throw new NotFoundException('Unauthorized user');
+    }
+    return await this.teacherModel.findByIdAndDelete(id);
   }
 }

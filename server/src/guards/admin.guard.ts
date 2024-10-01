@@ -4,6 +4,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { Role } from 'src/utils/user-roles.costans';
 
 export class AdminGuard implements CanActivate {
   canActivate(context: ExecutionContext) {
@@ -15,7 +16,7 @@ export class AdminGuard implements CanActivate {
       throw new ForbiddenException('User not authenticated');
     }
 
-    if (userRole !== 'admin') {
+    if (userRole !== Role.ADMIN) {
       throw new ForbiddenException('Access restricted to admin users');
     }
 
