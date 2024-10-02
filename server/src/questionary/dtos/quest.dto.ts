@@ -1,19 +1,30 @@
-import { IsEmail, IsNumber, IsObject, IsString } from "class-validator";
-import { ObjectId } from "mongodb";
+import { IsEmail, IsNumber, IsObject, IsString, Max, Min } from 'class-validator';
+import { ObjectId } from 'mongodb';
 
-export class QuestionaryCreateDTO{
-    @IsString()
-    fullname: string;
+export class QuestionaryCreateDTO {
+  @IsString()
+  fullname: string;
 
-    @IsString()
-    phone_number: string;
+  @IsString()
+  @Max(11)
+  @Min(9)
+  phone_number: string;
 
-    @IsEmail()
-    email: string;
+  @IsEmail()
+  email: string;
 
-    @IsNumber()
-    age: number;
+  @IsNumber()
+  age: number;
 
-    @IsObject()
-    userId: ObjectId
+  @IsObject()
+  userId: ObjectId;
+
+  @IsString()
+  teacher: string;
+
+  @IsString()
+  subject: string;
+
+  @IsString()
+  description?: string;
 }
