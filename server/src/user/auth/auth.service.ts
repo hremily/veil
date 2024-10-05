@@ -7,12 +7,14 @@ import {
   validatePassword,
 } from '../../middleware/password-hash.middleware';
 import { Role } from '../../utils/user-roles.costans';
+import { CustomMailerService } from 'src/mail/mail.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UserService,
     private teacherService: TeacherService,
+    private mailService: CustomMailerService,
   ) {}
 
   async signup(email: string, password: string, role: string) {
@@ -23,20 +25,23 @@ export class AuthService {
     }
 
     const hashedPassword = await hashPassword(password);
-
+    let user;
     if (role == Role.USER || role == Role.ADMIN) {
-      return await this.usersService.create(
+      user = await this.usersService.create(
         email,
         hashedPassword.toString(),
         role,
       );
     } else if (role == Role.TEACHER) {
-      return await this.teacherService.create(
+      user = await this.teacherService.create(
         email,
         hashedPassword.toString(),
         role,
       );
     }
+
+    await this.mailService.sendWelcomeEmail(user.email.toString());
+    return user;
   }
 
   async signin(email: string, password: string) {
@@ -54,6 +59,11 @@ export class AuthService {
     const isMatch = validatePassword(password, userPassword);
 
     if (isMatch) {
+      await this.mailService.sendSignalEmail(
+        user.email.toString(),
+        user.fullname.toString(),
+      );
+
       return user;
     }
   }

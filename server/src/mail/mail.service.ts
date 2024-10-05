@@ -18,8 +18,8 @@ export class CustomMailerService {
     await this.mailerService.sendMail({
       from: 'Veil',
       to: currentTeacher,
-      subject: `Добрий день, ${teacherName}`,
-      text: `Користувач: ${fullname} відправив вам заявку.\nПредмет: ${subject}.\nВік дитини: ${age}.\nПобажання: ${description}.\nКонтактні дані: ${phone_number}, ${email}`,
+      subject: `Hello, ${teacherName}`,
+      text: `The user: ${fullname} sent you an application.\nSubject: ${subject}.\nAge of the child: ${age}.\nWishes: ${description}.\nContact details: ${phone_number}, ${email}`,
       context: {
         fullname,
         email,
@@ -27,6 +27,31 @@ export class CustomMailerService {
         age,
         phone_number,
         description,
+      },
+    });
+  }
+
+  async sendSignalEmail(email: string, fullname: string) {
+    await this.mailerService.sendMail({
+      from: 'Veil',
+      to: email,
+      subject: 'A new entrance to the account was discovered',
+      text: `Dear ${fullname}, someone just logged into your account, if it was you - don't answer anything. \nIf it wasn't you, follow the link to change your password: http://localhost:`,
+      context: {
+        fullname,
+        email,
+      },
+    });
+  }
+
+  async sendWelcomeEmail(email: string) {
+    await this.mailerService.sendMail({
+      from: 'Veil',
+      to: email,
+      subject: 'You have successfully registered',
+      text: `Dear user, you have successfully registered on the VEIL platform. To change user information, go to your profile.\n\nThank you for using our tutoring platform!`,
+      context: {
+        email,
       },
     });
   }
