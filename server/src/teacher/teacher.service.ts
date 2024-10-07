@@ -28,6 +28,29 @@ export class TeacherService {
     return user;
   }
 
+  async findByToken(token: string) {
+    return await this.teacherModel.findOne({ resetToken: token });
+  }
+
+  async changePassword(token: string, password: string) {
+    const user = await this.teacherModel.findOne({ resetToken: token });
+
+    if (!user) {
+      throw new NotFoundException('invalid token');
+    }
+    const userId = user.id;
+    const hashedPassword = await hashPassword(password);
+
+    await this.teacherModel.findOneAndUpdate({ userId, hashedPassword });
+
+    user.resetToken = null;
+    user.resetTokenExpiration = null;
+  }
+
+  async findOneAndUpdate(userId, password) {
+    await this.teacherModel.findOneAndUpdate({ userId, password });
+  }
+
   async findByEmail(email: string) {
     if (!email) {
       throw new NotFoundException('Unauthorized user');
@@ -86,6 +109,10 @@ export class TeacherService {
     await this.teacherModel.findByIdAndUpdate(userId, updatedProfile, {
       new: true,
     });
+  }
+
+  async updatePassword(id: string, password: string) {
+    await this.teacherModel.findOneAndUpdate({ id, password: password });
   }
 
   async delete(id: string) {

@@ -30,11 +30,31 @@ export class UserService {
     return user;
   }
 
+  async changePassword(token: string, password: string) {
+    const user = await this.userModel.findOne({ resetToken: token });
+
+    if (!user) {
+      throw new NotFoundException('invalid token');
+    }
+    const userId = user.id;
+    const hashedPassword = await hashPassword(password);
+
+    await this.userModel.findOneAndUpdate({ userId, hashedPassword });
+  }
+
   async findByEmail(email: string) {
     if (!email) {
       throw new NotFoundException('Invalid email');
     }
-    return await this.userModel.findOne({ email });
+    return await this.userModel.findOne({ email: email });
+  }
+
+  async findByToken(token: string) {
+    return await this.userModel.findOne({ resetToken: token });
+  }
+
+  async findOneAndUpdate(userId, password) {
+    await this.userModel.findOneAndUpdate({ userId, password });
   }
 
   async findAllUsers(pagination: PaginationDTO) {
@@ -56,7 +76,7 @@ export class UserService {
 
     const { email, password, fullname, phone_number } = body;
 
-    const hashedPassword = hashPassword(password);
+    const hashedPassword = await hashPassword(password);
 
     const updatedUser = {
       email: email || currentUser.email,

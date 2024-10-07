@@ -20,12 +20,17 @@ import { AdminGuard } from 'src/guards/admin.guard';
 import * as mongoose from 'mongoose';
 import { Role } from '../utils/user-roles.costans';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
+import { resetPasswordDTO } from './dtos/reset-password.dto';
+import { TeacherService } from 'src/teacher/teacher.service';
+import { CustomMailerService } from 'src/mail/mail.service';
 
 @Controller()
 export class UserController {
   constructor(
     private userService: UserService,
     private authService: AuthService,
+    private teacherService: TeacherService,
+    private customMailerService: CustomMailerService,
   ) {}
   @Post('/signupuser')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
@@ -59,6 +64,21 @@ export class UserController {
     } catch (error) {
       throw new NotFoundException('Could not fetch users');
     }
+  }
+
+  @Post('/reset')
+  async resetPassword(@Body() body: resetPasswordDTO) {
+    const resetPasswordData: resetPasswordDTO = { email: body.email };
+    return await this.authService.resetPassword(resetPasswordData);
+  }
+
+  @Post('/reset/:resetToken')
+  async changePassword(
+    @Body() body: resetPasswordDTO,
+    @Param('resetToken') resetToken: string,
+  ) {
+    const password = body.password;
+    return await this.authService.changePassword(resetToken, password);
   }
 
   @Get('/:id')

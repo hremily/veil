@@ -11,6 +11,8 @@ export const UserSchema = new mongoose.Schema({
     { type: SchemaTypes.ObjectId, ref: 'Questionary', required: true },
   ],
   role: { type: String, ref: 'Role' },
+  resetToken: { type: String },
+  resetTokenExpiration: { type: Date },
 });
 
 export type UserType = {
@@ -19,4 +21,6 @@ export type UserType = {
   fullname: { type: String };
   phone_number: { type: String };
   role: { type: String };
+  resetToken: String;
+  resetTokenExpiration: Date;
 };

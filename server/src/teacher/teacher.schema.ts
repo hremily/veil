@@ -15,6 +15,8 @@ export const TeacherSchema = new mongoose.Schema({
     { type: SchemaTypes.ObjectId, ref: 'Questionary', required: true },
   ],
   role: { type: String, ref: 'Role' },
+  resetToken: { type: String },
+  resetTokenExpiration: { type: Date },
 });
 
 export type TeacherType = {
@@ -27,4 +29,6 @@ export type TeacherType = {
   description: { type: String };
   questionaries: { type: Object };
   role: { type: String };
+  resetToken: String;
+  resetTokenExpiration: Date;
 };
