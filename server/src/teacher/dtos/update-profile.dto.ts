@@ -41,4 +41,7 @@ export class UpdateTeacherProfileDTO {
   @IsOptional()
   @IsNumber()
   price: number;
+
+  @IsOptional()
+  image: string;
 }

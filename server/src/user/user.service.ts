@@ -74,17 +74,18 @@ export class UserService {
       throw new NotFoundException('User not found');
     }
 
-    const { email, password, fullname, phone_number } = body;
+    const { email, password, fullname, phone_number, image } = body;
+    console.log(image);
 
-    const hashedPassword = await hashPassword(password);
-
-    const updatedUser = {
+    const updatedUser: any = {
       email: email || currentUser.email,
-      password: hashedPassword || currentUser.password,
       fullname: fullname || currentUser.fullname,
       phone_number: phone_number || currentUser.phone_number,
+      image: image || currentUser.image,
     };
-
+    if (password) {
+      updatedUser.password = await hashPassword(password);
+    }
     return await this.userModel.findByIdAndUpdate(userId, updatedUser, {
       new: true,
     });

@@ -4,9 +4,10 @@ import mongoose, { SchemaTypes } from 'mongoose';
 Schema();
 export const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
+  password: { type: String },
   fullname: { type: String, default: '' },
   phone_number: { type: String, default: '' },
+  image: { type: String, default: '' },
   questionaries: [
     { type: SchemaTypes.ObjectId, ref: 'Questionary', required: true },
   ],
@@ -20,6 +21,7 @@ export type UserType = {
   password: String;
   fullname: { type: String };
   phone_number: { type: String };
+  image: { type: String };
   role: { type: String };
   resetToken: String;
   resetTokenExpiration: Date;

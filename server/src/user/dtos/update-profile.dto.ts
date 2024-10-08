@@ -19,4 +19,7 @@ export class UpdateProfileDto {
   @Min(9)
   @Max(11)
   phone_number?: string;
+
+  @IsOptional()
+  image?: string;
 }

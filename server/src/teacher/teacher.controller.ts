@@ -10,6 +10,8 @@ import {
   NotFoundException,
   Delete,
   Query,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { AuthService } from 'src/user/auth/auth.service';
@@ -20,6 +22,7 @@ import * as mongoose from 'mongoose';
 import { AdminGuard } from 'src/guards/admin.guard';
 import { Role } from '../utils/user-roles.costans';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
+import { MyFileInterceptor } from 'interceptors/file-upload.interceptor';
 
 @Controller()
 export class TeacherController {
@@ -59,10 +62,15 @@ export class TeacherController {
 
   @UseGuards(AuthGuard)
   @Put('/teacher/:id')
+  @UseInterceptors(MyFileInterceptor)
   async updateProfile(
     @Param('id') id: string,
     @Body() body: UpdateTeacherProfileDTO,
+    @UploadedFile() image
   ) {
+    if (image) {
+      body.image = image.path;
+    }
     return await this.teacherService.updateProfile(id, body);
   }
 

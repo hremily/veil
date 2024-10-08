@@ -10,6 +10,8 @@ import {
   UseGuards,
   Query,
   Patch,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
@@ -22,16 +24,13 @@ import * as mongoose from 'mongoose';
 import { Role } from '../utils/user-roles.costans';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
 import { resetPasswordDTO } from './dtos/reset-password.dto';
-import { TeacherService } from 'src/teacher/teacher.service';
-import { CustomMailerService } from 'src/mail/mail.service';
+import { MyFileInterceptor } from '../../interceptors/file-upload.interceptor';
 
 @Controller()
 export class UserController {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private teacherService: TeacherService,
-    private customMailerService: CustomMailerService,
   ) {}
   @Post('/signupuser')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
@@ -93,7 +92,15 @@ export class UserController {
 
   @UseGuards(AuthGuard)
   @Put('/:id')
-  async updateProfile(@Param('id') id: string, @Body() body: UpdateProfileDto) {
+  @UseInterceptors(MyFileInterceptor)
+  async updateProfile(
+    @Param('id') id: string,
+    @Body() body: UpdateProfileDto,
+    @UploadedFile() image,
+  ) {
+    if (image) {
+      body.image = image.path;
+    }
     return await this.userService.updateProfile(id, body);
   }
 

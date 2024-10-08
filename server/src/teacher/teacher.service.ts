@@ -88,6 +88,7 @@ export class TeacherService {
       experience,
       lessons,
       description,
+      image,
     } = body;
 
     const hashedPassword = await hashPassword(password);
@@ -100,6 +101,7 @@ export class TeacherService {
       experience: experience || user.experience,
       lessons: lessons || user.lessons,
       description: description || user.description,
+      image: image || user.image,
     };
 
     await this.teacherModel.findByIdAndUpdate(userId, updatedProfile, {
