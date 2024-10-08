@@ -47,10 +47,6 @@ export class TeacherService {
     user.resetTokenExpiration = null;
   }
 
-  async findOneAndUpdate(userId, password) {
-    await this.teacherModel.findOneAndUpdate({ userId, password });
-  }
-
   async findByEmail(email: string) {
     if (!email) {
       throw new NotFoundException('Unauthorized user');

@@ -48,25 +48,35 @@ export class AuthService {
 
   async signin(email: string, password: string) {
     let user = await this.usersService.findByEmail(email);
-
+    let teacher;
     if (!user) {
-      user = await this.teacherService.findByEmail(email);
+      teacher = await this.teacherService.findByEmail(email);
     }
 
-    if (!user) {
+    if (!user && !teacher) {
       throw new NotFoundException('User not found');
     }
 
-    const userPassword: string = user.password.toString();
-    const isMatch = validatePassword(password, userPassword);
-
-    if (isMatch) {
-      this.mailService.sendSignalEmail(
-        user.email.toString(),
-        user.fullname.toString(),
-      );
-
-      return user;
+    if (teacher) {
+      const userPassword: string = teacher.password.toString();
+      const isMatch = await validatePassword(password, userPassword);
+      if (isMatch) {
+        this.mailService.sendSignalEmail(
+          teacher.email.toString(),
+          teacher.fullname.toString(),
+        );
+        return teacher;
+      }
+    } else if (user) {
+      const userPassword: string = user.password.toString();
+      const isMatch = await validatePassword(password, userPassword);
+      if (isMatch) {
+        this.mailService.sendSignalEmail(
+          user.email.toString(),
+          user.fullname.toString(),
+        );
+        return user;
+      }
     }
   }
 
@@ -122,14 +132,14 @@ export class AuthService {
 
     if (teacher) {
       const userId = teacher._id;
-      await this.teacherService.findOneAndUpdate(userId, hashedPassword);
+      teacher.password = hashedPassword;
       teacher.resetToken = null;
       teacher.resetTokenExpiration = null;
 
       await teacher.save();
     } else if (user) {
       const userId = user._id;
-      await this.usersService.findOneAndUpdate(userId, hashedPassword);
+      user.password = hashedPassword;
       user.resetToken = null;
       user.resetTokenExpiration = null;
       await user.save();

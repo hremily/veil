@@ -17,7 +17,7 @@ export const UserSchema = new mongoose.Schema({
 
 export type UserType = {
   email: { type: String };
-  password: { type: String };
+  password: String;
   fullname: { type: String };
   phone_number: { type: String };
   role: { type: String };

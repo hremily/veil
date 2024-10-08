@@ -21,7 +21,7 @@ export const TeacherSchema = new mongoose.Schema({
 
 export type TeacherType = {
   email: { type: String };
-  password: { type: String };
+  password: String;
   fullname: { type: String };
   phone_number: { type: String };
   experience: { type: String };

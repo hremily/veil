@@ -9,6 +9,7 @@ import {
   Get,
   UseGuards,
   Query,
+  Patch,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
@@ -72,7 +73,7 @@ export class UserController {
     return await this.authService.resetPassword(resetPasswordData);
   }
 
-  @Post('/reset/:resetToken')
+  @Patch('/reset/:resetToken')
   async changePassword(
     @Body() body: resetPasswordDTO,
     @Param('resetToken') resetToken: string,
@@ -81,6 +82,7 @@ export class UserController {
     return await this.authService.changePassword(resetToken, password);
   }
 
+  @UseGuards(AuthGuard)
   @Get('/:id')
   async findUser(@Param('id') id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
