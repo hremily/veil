@@ -4,7 +4,7 @@
   "description": "The platform for students and teachears",
   "main": "index.js",
   "scripts": {
-    "start": "echo \"Please provide entry file\" && exit 1",
+    "start": "echo \"index.js\" && exit 1",
     "build": "webpack build -c config/webpack.production.config.js",
     "build:dev": "webpack build -c config/webpack.development.config.js",
     "start:dev": "webpack serve -c config/webpack.development.config.js",
