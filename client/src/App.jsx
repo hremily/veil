@@ -1,12 +1,14 @@
 import React from 'react';
-// import resizeHook from '@hooks/resize';
+import Footer from './components/Footer/Footer';
+import SignUp from './pages/SignUp/SignUp';
 
-import styles from './App.css';
-// import * as styles from './App.css';
+function App() {
+    return (
+        <>
+            <SignUp />
+            <Footer />
+        </>
+    );
+}
 
-const App = () => {
-    return <div className={styles.main}>My first application</div>;
-};
-
-// export { App };
 export default App;
