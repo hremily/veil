@@ -1,15 +1,54 @@
-.illustration-section {
-    width: 50%;
+.wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    background-color: #f7e9e9;
-    border-radius: 0 15px 15px 0;
+    padding: 10px 40px;
+    background-color: #f8f9fa;
+    height: 80px;
+}
+
+.illustrationSection {
+    display: flex;
+    align-items: center;
+}
+
+.logoWrapper {
+    display: flex;
+    align-items: center;
 }
 
 .logo {
-    font-size: 2rem;
+    width: 50px;
+    margin-right: 10px;
+}
+
+.logoText {
+    font-size: 2.5rem;
     font-weight: bold;
-    color: #c06cff;
-    margin-bottom: 1rem;
+    color: #ba68c8;
+}
+
+.homeLink {
+    font-size: 1.5rem;
+    color: #ba68c8;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav a {
+    margin-right: 20px;
+    color: #000;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav a:hover {
+    text-decoration: underline;
 }
