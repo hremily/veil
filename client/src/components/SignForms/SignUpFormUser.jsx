@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SignUpForm.module.css';
 
-function SignUpUser() {
+function SignUpFormUser() {
     return (
         <div className={styles.signupWrap}>
             <div className={styles.signupContainer}>
@@ -10,7 +10,7 @@ function SignUpUser() {
                     <form>
                         <input type="email" placeholder="Enter email" required />
                         <input type="password" placeholder="Password" required />
-                        <button type="submit">Create</button>
+                        <button type="submit">Sign up</button>
                     </form>
                     <p>
                         Sign up like
@@ -30,4 +30,4 @@ function SignUpUser() {
     );
 }
 
-export default SignUpUser;
+export default SignUpFormUser;

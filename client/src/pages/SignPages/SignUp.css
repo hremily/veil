@@ -39,21 +39,10 @@
     text-align: center;
 }
 
-.logo {
-    width: 50px;
-    height: auto;
-    margin-right: 5px;
-}
-
 .signupRight {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-}
-
-.signupImage {
-    width: 100%;
-    height: auto;
 }

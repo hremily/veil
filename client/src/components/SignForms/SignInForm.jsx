@@ -1,27 +1,26 @@
 import React from 'react';
 import styles from './SignUpForm.module.css';
 
-function SignUpTeacher() {
+function SignIn() {
     return (
         <div className={styles.signupWrap}>
             <div className={styles.signupContainer}>
                 <div className={styles.formSection}>
-                    <h1>Create an Account</h1>
+                    <h1>Enter to the Account</h1>
                     <form>
                         <input type="email" placeholder="Enter email" required />
                         <input type="password" placeholder="Password" required />
-                        <button type="submit">Create</button>
+                        <button type="submit">Sign in</button>
                     </form>
                     <p>
-                        Sign up like
-                        <span className={styles.teacherLink}>
-                            <a href="/signupuser"> student!</a>
+                        Don`t have an account?{' '}
+                        <span className={styles.signinLink}>
+                            <a href="/signupuser">Sign up</a>
                         </span>
                     </p>
                     <p>
-                        Have an account?{' '}
                         <span className={styles.signinLink}>
-                            <a href="/signin">Sign in</a>
+                            <a href="/signupuser">Reset password</a>
                         </span>
                     </p>
                 </div>
@@ -30,4 +29,4 @@ function SignUpTeacher() {
     );
 }
 
-export default SignUpTeacher;
+export default SignIn;
