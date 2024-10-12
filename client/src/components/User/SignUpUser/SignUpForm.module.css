@@ -1,43 +1,45 @@
-.signupContainer {
+.signupWrap {
+    width: 100%;
     display: flex;
-    height: 100vh;
-    background-color: #f7e9e9;
-    font-family: Arial, sans-serif;
+    justify-content: center;
 }
 
 .formSection {
-    width: 50%;
-    padding: 2rem;
+    width: 100%;
+    max-width: 680px;
+    padding: 3rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: white;
-    border-radius: 15px 0 0 15px;
+    border-radius: 15px;
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
+    color: #ba68c8;
 }
 
 form {
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 input {
-    padding: 0.75rem;
-    margin-bottom: 1rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
 }
 
 button {
-    padding: 0.75rem;
-    background-color: #ff5bf0;
+    padding: 1rem;
+    background-color: #e75fff;
     color: white;
     border: none;
     border-radius: 8px;
@@ -46,21 +48,22 @@ button {
 }
 
 button:hover {
-    background-color: #ff4ae0;
+    background-color: #79206a;
 }
 
-p {
+.formSection p {
     margin-top: 1rem;
-    font-size: 0.9rem;
+    font-size: 1.5rem;
+    color: #989898;
 }
 
 .teacherLink a,
 .signinLink a {
-    color: #ff4ae0;
+    color: #e75fff;
     text-decoration: none;
 }
 
 .teacherLink a:hover,
 .signinLink a:hover {
-    color: #d647d2;
+    color: #81297e;
 }

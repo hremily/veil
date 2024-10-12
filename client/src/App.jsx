@@ -1,11 +1,14 @@
 import React from 'react';
 import Footer from './components/Footer/Footer';
-import SignUp from './pages/SignUp/SignUp';
+import SignUpTeacher from './pages/SignUp/SignUpTeacher';
+import SignUpUser from './pages/SignUp/SignUpUser';
+import SignIn from './pages/SignIn/SignIn';
 
 function App() {
     return (
         <>
-            <SignUp />
+            <SignUpTeacher />
+            <SignUpUser />
             <Footer />
         </>
     );
