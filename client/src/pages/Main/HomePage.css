@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.homeSection {
+    font-family: Arial, sans-serif;
+    background-color: #eaeaea;
+    color: #333;
+}
+
+.imageContainer {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+.imageContainer {
+    position: relative;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+}
+
+.textOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.communicationSkills h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.communicationSkills span {
+    color: purple;
+}
+
+.communicationSkills p {
+    margin: 20px 0;
+    font-size: 18px;
+    color: black;
+}
+
+.findTeacherBtn {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    border-radius: 75px;
+}
+
+.findTeacherBtn:hover {
+    background-color: purple;
+}
+
+.quest {
+    padding: 50px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.imageForm {
+    width: 50%;
+    height: auto;
+    padding: 5px;
+}

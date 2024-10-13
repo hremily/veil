@@ -1,0 +1,115 @@
+.formContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #eaeaea;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.formGroup {
+    flex: 1;
+}
+
+.container {
+    text-align: center;
+}
+
+.topElements {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.element {
+    background-color: #ba68c844;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.logo {
+    background-color: #ba68c8;
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+    padding: 20px 40px;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input,
+select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #999999;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #999999;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}
+
+.flex-container > * {
+    flex: 1;
+    margin: 5px 0;
+}
+
+.flex-container .email,
+.flex-container .years {
+    width: 100%;
+}
+
+.flex-container > * {
+    flex: 1;
+    margin: 5px 0;
+}
+
+.fullname,
+.email,
+.years,
+.select {
+    width: 100%;
+}
+
+button {
+    background-color: #e75fff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    margin: 10px auto 0 auto;
+}
