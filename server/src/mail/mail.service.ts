@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
-import e from 'express';
+
+const url = process.env.MAIL_URL;
 
 @Injectable()
 export class CustomMailerService {
@@ -57,17 +58,16 @@ export class CustomMailerService {
     });
   }
 
-  async sendReset(email: string, resetToken: any){
+  async sendReset(email: string, resetToken: any) {
+    const resetLink = url + '/reset/' + resetToken;
     await this.mailerService.sendMail({
       from: 'Veil',
-      to:email,
-      subject: "Reset password",
-      text: `Click a link 'http://localhost:3000/reset/${resetToken}' to set a new password`,
+      to: email,
+      subject: 'Reset password',
+      text: `Click a link '${resetLink}' to set a new password`,
       context: {
-        resetToken
-      }
-
+        resetToken,
+      },
     });
-    
   }
 }

@@ -43,7 +43,7 @@ export class AuthService {
     }
 
     await this.mailService.sendWelcomeEmail(user.email.toString());
-    return user;
+    return user._id;
   }
 
   async signin(email: string, password: string) {

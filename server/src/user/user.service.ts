@@ -39,7 +39,10 @@ export class UserService {
     const userId = user.id;
     const hashedPassword = await hashPassword(password);
 
-    await this.userModel.findOneAndUpdate({ userId, hashedPassword });
+    await this.userModel.findOneAndUpdate(
+      { _id: userId },
+      { $set: { password: hashedPassword } },
+    );
   }
 
   async findByEmail(email: string) {
@@ -54,7 +57,10 @@ export class UserService {
   }
 
   async findOneAndUpdate(userId, password) {
-    await this.userModel.findOneAndUpdate({ userId, password });
+    await this.userModel.findOneAndUpdate(
+      { _id: userId },
+      { $set: { password: password } },
+    );
   }
 
   async findAllUsers(pagination: PaginationDTO) {
@@ -75,7 +81,6 @@ export class UserService {
     }
 
     const { email, password, fullname, phone_number, image } = body;
-    console.log(image);
 
     const updatedUser: any = {
       email: email || currentUser.email,
