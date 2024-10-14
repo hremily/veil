@@ -61,20 +61,14 @@ export class AuthService {
       const userPassword: string = teacher.password.toString();
       const isMatch = await validatePassword(password, userPassword);
       if (isMatch) {
-        this.mailService.sendSignalEmail(
-          teacher.email.toString(),
-          teacher.fullname.toString(),
-        );
+        this.mailService.sendSignalEmail(teacher.email.toString());
         return teacher;
       }
     } else if (user) {
       const userPassword: string = user.password.toString();
       const isMatch = await validatePassword(password, userPassword);
       if (isMatch) {
-        this.mailService.sendSignalEmail(
-          user.email.toString(),
-          user.fullname.toString(),
-        );
+        this.mailService.sendSignalEmail(user.email.toString());
         return user;
       }
     }

@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
-const url = process.env.MAIL_URL;
-
 @Injectable()
 export class CustomMailerService {
   constructor(private readonly mailerService: MailerService) {}
@@ -33,15 +31,17 @@ export class CustomMailerService {
     });
   }
 
-  async sendSignalEmail(email: string, fullname: string) {
+  async sendSignalEmail(email: string) {
+    const url = process.env.MAIL_URL;
+    const link = `${url}/reset`;
     await this.mailerService.sendMail({
       from: 'Veil',
       to: email,
       subject: 'A new entrance to the account was discovered',
-      text: `Dear ${fullname}, someone just logged into your account, if it was you - don't answer anything. \nIf it wasn't you, follow the link to change your password: http://localhost:3000/reset`,
+      text: `Dear user, someone just logged into your account, if it was you - don't answer anything. \nAnother way - follow the link to change your password: ${link}`,
       context: {
-        fullname,
         email,
+        url,
       },
     });
   }
@@ -59,7 +59,8 @@ export class CustomMailerService {
   }
 
   async sendReset(email: string, resetToken: any) {
-    const resetLink = url + '/reset/' + resetToken;
+    const url = process.env.MAIL_URL;
+    const resetLink = `${url}/reset/${resetToken}`;
     await this.mailerService.sendMail({
       from: 'Veil',
       to: email,
@@ -67,6 +68,7 @@ export class CustomMailerService {
       text: `Click a link '${resetLink}' to set a new password`,
       context: {
         resetToken,
+        url,
       },
     });
   }
