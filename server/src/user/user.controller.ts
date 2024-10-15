@@ -27,12 +27,21 @@ export class UserController {
     private userService: UserService,
     private authService: AuthService,
   ) {}
+
   @Post('/signupuser')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
     const role = Role.USER;
     const user = await this.authService.signup(body.email, body.password, role);
     session.userId = user._id;
     session.userRole = user.role;
+    return user;
+  }
+
+  @Post('/signupteacher')
+  async createTeacher(@Body() body: CreateUserDTO, @Session() session: any) {
+    const role = Role.TEACHER;
+    const user = await this.authService.signup(body.email, body.password, role);
+    session.userId = user._id;
     return user;
   }
 
@@ -47,8 +56,8 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Get('/user')
   async getProfile(@Session() session: any) {
-    const { userId, userRole } = session;
-    return await this.authService.getUser(userId, userRole);
+    const { userId } = session;
+    return await this.authService.getUser(userId);
   }
 
   @UseGuards(AdminGuard)
@@ -59,6 +68,11 @@ export class UserController {
     } catch (error) {
       throw new NotFoundException('Could not fetch users');
     }
+  }
+
+  @Get('/teachers')
+  async allTeachers(@Query() pagination: PaginationDTO) {
+    return await this.userService.findAllTeachers(pagination);
   }
 
   @Get('/:id')

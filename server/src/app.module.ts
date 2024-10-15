@@ -5,13 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserSchema } from './user/user.schema';
-import { TeacherSchema } from './teacher/teacher.schema';
 import { UserService } from './user/user.service';
-import { TeacherService } from './teacher/teacher.service';
 import { AuthModule } from './user/auth/auth.module';
 import { CustomMailerService } from './mail/mail.service';
 import { UserModule } from './user/user.module';
-import { TeacherModule } from './teacher/teacher.module';
 import { QuestionaryModule } from './questionary/questionary.module';
 import mailerInfo from '../config/mailer';
 
@@ -43,16 +40,12 @@ import mailerInfo from '../config/mailer';
         return { uri };
       },
     }),
-    MongooseModule.forFeature([
-      { name: 'User', schema: UserSchema },
-      { name: 'Teacher', schema: TeacherSchema },
-    ]),
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     AuthModule,
     UserModule,
-    TeacherModule,
     QuestionaryModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserService, TeacherService, CustomMailerService],
+  providers: [AppService, UserService, CustomMailerService],
 })
 export class AppModule {}

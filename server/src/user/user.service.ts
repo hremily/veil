@@ -3,17 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserType } from './user.schema';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
-import { TeacherType } from 'src/teacher/teacher.schema';
 import { hashPassword } from '../middleware/password-hash.middleware';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
 import { paginationFunc } from '../middleware/pagination.middleware';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectModel('User') private userModel: Model<UserType>,
-    @InjectModel('Teacher') private teacherModel: Model<TeacherType>,
-  ) {}
+  constructor(@InjectModel('User') private userModel: Model<UserType>) {}
 
   async create(email: string, password: string, role: string) {
     return await this.userModel.create({ email, password, role });
@@ -37,37 +33,63 @@ export class UserService {
     return await this.userModel.findOne({ email });
   }
 
+  async findByName(name: string) {
+    if (!name) {
+      throw new NotFoundException('Unauthorized user');
+    }
+    return await this.userModel.findOne({ fullname: name });
+  }
+
   async findAllUsers(pagination: PaginationDTO) {
     const { skip, limit } = pagination;
     const { pageSize, pageSkip } = paginationFunc(limit, skip);
-    const [users, teachers] = await Promise.all([
-      this.userModel.find().skip(pageSkip).limit(pageSize),
-      this.teacherModel.find().skip(pageSkip).limit(pageSize),
-    ]);
-    return [users, teachers];
+    const users = await this.userModel.find().skip(pageSkip).limit(pageSize);
+
+    return users;
+  }
+
+  async findAllTeachers(pagination: PaginationDTO) {
+    const { skip, limit } = pagination;
+    const { pageSize, pageSkip } = paginationFunc(limit, skip);
+
+    const teachers = await this.userModel
+      .find({ role: 'teacher' })
+      .skip(pageSkip)
+      .limit(pageSize);
+
+    return teachers;
   }
 
   async updateProfile(userId: string, body: UpdateProfileDto) {
-    const currentUser = await this.userModel.findById(userId);
+    const user = await this.userModel.findById(userId);
 
-    if (!currentUser) {
+    if (!user) {
       throw new NotFoundException('User not found');
     }
 
-    const { email, password, fullname, phone_number } = body;
+    const {
+      email,
+      password,
+      fullname,
+      phone_number,
+      experience,
+      lessons,
+      description,
+    } = body;
 
     const hashedPassword = hashPassword(password);
 
     const updatedUser = {
-      email: email || currentUser.email,
-      password: hashedPassword || currentUser.password,
-      fullname: fullname || currentUser.fullname,
-      phone_number: phone_number || currentUser.phone_number,
+      email: email || user.email,
+      password: hashedPassword || user.password,
+      fullname: fullname || user.fullname,
+      phone_number: phone_number || user.phone_number,
+      experience: experience || user.experience,
+      lessons: lessons || user.lessons,
+      description: description || user.description,
     };
 
-    return await this.userModel.findByIdAndUpdate(userId, updatedUser, {
-      new: true,
-    });
+    return await this.userModel.findByIdAndUpdate({user});
   }
 
   async delete(id: string) {
