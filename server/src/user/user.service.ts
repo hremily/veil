@@ -97,7 +97,10 @@ export class UserService {
       image,
     } = body;
 
-    const hashedPassword = hashPassword(password);
+    let hashedPassword;
+    if (password) {
+      hashedPassword = hashPassword(password);
+    }
 
     const updatedUser = {
       email: email || user.email,
@@ -109,8 +112,9 @@ export class UserService {
       description: description || user.description,
       image: image || user.image,
     };
-
-    return await this.userModel.findByIdAndUpdate({ userId, updatedUser });
+    return await this.userModel.findByIdAndUpdate(userId, updatedUser, {
+      new: true,
+    });
   }
 
   async delete(id: string) {

@@ -21,7 +21,7 @@ import { NotFoundException } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AdminGuard } from 'src/guards/admin.guard';
 import * as mongoose from 'mongoose';
-import { Role } from '../utils/user-roles.costans';
+import { Role } from '../utils/user-roles.constants';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
 import { resetPasswordDTO } from './dtos/reset-password.dto';
 import { MyFileInterceptor } from '../../interceptors/file-upload.interceptor';

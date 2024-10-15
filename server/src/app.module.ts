@@ -12,9 +12,14 @@ import { UserModule } from './user/user.module';
 import { QuestionaryModule } from './questionary/questionary.module';
 
 import mailerInfo from '../config/mailer';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'node:path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client', 'build'),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,

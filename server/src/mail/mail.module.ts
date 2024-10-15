@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { CustomMailerService } from './mail.service';
+import mailerInfo from 'config/mailer';
 
 @Module({
   imports: [
@@ -10,8 +11,8 @@ import { CustomMailerService } from './mail.service';
         port: 587,
         secure: false,
         auth: {
-          user: 'emili061116@gmail.com',
-          pass: 'novuy parol',
+          user: mailerInfo.user,
+          pass: mailerInfo.pass,
         },
       },
     }),
