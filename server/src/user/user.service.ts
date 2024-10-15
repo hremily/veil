@@ -26,11 +26,30 @@ export class UserService {
     return user;
   }
 
+  async changePassword(token: string, password: string) {
+    const user = await this.userModel.findOne({ resetToken: token });
+
+    if (!user) {
+      throw new NotFoundException('invalid token');
+    }
+    const userId = user.id;
+    const hashedPassword = await hashPassword(password);
+
+    await this.userModel.findOneAndUpdate(
+      { _id: userId },
+      { $set: { password: hashedPassword } },
+    );
+  }
+
   async findByEmail(email: string) {
     if (!email) {
       throw new NotFoundException('Invalid email');
     }
     return await this.userModel.findOne({ email });
+  }
+
+  async findByToken(token: string) {
+    return await this.userModel.findOne({ resetToken: token });
   }
 
   async findByName(name: string) {
@@ -75,6 +94,7 @@ export class UserService {
       experience,
       lessons,
       description,
+      image,
     } = body;
 
     const hashedPassword = hashPassword(password);
@@ -87,9 +107,10 @@ export class UserService {
       experience: experience || user.experience,
       lessons: lessons || user.lessons,
       description: description || user.description,
+      image: image || user.image,
     };
 
-    return await this.userModel.findByIdAndUpdate({user});
+    return await this.userModel.findByIdAndUpdate({ userId, updatedUser });
   }
 
   async delete(id: string) {

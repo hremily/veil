@@ -68,7 +68,7 @@ export class QuestionaryService {
       throw new NotFoundException('Quet not found');
     }
 
-    const user = await this.userModel.findByIdAndUpdate(questionary.userId, {
+    await this.userModel.findByIdAndUpdate(questionary.userId, {
       $pop: { questionaries: questionary._id },
     });
 

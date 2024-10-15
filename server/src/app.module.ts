@@ -10,6 +10,7 @@ import { AuthModule } from './user/auth/auth.module';
 import { CustomMailerService } from './mail/mail.service';
 import { UserModule } from './user/user.module';
 import { QuestionaryModule } from './questionary/questionary.module';
+
 import mailerInfo from '../config/mailer';
 
 @Module({

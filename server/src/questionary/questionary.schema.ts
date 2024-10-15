@@ -15,11 +15,11 @@ export const QuestionarySchema = new mongoose.Schema({
 });
 
 export type QuestionaryType = {
-  fullname: { type: String };
-  phone_number: { type: String };
-  email: { type: String };
-  age: { type: Number };
+  fullname: { type: string };
+  phone_number: { type: string };
+  email: { type: string };
+  age: { type: number };
   userId: { type: ObjectId };
-  subject: { type: String };
+  subject: { type: string };
   teacher: { type: ObjectId };
 };

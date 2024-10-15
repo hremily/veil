@@ -13,7 +13,10 @@ export const hashPassword = async (password) => {
   return hashedPassword;
 };
 
-export const validatePassword = async (password, userPassword) => {
+export const validatePassword = async (
+  password: string,
+  userPassword: string,
+) => {
   const [salt, storedHash] = userPassword.split('.');
   const hashedPassword = (await scrypt(password, salt, 32)) as Buffer;
 

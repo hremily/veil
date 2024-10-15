@@ -9,6 +9,9 @@ import {
   Get,
   UseGuards,
   Query,
+  Patch,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
@@ -20,6 +23,8 @@ import { AdminGuard } from 'src/guards/admin.guard';
 import * as mongoose from 'mongoose';
 import { Role } from '../utils/user-roles.costans';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
+import { resetPasswordDTO } from './dtos/reset-password.dto';
+import { MyFileInterceptor } from '../../interceptors/file-upload.interceptor';
 
 @Controller()
 export class UserController {
@@ -33,7 +38,6 @@ export class UserController {
     const role = Role.USER;
     const user = await this.authService.signup(body.email, body.password, role);
     session.userId = user._id;
-    session.userRole = user.role;
     return user;
   }
 
@@ -85,10 +89,34 @@ export class UserController {
 
   @UseGuards(AuthGuard)
   @Put('/:id')
-  async updateProfile(@Param('id') id: string, @Body() body: UpdateProfileDto) {
+  @UseInterceptors(MyFileInterceptor)
+  async updateProfile(
+    @Param('id') id: string,
+    @Body() body: UpdateProfileDto,
+    @UploadedFile() image,
+  ) {
+    if (image) {
+      body.image = image.path;
+    }
     return await this.userService.updateProfile(id, body);
   }
 
+  @Post('/reset')
+  async resetPassword(@Body() body: resetPasswordDTO) {
+    const resetPasswordData: resetPasswordDTO = { email: body.email };
+    return await this.authService.resetPassword(resetPasswordData);
+  }
+
+  @Patch('/reset/:resetToken')
+  async changePassword(
+    @Body() body: resetPasswordDTO,
+    @Param('resetToken') resetToken: string,
+  ) {
+    const password = body.password;
+    return await this.authService.changePassword(resetToken, password);
+  }
+
+  @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
   @Delete('/:id')
   async delete(@Param('id') id: string) {

@@ -42,4 +42,7 @@ export class UpdateProfileDto {
   @IsOptional()
   @IsNumber()
   price: number;
+
+  @IsOptional()
+  image: string;
 }
