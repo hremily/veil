@@ -1,5 +1,6 @@
-const path = require('path');
+const path = require('node:path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const basicConfig = {
     entry: path.resolve(__dirname, '../src/index.js'),
@@ -10,6 +11,9 @@ const basicConfig = {
     plugins: [
         new HtmlWebPackPlugin({
             template: path.resolve(__dirname, '../templates/index.html'),
+        }),
+        new CopyPlugin({
+            patterns: [{ from: path.resolve(__dirname, '../assets'), to: path.resolve(__dirname, '../dist/assets') }],
         }),
     ],
     module: {

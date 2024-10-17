@@ -1,6 +1,5 @@
 const { merge } = require('webpack-merge');
 const basicConfig = require('./webpack.config');
-
 const config = {
     mode: 'development',
     module: {
@@ -21,11 +20,19 @@ const config = {
                     },
                 ],
             },
+            {
+                test: /\.jsx?$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env', '@babel/preset-react'],
+                            plugins: ['istanbul'],
+                        },
+                    },
+                ],
+            },
         ],
-    },
-    devServer: {
-        port: 9000,
-        open: true,
     },
 };
 
