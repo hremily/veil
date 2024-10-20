@@ -6,6 +6,7 @@ import { UpdateProfileDto } from './dtos/update-profile.dto';
 import { hashPassword } from '../middleware/password-hash.middleware';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
 import { paginationFunc } from '../middleware/pagination.middleware';
+import { Role } from 'src/utils/user-roles.constants';
 
 @Injectable()
 export class UserService {
@@ -27,12 +28,11 @@ export class UserService {
   }
 
   async changePassword(token: string, password: string) {
-    const user = await this.userModel.findOne({ resetToken: token });
+    const { _id: userId } = await this.userModel.findOne({ resetToken: token });
 
-    if (!user) {
+    if (!userId) {
       throw new NotFoundException('invalid token');
     }
-    const userId = user.id;
     const hashedPassword = await hashPassword(password);
 
     await this.userModel.findOneAndUpdate(
@@ -72,7 +72,7 @@ export class UserService {
     const { pageSize, pageSkip } = paginationFunc(limit, skip);
 
     const teachers = await this.userModel
-      .find({ role: 'teacher' })
+      .find({ role: Role.TEACHER })
       .skip(pageSkip)
       .limit(pageSize);
 

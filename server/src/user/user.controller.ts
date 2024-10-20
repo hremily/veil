@@ -36,17 +36,25 @@ export class UserController {
   @Post('/signupuser')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
     const role = Role.USER;
-    const user = await this.authService.signup(body.email, body.password, role);
-    session.userId = user._id;
-    return user;
+    session.userId = await this.authService.signup(
+      body.email,
+      body.password,
+      role,
+    );
+    console.log('ID: ' + session.userId);
+    console.log('Session: ' + session);
+    return session;
   }
 
   @Post('/signupteacher')
   async createTeacher(@Body() body: CreateUserDTO, @Session() session: any) {
     const role = Role.TEACHER;
-    const user = await this.authService.signup(body.email, body.password, role);
-    session.userId = user._id;
-    return user;
+    session.userId = await this.authService.signup(
+      body.email,
+      body.password,
+      role,
+    );
+    return session;
   }
 
   @Post('/signin')
@@ -54,6 +62,8 @@ export class UserController {
     const user = await this.authService.signin(body.email, body.password);
     session.userId = user._id;
     session.userRole = user.role;
+    console.log('ID: ' + session.userId);
+    console.log('Session: ' + session);
     return user;
   }
 
@@ -112,7 +122,7 @@ export class UserController {
     @Body() body: resetPasswordDTO,
     @Param('resetToken') resetToken: string,
   ) {
-    const password = body.password;
+    const { password } = body;
     return await this.authService.changePassword(resetToken, password);
   }
 

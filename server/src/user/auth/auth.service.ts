@@ -7,7 +7,7 @@ import {
 } from '../../middleware/password-hash.middleware';
 import { CustomMailerService } from 'src/mail/mail.service';
 import { resetPasswordDTO } from '../dtos/reset-password.dto';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 @Injectable()
 export class AuthService {

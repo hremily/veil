@@ -11,7 +11,7 @@ import { CustomMailerService } from './mail/mail.service';
 import { UserModule } from './user/user.module';
 import { QuestionaryModule } from './questionary/questionary.module';
 
-import mailerInfo from '../config/mailer';
+import {mailerInfo} from '../config/mailer';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'node:path';
 
