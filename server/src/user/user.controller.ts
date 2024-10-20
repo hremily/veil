@@ -41,8 +41,6 @@ export class UserController {
       body.password,
       role,
     );
-    console.log('ID: ' + session.userId);
-    console.log('Session: ' + session);
     return session;
   }
 
@@ -62,8 +60,6 @@ export class UserController {
     const user = await this.authService.signin(body.email, body.password);
     session.userId = user._id;
     session.userRole = user.role;
-    console.log('ID: ' + session.userId);
-    console.log('Session: ' + session);
     return user;
   }
 
