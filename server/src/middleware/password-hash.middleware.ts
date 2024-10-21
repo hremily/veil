@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
-import { randomBytes, scrypt as _scrypt } from 'crypto';
+import { randomBytes, scrypt as _scrypt } from 'node:crypto';
 import { promisify } from 'util';
 
 const scrypt = promisify(_scrypt);
@@ -13,7 +13,10 @@ export const hashPassword = async (password) => {
   return hashedPassword;
 };
 
-export const validatePassword = async (password, userPassword) => {
+export const validatePassword = async (
+  password: string,
+  userPassword: string,
+) => {
   const [salt, storedHash] = userPassword.split('.');
   const hashedPassword = (await scrypt(password, salt, 32)) as Buffer;
 
