@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import MainModal from '../MainModal/MainModal';
 import styles from './Header.module.css';
 
 function Header() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
+
     return (
         <header>
             <div className={styles.wrapper}>
@@ -16,11 +23,11 @@ function Header() {
                 </div>
                 <nav className={styles.nav}>
                     <a href="#categories">Categories</a>
-
                     <a href="#profile">Profile</a>
-                    <a href="signout">
+                    <a href="#signout" onClick={toggleModal}>
                         <img src="../../images/logout.png" alt="signout" />
                     </a>
+                    {isModalOpen && <MainModal toggleModal={toggleModal} />}
                 </nav>
             </div>
         </header>

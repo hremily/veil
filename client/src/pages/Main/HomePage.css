@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
 .homeSection {
     font-family: Arial, sans-serif;
     background-color: #eaeaea;
@@ -9,22 +10,20 @@
 }
 
 .imageContainer {
+    position: relative;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 25px;
 }
 
 .main {
     display: flex;
     justify-content: space-between;
     padding-bottom: 50px;
-}
-
-.imageContainer {
-    position: relative;
 }
 
 .image {

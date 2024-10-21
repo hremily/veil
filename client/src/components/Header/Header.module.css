@@ -5,6 +5,8 @@
     padding: 10px 40px;
     background-color: #eaeaea;
     height: 80px;
+    position: relative;
+    z-index: 10;
 }
 
 .illustrationSection {
@@ -51,4 +53,9 @@
 
 .nav a:hover {
     text-decoration: underline;
+}
+
+.modal {
+    position: fixed;
+    /* top:; */
 }
