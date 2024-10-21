@@ -5,18 +5,18 @@ import EditTeacherForm from '../../components/EditTeacherForm/EditTeacherForm';
 import Footer from '../../components/Footer/Footer';
 
 const EditTeacherProfile = () => {
-    const [selectedImage, setSelectedImage] = useState(null);
+    // const [selectedImage, setSelectedImage] = useState(null);
 
-    const handleImageClick = () => {
-        document.getElementById('image').click();
-    };
+    // const handleImageClick = () => {
+    //     document.getElementById('image').click();
+    // };
 
-    const handleImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            setSelectedImage(URL.createObjectURL(file));
-        }
-    };
+    // const handleImageChange = (event) => {
+    //     if (event.target.files && event.target.files[0]) {
+    //         const file = event.target.files[0];
+    //         setSelectedImage(URL.createObjectURL(file));
+    //     }
+    // };
 
     return (
         <div className={styles.editTeacherProfile}>

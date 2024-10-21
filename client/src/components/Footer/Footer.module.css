@@ -1,5 +1,5 @@
 .footer {
-    background-color: #a95cb8; /* Колір фону */
+    background-color: #a95cb8;
     padding: 20px 0;
     text-align: center;
     color: white;
@@ -23,7 +23,7 @@
   }
   
   .icons a:hover {
-    color: #f0e68c; /* Колір при наведенні */
+    color: #f0e68c; 
   }
   
   .footer p {
