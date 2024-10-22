@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.maimContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.minHScreen {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #eaeaea;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 800px;
+    max-width: 90%;
+    height: auto;
+}
+
+.imageSection {
+    flex: 1;
+}
+
+.imageSection img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contentSection {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+}
+
+.contentSection h1 {
+    color: #ba68c8;
+    font-size: 36px;
+    margin: 0;
+}
+
+.contentSection h2 {
+    color: #00000067;
+    font-size: 18px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.contentSection p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.editButton {
+    background-color: #ba68c8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+}
+
+footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
