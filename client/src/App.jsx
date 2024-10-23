@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+// import styles from './App.css';
 // import Footer from './components/Footer/Footer';
 // import Header from './components/Header/Header';
 // import SignUpTeacher from './pages/SignPages/SignUpTeacher.jsx';
@@ -6,18 +7,15 @@ import React, { useState } from 'react';
 // import SignUpUser from './pages/SignPages/SignUpUser.jsx';
 // import HomePage from './pages/Main/HomePage.jsx';
 // import EditTeacherProfile from './pages/EditTeacherProfile/EditTeacherProfile.jsx';
-// import EditUserForm from './components/EditUserForm/EditUserForm.jsx';
 // import EditUserProfile from './pages/EditUserProfile/EditUserProfile.jsx';
-// import Card from './components/UserCard/Card';
-import ViewUserPage from './pages/ViewUser/ViewUserPage';
+// import ViewUserPage from './pages/ViewUser/ViewUserPage';
 // import AdminPage from './pages/Admin/AdminPage';
-import styles from './App.css';
+import CategoriesPage from './pages/Categories/Categories';
 
 function App() {
     return (
         <>
-            {/* <AdminPage /> */}
-            <ViewUserPage />
+            <CategoriesPage />
         </>
     );
 }

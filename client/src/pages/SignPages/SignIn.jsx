@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './SignUp.css';
+
+import Logo from '../../components/Logo/Logo';
 import SignInForm from '../../components/SignForms/SignInForm';
 import SignPicture from '../../components/SignPicture/Pic';
-import Logo from '../../components/Logo/Logo';
+import styles from './SignUp.css';
 
 const SignIn = () => {
     return (

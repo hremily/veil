@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import MainModal from '../MainModal/MainModal';
 import styles from './Header.module.css';
 

@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './SignUp.css';
-import SignUpTeacherForm from '../../components/SignForms/SignUpFormTeacher';
+
 import Logo from '../../components/Logo/Logo';
+import SignUpTeacherForm from '../../components/SignForms/SignUpFormTeacher';
 import SignPicture from '../../components/SignPicture/Pic';
+import styles from './SignUp.css';
 
 const SignUpTeacher = () => {
     return (

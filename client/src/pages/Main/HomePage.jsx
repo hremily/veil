@@ -1,9 +1,10 @@
 import React from 'react';
-import styles from './HomePage.css';
-import Header from '../../components/Header/Header';
+
 import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
 import Questionary from '../../components/Questionary/Questionary';
 import TextMain from '../../components/TextMain/TextMain';
+import styles from './HomePage.css';
 
 const HomePage = () => {
     return (

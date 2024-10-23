@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import styles from './EditTeacherProfile.css';
-import Header from '../../components/Header/Header';
+import React from 'react';
+
 import EditTeacherForm from '../../components/EditTeacherForm/EditTeacherForm';
 import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
+import styles from './EditTeacherProfile.css';
 
 const EditTeacherProfile = () => {
     // const [selectedImage, setSelectedImage] = useState(null);

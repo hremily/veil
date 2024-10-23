@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import styles from './AdminPage.css';
+
+import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Card from '../../components/UserCard/Card';
-import Footer from '../../components/Footer/Footer';
+import styles from './AdminPage.css';
 
 const AdminPage = () => {
     const [users, setUsers] = useState([
@@ -33,7 +34,7 @@ const AdminPage = () => {
     ]);
 
     const handleDelete = (index) => {
-        const newUsers = users.filter((_, i) => i !== index);
+        const newUsers = users.filter((_, index_) => index_ !== index);
         setUsers(newUsers);
     };
 

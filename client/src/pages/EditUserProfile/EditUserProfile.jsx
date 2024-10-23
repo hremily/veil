@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './EditUserProfile.css';
-import Header from '../../components/Header/Header';
+
 import EditUserForm from '../../components/EditUserForm/EditUserForm';
 import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
+import styles from './EditUserProfile.css';
 
 const EditUserProfile = () => {
     return (

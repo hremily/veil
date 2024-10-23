@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './ViewUserPage.css';
-import Header from '../../components/Header/Header';
+
 import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
+import styles from './ViewUserPage.css';
 
 const ViewUserPage = () => {
     return (

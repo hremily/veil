@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './TextMain.module.css';
 
 function TextMain() {
