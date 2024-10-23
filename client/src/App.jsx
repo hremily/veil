@@ -11,11 +11,13 @@ import React from 'react';
 // import ViewUserPage from './pages/ViewUser/ViewUserPage';
 // import AdminPage from './pages/Admin/AdminPage';
 import CategoriesPage from './pages/Categories/Categories';
+import FindTeacherPage from './pages/FindTeacher/FindTeacherPage';
+import HomePage from './pages/Main/HomePage';
 
 function App() {
     return (
         <>
-            <CategoriesPage />
+            <FindTeacherPage />
         </>
     );
 }
