@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import styles from './FindTeacherPage.css';
-import Header from '../../components/Header/Header';
+
 import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
 import Questionary from '../../components/Questionary/Questionary';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
+import styles from './FindTeacherPage.css';
 
 const FindTeacherPage = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,12 +18,12 @@ const FindTeacherPage = () => {
         },
     ];
 
-    const prevTeacher = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === 0 ? teachers.length - 1 : prevIndex - 1));
+    const previousTeacher = () => {
+        setCurrentIndex((previousIndex) => (previousIndex === 0 ? teachers.length - 1 : previousIndex - 1));
     };
 
     const nextTeacher = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === teachers.length - 1 ? 0 : prevIndex + 1));
+        setCurrentIndex((previousIndex) => (previousIndex === teachers.length - 1 ? 0 : previousIndex + 1));
     };
 
     return (
@@ -32,7 +33,7 @@ const FindTeacherPage = () => {
                 <div className={styles.teachersHeader}>
                     <h1>Our Teachers</h1>
                     <div className={styles.buttons}>
-                        <button className={styles.prevButton} onClick={prevTeacher}>
+                        <button className={styles.prevButton} onClick={previousTeacher}>
                             &lt;
                         </button>
                         <button className={styles.nextButton} onClick={nextTeacher}>

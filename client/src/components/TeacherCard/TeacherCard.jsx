@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './TeacherCard.module.css';
 
 const TeacherCard = ({ name, description, skills, image }) => {
