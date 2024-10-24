@@ -13,7 +13,7 @@ import { CustomMailerService } from './mail/mail.service';
 import { UserModule } from './user/user.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { QuestionaryModule } from './questionary/questionary.module';
-import mailerInfo from '../config/mailer';
+import { mailerInfo } from '../config/mailerInfo';
 
 @Module({
   imports: [

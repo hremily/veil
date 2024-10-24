@@ -10,9 +10,9 @@
     "husky": "^9.1.6"
   },
   "scripts": {
-    "start:server": "yarn --cwd server start:dev",
-    "start:client": "yarn --cwd client start:dev",
-    "start": "concurrently \"yarn start:server\" \"yarn start:client\"",
+    "start:server": "npm --cwd server start:dev",
+    "start:client": "npm --cwd client start:dev",
+    "start": "concurrently \"npm start:server\" \"npm start:client\"",
     "test": "echo \"No tests available\"",
     "prepare": "husky"
   }
