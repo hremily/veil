@@ -1,19 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import styles from './MainModal.module.css';
 
-const Modal = ({ toggleModal }) => {
+const MainModal = ({ toggleModal }) => {
     return (
-        <div className={styles.modal}>
-            <div className={styles.modalContent}>
+        <div className={styles.modal} onClick={toggleModal}>
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <span className={styles.close} onClick={toggleModal}>
                     &times;
                 </span>
                 <ul className={styles.modalList}>
                     <li className={styles.modalListItem}>
                         <a href="#logout" className={styles.modalLink}>
-                            <i className="fas fa-sign-out-alt"></i> Log out
+                            <div className={styles.imageContainer}>
+                                <img src="/images/logout.png" alt="" srcset="" />
+                                <i className="fas fa-sign-out-alt"></i> Log out
+                            </div>
                         </a>
                     </li>
                     <li className={styles.modalListItem}>
@@ -23,7 +25,7 @@ const Modal = ({ toggleModal }) => {
                     </li>
                     <li className={styles.modalListItem}>
                         <a href="#darkmode" className={styles.modalLink}>
-                            <i className="fas fa-moon"></i> Dark mode
+                            <i className="fas fa-moon"></i> Dark
                         </a>
                     </li>
                 </ul>
@@ -32,8 +34,8 @@ const Modal = ({ toggleModal }) => {
     );
 };
 
-Modal.propTypes = {
+MainModal.propTypes = {
     toggleModal: PropTypes.func.isRequired,
 };
 
-export default Modal;
+export default MainModal;

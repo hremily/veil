@@ -1,13 +1,9 @@
 import React from 'react';
-
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
 import styles from './ViewUserPage.css';
 
 const ViewUserPage = () => {
     return (
-        <div className={styles.maimContainer}>
-            <Header />
+        <div className={styles.mainContainer}>
             <div className={styles.minHScreen}>
                 <div className={styles.container}>
                     <div className={styles.imageSection}>
@@ -25,7 +21,6 @@ const ViewUserPage = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };

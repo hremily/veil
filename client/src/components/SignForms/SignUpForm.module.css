@@ -59,6 +59,7 @@ button:hover {
 
 .teacherLink a,
 .signinLink a {
+    font-size: 1.5rem;
     color: var(--background-link);
     text-decoration: none;
 }

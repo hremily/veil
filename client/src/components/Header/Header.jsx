@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import MainModal from '../MainModal/MainModal';
 import styles from './Header.module.css';
 
@@ -17,19 +17,19 @@ function Header() {
                     <div className={styles.logoWrapper}>
                         <img src="../images/VEIL_logo.png" alt="Logo" className={styles.logo} />
                         <span className={styles.logoText}>eil {'|'} </span>
-                        <a href="home" className={styles.homeLink}>
+                        <Link to="/" className={styles.homeLink} style={{ color: 'var(--primary-color)' }}>
                             HOME
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <nav className={styles.nav}>
-                    <a href="#categories">Categories</a>
-                    <a href="#profile">Profile</a>
+                    <Link to="/categories">Categories</Link>
+                    <Link to="/profile">Profile</Link>
                     <a href="#signout" onClick={toggleModal}>
-                        <img src="../../images/logout.png" alt="signout" />
+                        <img src="/images/settings.png" alt="signout" />
                     </a>
-                    {isModalOpen && <MainModal toggleModal={toggleModal} />}
                 </nav>
+                {isModalOpen && <MainModal toggleModal={toggleModal} />}
             </div>
         </header>
     );

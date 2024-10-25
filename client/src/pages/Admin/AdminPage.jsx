@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
 import Card from '../../components/UserCard/Card';
 import styles from './AdminPage.css';
 
@@ -40,7 +38,6 @@ const AdminPage = () => {
 
     return (
         <div className={styles.adminPage}>
-            <Header />
             <div className={styles.container}>
                 {users.map((user, index) => (
                     <Card
@@ -53,7 +50,6 @@ const AdminPage = () => {
                     />
                 ))}
             </div>
-            <Footer />
         </div>
     );
 };

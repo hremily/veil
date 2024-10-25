@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
 import styles from './Categories.css';
 
 const Categories = () => {
@@ -20,7 +18,6 @@ const Categories = () => {
 
     return (
         <div className={styles.wrapper}>
-            <Header />
             <div className={styles.mainContent}>
                 <div className={styles.left}>
                     <img className={styles.descriptionImg} src="../images/description.png" alt="description" />
@@ -39,7 +36,6 @@ const Categories = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };
