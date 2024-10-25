@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease-in-out;
 }
 
 .card img {
@@ -53,4 +54,60 @@
 .deleteButton {
     background-color: #fff;
     border: none;
+    cursor: pointer;
+}
+
+.adminPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 150px;
+        padding: 15px;
+    }
+
+    .name {
+        font-size: 16px;
+    }
+
+    .role,
+    .phone {
+        font-size: 12px;
+    }
+
+    .icons i {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+        margin: 5px 0;
+        padding: 10px;
+    }
+
+    .name {
+        font-size: 14px;
+    }
+
+    .role,
+    .phone {
+        font-size: 11px;
+    }
+
+    .icons i {
+        font-size: 16px;
+    }
 }

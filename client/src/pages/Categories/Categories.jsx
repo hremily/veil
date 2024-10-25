@@ -23,7 +23,7 @@ const Categories = () => {
             <Header />
             <div className={styles.mainContent}>
                 <div className={styles.left}>
-                    <img src="../images/description.png" alt="description" />
+                    <img className={styles.descriptionImg} src="../images/description.png" alt="description" />
                     <button className={styles.consultationBtn}>Get a consultation</button>
                 </div>
                 <div className={styles.right}>

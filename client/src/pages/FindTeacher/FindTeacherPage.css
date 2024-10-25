@@ -3,6 +3,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    background-color: #eaeaea;
+    flex-wrap: wrap;
 }
 
 .imageForm {
@@ -16,9 +18,10 @@
     text-align: center;
     background-image: url('../../../public/images/bubbles.png');
     background-size: cover;
-    height: 75vh;
+    background-color: #eaeaea;
+    height: 95vh;
     overflow-y: auto;
-    margin: 50px auto;
+    margin: 0;
 }
 
 .teachersHeader {
@@ -28,6 +31,7 @@
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 .teachersHeader h1 {
@@ -78,6 +82,7 @@
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    flex-wrap: wrap;
 }
 
 .teacherCard {
@@ -112,4 +117,50 @@
 .teacherInfo li {
     font-size: 16px;
     color: #333;
+}
+
+@media (max-width: 768px) {
+    .flexContainer {
+        flex-direction: column;
+    }
+
+    .imageForm {
+        width: 60%;
+    }
+
+    .teachersHeader h1 {
+        font-size: 28px;
+    }
+
+    .cardContainer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .imageForm {
+        width: 100%;
+    }
+
+    .teachersHeader h1 {
+        font-size: 24px;
+    }
+
+    .cardContainer {
+        padding: 10px;
+    }
+
+    .teacherImage img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .teacherInfo h2 {
+        font-size: 20px;
+    }
+
+    .teacherInfo p,
+    .teacherInfo li {
+        font-size: 13px;
+    }
 }

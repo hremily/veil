@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from './EditTeacherForm.module.css';
 
 const EditTeacherForm = () => {

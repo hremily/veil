@@ -1,15 +1,15 @@
 .modal {
     display: flex;
     align-items: center;
-    position: absolute; /* Зміна на absolute для розташування поряд з logout */
+    position: absolute;
     z-index: 2;
-    background-color: white; /* Білий колір */
+    background-color: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 15px;
     width: 150px;
-    top: 60px; /* Розташування поряд з logout (коригується для точного позиціонування) */
-    right: 10px; /* Регулюємо відступ праворуч */
+    top: 60px;
+    right: 10px;
 }
 
 .modal-content {
@@ -39,11 +39,29 @@ ul li {
 
 ul li a {
     text-decoration: none;
-    color: #007bff; /* Блакитний колір посилання */
+    color: #007bff;
     font-weight: bold;
     cursor: pointer;
 }
 
 ul li a:hover {
-    text-decoration: underline; /* Підкреслення при наведенні */
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .modal {
+        width: 80%;
+        top: 50px;
+        right: 10%;
+    }
+}
+
+@media (max-width: 768px) {
+    ul li {
+        font-size: 14px;
+    }
+
+    .close {
+        font-size: 16px;
+    }
 }

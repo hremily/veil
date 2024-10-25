@@ -3,14 +3,6 @@ import React from 'react';
 
 import styles from './Card.module.css';
 
-Card.propTypes = {
-    imgSrc: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    onDelete: PropTypes.func.isRequired,
-};
-
 const Card = ({ imgSrc, name, role, phone, onDelete }) => {
     return (
         <div className={styles.card}>
@@ -25,6 +17,14 @@ const Card = ({ imgSrc, name, role, phone, onDelete }) => {
             </button>
         </div>
     );
+};
+
+Card.propTypes = {
+    imgSrc: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
 };
 
 export default Card;

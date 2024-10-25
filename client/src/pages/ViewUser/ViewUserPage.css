@@ -11,7 +11,7 @@ body {
     height: 100%;
 }
 
-.maimContainer {
+.mainContainer {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -43,7 +43,7 @@ body {
 
 .imageSection img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
 }
 
@@ -87,4 +87,67 @@ footer {
     background-color: #f1f1f1;
     padding: 10px;
     text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .contentSection h1 {
+        font-size: 28px;
+    }
+
+    .contentSection h2 {
+        font-size: 16px;
+    }
+
+    .contentSection p {
+        font-size: 15px;
+    }
+
+    .editButton {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .imageSection img {
+        height: 200px;
+    }
+
+    .contentSection {
+        padding: 15px;
+    }
+
+    .contentSection h1 {
+        font-size: 24px;
+    }
+
+    .contentSection h2 {
+        font-size: 14px;
+    }
+
+    .contentSection p {
+        font-size: 14px;
+    }
+
+    .editButton {
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contentSection h1 {
+        font-size: 20px;
+    }
+
+    .contentSection h2 {
+        font-size: 12px;
+    }
+
+    .contentSection p {
+        font-size: 12px;
+    }
 }

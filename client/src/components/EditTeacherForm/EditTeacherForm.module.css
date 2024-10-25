@@ -1,3 +1,132 @@
+/* .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    width: 100%;
+    background-color: #eaeaea;
+    border-radius: 12px;
+}
+
+.formContainer {
+    flex: 1;
+    margin-right: 20px;
+    margin-bottom: 50px;
+}
+
+h2 {
+    text-align: center;
+    color: #ba68c8;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.editForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.divideGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    background-color: #f1f1f1;
+    transition: box-shadow 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+button {
+    background-color: #d632ff;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #820082;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 45%;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.imgContainer img {
+    width: 70%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.imgContainer input[type='file'] {
+    position: absolute;
+    bottom: 10px;
+    left: 110px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .formContainer {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .imgContainer {
+        width: 90%;
+        margin-top: 20px;
+    }
+    .imgContainer input[type='file'] {
+        left: 80px;
+    }
+} */
+
 .wrapper {
     display: flex;
     justify-content: space-between;
@@ -5,6 +134,7 @@
     padding: 20px;
     width: auto;
     background-color: #eaeaea;
+    color: #757575;
     border-radius: 12px;
 }
 
@@ -21,7 +151,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-.editForm {
+.formContainer form {
     display: flex;
     flex-direction: column;
 }
@@ -33,7 +163,7 @@ h2 {
 }
 
 .divideGroup input,
-textarea {
+select {
     flex: 1;
     padding: 10px;
     border-radius: 8px;
@@ -41,11 +171,8 @@ textarea {
     font-size: 1rem;
     background-color: #fff;
 }
-
-textarea {
-    height: 100px;
-    border-radius: 12px;
-    resize: none;
+.divideGroup select {
+    color: #757575;
 }
 
 .imgContainer {
@@ -76,4 +203,205 @@ button {
 
 button:hover {
     background-color: #820082;
+}
+
+.questList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.questList input {
+    flex: 2;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-size: 1.2rem;
+}
+
+.questList button {
+    width: auto;
+    background-color: #f0b6ff;
+    color: #675454;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 0;
+}
+
+.questList button:hover {
+    background-color: #6f0788;
+    color: #ffffff;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    background-color: #f1f1f1;
+    transition: box-shadow 0.3s ease;
+}
+
+.imgContainer input[type='file'] {
+    bottom: 10px;
+    left: 110px;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .formContainer {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .imgContainer {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .formContainer {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .divideGroup {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .imgContainer {
+        width: 100%;
+    }
+
+    .questList {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .questList input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .questList button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .wrapper {
+        padding: 5px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .formContainer {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .divideGroup {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .divideGroup input,
+    .divideGroup select {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .imgContainer {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .imgContainer img {
+        max-height: 200px;
+    }
+
+    .questList {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .questList input {
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .questList button {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
 }

@@ -115,3 +115,145 @@ button:hover {
     background-color: #6f0788;
     color: #ffffff;
 }
+
+.imgContainer input[type='file'] {
+    bottom: 10px;
+    left: 110px;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .formContainer {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .imgContainer {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .formContainer {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .divideGroup {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .imgContainer {
+        width: 100%;
+    }
+
+    .questList {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .questList input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .questList button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .wrapper {
+        padding: 5px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .formContainer {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .divideGroup {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .divideGroup input,
+    .divideGroup select {
+        width: 100%;
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .imgContainer {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .imgContainer img {
+        max-height: 200px;
+    }
+
+    .questList {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .questList input {
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .questList button {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}

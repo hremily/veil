@@ -13,6 +13,7 @@ body {
     background-size: cover;
     height: 100vh;
     overflow-y: auto;
+    flex-direction: row;
 }
 
 .mainContent .left {
@@ -94,43 +95,91 @@ body {
     font-size: 18px;
 }
 
-.mainContent .right .subject:nth-child(2) span {
-    background-color: #ff9800;
-}
-
-.mainContent .right .subject:nth-child(3) span {
-    background-color: #8bc34a;
-}
-
-.mainContent .right .subject:nth-child(4) span {
-    background-color: #00bcd4;
-}
-
-.mainContent .right .subject:nth-child(5) span {
-    background-color: #3f51b5;
-}
-
-.mainContent .right .subject:nth-child(6) span {
-    background-color: #9c27b0;
-}
-
-.mainContent .right .subject:nth-child(7) span {
-    background-color: #e91e63;
-}
-
-.mainContent .right .subject:nth-child(8) span {
-    background-color: #673ab7;
-}
-
-.mainContent .right .subject:nth-child(9) span {
-    background-color: #009688;
-}
-
-.mainContent .right .subject:nth-child(10) span {
-    background-color: #795548;
-}
-
 .mainContent .right .subject:hover {
     background-color: rgba(255, 255, 255, 0.9);
     transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+    .mainContent {
+        flex-direction: column;
+        padding: 20px;
+        height: auto;
+    }
+
+    .mainContent .left {
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .mainContent .right {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .mainContent .left h2 {
+        font-size: 20px;
+    }
+
+    .mainContent .left .cost {
+        font-size: 16px;
+    }
+
+    .mainContent .left .cost .new-price {
+        font-size: 28px;
+    }
+
+    .mainContent .left .consultation-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .mainContent .right .subject {
+        height: 70px;
+        padding: 15px;
+    }
+
+    .mainContent .right .subject span {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        line-height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .descriptionImg {
+        display: none;
+    }
+
+    .mainContent .left h2 {
+        font-size: 18px;
+    }
+
+    .mainContent .left .cost {
+        font-size: 14px;
+    }
+
+    .mainContent .left .cost .new-price {
+        font-size: 24px;
+    }
+
+    .mainContent .left .consultation-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .mainContent .right .subject {
+        height: 60px;
+        padding: 10px;
+    }
+
+    .mainContent .right .subject span {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        line-height: 35px;
+    }
 }

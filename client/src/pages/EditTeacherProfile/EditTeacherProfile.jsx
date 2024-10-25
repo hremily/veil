@@ -21,7 +21,7 @@ const EditTeacherProfile = () => {
 
     return (
         <div className={styles.editTeacherProfile}>
-            <Header />
+          
             <div className={styles.editTeacherProfile__content}>
                 <div className={styles.formContainer}>
                     <EditTeacherForm />

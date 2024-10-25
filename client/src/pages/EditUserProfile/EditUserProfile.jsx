@@ -8,7 +8,6 @@ import styles from './EditUserProfile.css';
 const EditUserProfile = () => {
     return (
         <div className={styles.editPage}>
-            <Header />
             <div className={styles.editContainer}>
                 <EditUserForm />
             </div>
