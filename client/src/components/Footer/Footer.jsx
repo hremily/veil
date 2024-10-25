@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './Footer.module.css';
 import { CiLinkedin } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
 import { IoLogoGithub } from "react-icons/io";
+
+import styles from './Footer.module.css';
 
 const Footer = () => {
   return (
