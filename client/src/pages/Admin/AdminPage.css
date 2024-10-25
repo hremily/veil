@@ -1,5 +1,5 @@
 body {
-    background-color: #eaeaea;
+    background-color: var(--background-color);
 }
 
 .container {
@@ -10,7 +10,7 @@ body {
 }
 
 .card {
-    background-color: #fff;
+    background-color: var(--secondary-color);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px;

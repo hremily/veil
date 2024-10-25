@@ -4,8 +4,8 @@
     align-items: center;
     padding: 20px;
     width: auto;
-    background-color: #eaeaea;
-    color: #757575;
+    background-color: var(--background-color);
+    color: var(--text-color);
     border-radius: 12px;
 }
 
@@ -17,7 +17,7 @@
 
 h2 {
     text-align: center;
-    color: #ba68c8;
+    color: var(--primary-color);
     font-size: 2rem;
     margin-bottom: 20px;
 }
@@ -43,7 +43,7 @@ select {
     background-color: #fff;
 }
 .divideGroup select {
-    color: #757575;
+    color: var(--text-color-form);
 }
 
 .imgContainer {
@@ -62,7 +62,7 @@ select {
 }
 
 button {
-    background-color: #d632ff;
+    background-color: var(--button-color);
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -73,14 +73,14 @@ button {
 }
 
 button:hover {
-    background-color: #820082;
+    background-color: var(--button-color-hover);
 }
 
 .questList {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: var(--secondary-color);
     font-family: Arial, Helvetica, sans-serif;
     padding: 15px;
     border-radius: 12px;
@@ -94,13 +94,13 @@ button:hover {
     padding: 15px;
     border-radius: 12px;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
+    /*background-color: var(--input-color);*/
     font-size: 1.2rem;
 }
 
 .questList button {
     width: auto;
-    background-color: #f0b6ff;
+    background-color: var(--secondary-button-color);
     color: #675454;
     padding: 10px 20px;
     border-radius: 8px;
@@ -112,8 +112,28 @@ button:hover {
 }
 
 .questList button:hover {
-    background-color: #6f0788;
-    color: #ffffff;
+    background-color: var(--button-color-hover);
+    color: var(--secondary-color);
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    background-color: var(--secondary-input-color);
+    transition: box-shadow 0.3s ease;
 }
 
 .imgContainer input[type='file'] {
@@ -218,7 +238,6 @@ button:hover {
 
     .divideGroup input,
     .divideGroup select {
-        width: 100%;
         padding: 8px;
         font-size: 0.9rem;
     }

@@ -1,5 +1,5 @@
 .card {
-    background-color: #fff;
+    background-color: var(--secondary-color);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px;
@@ -22,16 +22,16 @@
 .name {
     font-size: 18px;
     font-weight: bold;
-    background-color: #fff;
-    color: #8b3999;
+    background-color: var(--secondary-color);
+    color: var(--userInfo);
     margin: 10px 0;
 }
 
 .role,
 .phone {
     font-size: 14px;
-    background-color: #fff;
-    color: #00000067;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
@@ -43,16 +43,16 @@
 
 .icons i {
     font-size: 20px;
-    color: #9b59b6;
+    color: var(--background-icons);
     margin: 0 5px;
 }
 
 .userData {
-    background-color: #fff;
+    background-color: var(--secondary-color);
 }
 
 .deleteButton {
-    background-color: #fff;
+    background-color: var(--secondary-color);
     border: none;
     cursor: pointer;
 }

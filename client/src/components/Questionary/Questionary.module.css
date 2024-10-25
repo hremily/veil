@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #eaeaea;
+    background-color: var(--background-color);
     border: 1px solid #ddd;
     border-radius: 5px;
     max-width: 1200px;
@@ -26,8 +26,8 @@
 }
 
 .element {
-    background-color: #ba68c844;
-    color: #000;
+    background-color: var(--elements);
+    color: var(--text-color);
     padding: 10px 20px;
     border-radius: 5px;
     margin: 0 10px;
@@ -35,7 +35,7 @@
 
 .logo {
     background-color: #ba68c8;
-    color: #fff;
+    color: var(--secondary-color);
     font-size: 36px;
     font-weight: bold;
     padding: 20px 40px;
@@ -60,7 +60,7 @@ select {
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 3px;
-    color: #999999;
+    color: var(--text-color-form);
 }
 
 input,
@@ -70,7 +70,7 @@ select {
     border: 1px solid #ddd;
     border-radius: 3px;
     font-size: 14px;
-    color: #999999;
+    color: var(--text-color-form);
 }
 
 .flex-container {
@@ -103,8 +103,8 @@ select {
 }
 
 button {
-    background-color: #e75fff;
-    color: #fff;
+    background-color: var(--button-color);
+    color: var(--secondary-color);
     padding: 10px 20px;
     border: none;
     border-radius: 3px;

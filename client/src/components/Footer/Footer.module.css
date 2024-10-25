@@ -1,8 +1,8 @@
 .footer {
-    background-color: #a95cb8;
+    background-color: var(--footer-background);
     padding: 20px 0;
     text-align: center;
-    color: white;
+    color: var(--secondary-color);
     font-family: 'Arial', sans-serif;
     position: relative;
     bottom: 0;
@@ -33,14 +33,14 @@
 }
 
 .icons a {
-    color: white;
+    color: var(--secondary-color);
     margin: 0 10px;
     text-decoration: none;
     font-size: 24px;
 }
 
 .icons a:hover {
-    color: #f0e68c;
+    color: var(--footer-icons-hover);
 }
 
 .footer p {

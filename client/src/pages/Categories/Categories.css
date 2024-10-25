@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #eaeaea;
+    background-color: var(--background-color);
     margin: 0;
     padding: 0;
 }
@@ -27,19 +27,19 @@ body {
 }
 
 .mainContent .left h2 span {
-    background-color: #d8b4fe;
+    background-color: var(--background-color-main-details);
     padding: 0 5px;
 }
 
 .mainContent .left .cost {
     margin-top: 20px;
     font-size: 18px;
-    color: #000;
+    color: var(--text-color);
 }
 
 .mainContent .left .cost .old-price {
     text-decoration: line-through;
-    color: #888;
+    color: var(--text-color-form);
 }
 
 .mainContent .left .cost .new-price {
@@ -50,8 +50,8 @@ body {
 .mainContent .left .consultation-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #d8b4fe;
-    color: #fff;
+    background-color: var(--secondary-button-color);
+    color: var(--secondary-colorcolor);
     border: none;
     border-radius: 5px;
     cursor: pointer;
