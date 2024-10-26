@@ -7,7 +7,7 @@ const EditTeacherProfile = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageClick = () => {
-        document.getElementById('image').click();
+        document.querySelector('#image').click();
     };
 
     const handleImageChange = (event) => {

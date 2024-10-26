@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import styles from './MainModal.module.css';
 
 const MainModal = ({ toggleModal }) => {
     return (
         <div className={styles.modal} onClick={toggleModal}>
-            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalContent} onClick={(error) => error.stopPropagation()}>
                 <span className={styles.close} onClick={toggleModal}>
                     &times;
                 </span>
@@ -13,7 +14,7 @@ const MainModal = ({ toggleModal }) => {
                     <li className={styles.modalListItem}>
                         <a href="#logout" className={styles.modalLink}>
                             <div className={styles.imageContainer}>
-                                <img src="/images/logout.png" alt="" srcset="" />
+                                <img src="/images/logout.png" alt="" srcSet="" />
                                 <i className="fas fa-sign-out-alt"></i> Log out
                             </div>
                         </a>

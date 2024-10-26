@@ -1,21 +1,20 @@
+import './App.css';
+
 import React from 'react';
-import { Routes, Route, BrowserRouter, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
-import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-
-import Categories from './pages/Categories/Categories';
-import HomePage from './pages/Main/HomePage';
-import ViewUserPage from './pages/ViewUser/ViewUserPage';
-import SignIn from './pages/SignPages/SignIn';
-import SignUpUser from './pages/SignPages/SignUpUser';
-import SignUpTeacher from './pages/SignPages/SignUpTeacher';
+import Header from './components/Header/Header';
 import Admin from './pages/Admin/AdminPage';
+import Categories from './pages/Categories/Categories';
 import EditTeacherProfile from './pages/EditTeacherProfile/EditTeacherProfile';
 import EditUserProfile from './pages/EditUserProfile/EditUserProfile';
 import FindTeacher from './pages/FindTeacher/FindTeacherPage';
-
-import './App.css';
+import HomePage from './pages/Main/HomePage';
+import SignIn from './pages/SignPages/SignIn';
+import SignUpTeacher from './pages/SignPages/SignUpTeacher';
+import SignUpUser from './pages/SignPages/SignUpUser';
+import ViewUserPage from './pages/ViewUser/ViewUserPage';
 
 function App() {
     const location = useLocation();
