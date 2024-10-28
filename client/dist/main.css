@@ -1,5 +1,5 @@
 .Footer-module__footer {
-    background-color: #a95cb8; /* Колір фону */
+    background-color: #a95cb8;
     padding: 20px 0;
     text-align: center;
     color: white;
@@ -7,136 +7,135 @@
     position: relative;
     bottom: 0;
     width: 100%;
-  }
-  
-  .Footer-module__footerContent {
+}
+
+.Footer-module__footerContent {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .Footer-module__icons a {
+}
+
+.Footer-module__icons a {
     color: white;
     margin: 0 10px;
     text-decoration: none;
     font-size: 24px;
-  }
-  
-  .Footer-module__icons a:hover {
-    color: #f0e68c; /* Колір при наведенні */
-  }
-  
-  .Footer-module__footer p {
+}
+
+.Footer-module__icons a:hover {
+    color: #f0e68c;
+}
+
+.Footer-module__footer p {
     margin: 5px 0;
-  }
-  
+}
+
 .SignUp__signup-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e8dddd; 
-    height: 100vh; 
-    padding: 20px; 
+    background-color: #e8dddd;
+    height: 100vh;
+    padding: 20px;
 }
 
 .SignUp__signup-container {
     display: flex;
-    max-width: 900px; 
+    max-width: 900px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border-radius: 10px; 
+    border-radius: 10px;
     overflow: hidden;
-    background-color: white; 
+    background-color: white;
 }
 
 .SignUp__signup-left {
     background-color: #fff;
-    width: 50%; 
+    width: 50%;
     padding: 40px;
     display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: flex-start; 
-    height: 100%; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
 }
 
 .SignUp__signup-right {
-    background-color: #f4ebf6; 
-    width: 50%; 
+    background-color: #f4ebf6;
+    width: 50%;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     height: 100%;
 }
 
 .SignUp__signup-image {
-    width: 80%; 
+    width: 80%;
     height: auto;
     border-radius: 5px;
 }
 
 .SignUp__logo {
-    font-size: 3rem; 
-    font-weight: bold; 
-    color: #a457e4; 
-    margin-bottom: 20px; 
+    font-size: 3rem;
+    font-weight: bold;
+    color: #a457e4;
+    margin-bottom: 20px;
 }
 
 h2 {
-    font-size: 2rem; 
-    margin-bottom: 20px; 
-    color: #333; 
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 .SignUp__signup-form {
     display: flex;
-    flex-direction: column; 
-    width: 100%; 
-    max-width: 400px; 
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
 }
 
 .SignUp__input-field {
-    padding: 15px; 
-    margin: 10px 0; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    font-size: 1rem; 
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
 .SignUp__submit-btn {
-    background-color: #c76cf7; 
-    color: white; 
-    padding: 15px; 
-    border: none; 
-    border-radius: 5px; 
-    font-size: 1rem; 
-    cursor: pointer; 
+    background-color: #c76cf7;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .SignUp__submit-btn:hover {
-    background-color: #b64be1; 
+    background-color: #b64be1;
 }
 
 .SignUp__enter-like {
-    margin-top: 20px; 
-    font-size: 1rem; 
+    margin-top: 20px;
+    font-size: 1rem;
 }
 
 .SignUp__student-link {
-    color: #c76cf7; 
-    cursor: pointer; 
+    color: #c76cf7;
+    cursor: pointer;
 }
 
 .SignUp__sign-in {
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .SignUp__sign-in a {
-    color: #a457e4; 
-    text-decoration: none; 
+    color: #a457e4;
+    text-decoration: none;
 }
 
 .SignUp__sign-in a:hover {
-    text-decoration: underline; 
+    text-decoration: underline;
 }
-
