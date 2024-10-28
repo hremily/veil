@@ -1,6 +1,6 @@
 import './App.css';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import Footer from './components/Footer/Footer';
@@ -15,9 +15,22 @@ import SignIn from './pages/SignPages/SignIn';
 import SignUpTeacher from './pages/SignPages/SignUpTeacher';
 import SignUpUser from './pages/SignPages/SignUpUser';
 import ViewUserPage from './pages/ViewUser/ViewUserPage';
+import MainModal from './components/MainModal/MainModal';
+
+import { AuthProvider } from './routes/AuthContext';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
     const location = useLocation();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => setIsModalOpen(!isModalOpen);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            setIsModalOpen(false);
+        }
+    }, [location.pathname]);
 
     const hideHeaderPaths = ['/signin', '/signup-teacher', '/signup-user'];
     const hideFooterPaths = ['/signin', '/signup-teacher', '/signup-user'];
@@ -26,24 +39,26 @@ function App() {
     const showFooter = !hideFooterPaths.includes(location.pathname);
 
     return (
-        <>
+        <AuthProvider>
             {showHeader && <Header />}
 
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/profile" element={<ViewUserPage />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup-user" element={<SignUpUser />} />
                 <Route path="/signup-teacher" element={<SignUpTeacher />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/teacher-profile" element={<EditTeacherProfile />} />
-                <Route path="/user-profile" element={<EditUserProfile />} />
-                <Route path="/find-teacher" element={<FindTeacher />} />
+
+                <Route path="/categories" element={<ProtectedRoute element={Categories} />} />
+                <Route path="/profile" element={<ProtectedRoute element={ViewUserPage} />} />
+                <Route path="/admin" element={<ProtectedRoute element={Admin} />} />
+                <Route path="/teacher-profile" element={<ProtectedRoute element={EditTeacherProfile} />} />
+                <Route path="/user-profile" element={<ProtectedRoute element={EditUserProfile} />} />
+                <Route path="/findteacher" element={<ProtectedRoute element={FindTeacher} />} />
             </Routes>
 
+            {isModalOpen && <MainModal toggleModal={toggleModal} />}
             {showFooter && <Footer />}
-        </>
+        </AuthProvider>
     );
 }
 

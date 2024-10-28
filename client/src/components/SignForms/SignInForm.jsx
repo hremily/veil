@@ -16,12 +16,12 @@ function SignIn() {
                     <p>
                         Don`t have an account?{' '}
                         <span className={styles.signinLink}>
-                            <a href="/signupuser">Sign up</a>
+                            <a href="/signup-user">Sign up</a>
                         </span>
                     </p>
                     <p>
                         <span className={styles.signinLink}>
-                            <a href="/signupuser">Reset password</a>
+                            <a href="/reset">Reset password</a>
                         </span>
                     </p>
                 </div>
