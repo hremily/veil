@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import secret from '../config/secret';
+import { secret } from '../config/secret';
 const session = require('express-session');
 
 async function bootstrap() {
