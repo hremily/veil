@@ -17,8 +17,8 @@ import ViewUserPage from './pages/ViewUser/ViewUserPage';
 import MainModal from './components/MainModal/MainModal';
 
 import { roleConstans } from '../assets/role-constants';
-import { AuthProvider } from './routes/AuthProvider';
-import ProtectedRoute from './routes/ProtectedRoute';
+import AuthProvider from './components/Auth/AuthProvider';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
 
 function App() {
     const location = useLocation();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Categories.module.css';
+import styles from './Categories.css';
 import { subjects } from '../../../assets/subjects-constants';
 
 const Categories = () => {
@@ -8,7 +8,6 @@ const Categories = () => {
     const navigate = useNavigate();
 
     const handleCategorySelect = (id) => {
-        // Navigate to FindTeacherPage and pass the selected category
         navigate('/find-teacher', { state: { selectedCategory: id } });
     };
 

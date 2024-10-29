@@ -56,7 +56,7 @@ const FindTeacherPage = ({ location }) => {
                         <TeacherCard
                             name={teachers[currentIndex].fullname}
                             description={teachers[currentIndex].description}
-                            skills={teachers[currentIndex].skills}
+                            lessons={teachers[currentIndex].lessons}
                             imgSrc={teachers[currentIndex].image}
                         />
                     ) : (
