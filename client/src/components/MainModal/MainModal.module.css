@@ -6,8 +6,8 @@
     z-index: 2;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    padding: 5px 10px;
-    width: 70px;
+    padding: 5px;
+    width: 100px;
     top: 60px;
     right: 10px;
     background-color: var(--secondary-color);
@@ -53,6 +53,12 @@ ul li a {
 
 ul li a:hover {
     text-decoration: underline;
+}
+
+.modalLink {
+    background-color: var(--secondary-color);
+    padding: 2px;
+    color: var(--text-color);
 }
 
 @media (max-width: 768px) {

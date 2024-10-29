@@ -125,7 +125,7 @@ input[type='email'],
 input[type='password'],
 input[type='number'],
 textarea,
-select {
+select.subject {
     width: 100%;
     padding: 15px;
     border-radius: 12px;

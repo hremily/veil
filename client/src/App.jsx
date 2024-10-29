@@ -1,5 +1,4 @@
 import './App.css';
-
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
@@ -17,7 +16,8 @@ import SignUpUser from './pages/SignPages/SignUpUser';
 import ViewUserPage from './pages/ViewUser/ViewUserPage';
 import MainModal from './components/MainModal/MainModal';
 
-import { AuthProvider } from './routes/AuthContext';
+import { roleConstans } from '../assets/role-constants';
+import { AuthProvider } from './routes/AuthProvider';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
@@ -48,12 +48,21 @@ function App() {
                 <Route path="/signup-user" element={<SignUpUser />} />
                 <Route path="/signup-teacher" element={<SignUpTeacher />} />
 
-                <Route path="/categories" element={<ProtectedRoute element={Categories} />} />
-                <Route path="/profile" element={<ProtectedRoute element={ViewUserPage} />} />
-                <Route path="/admin" element={<ProtectedRoute element={Admin} />} />
-                <Route path="/teacher-profile" element={<ProtectedRoute element={EditTeacherProfile} />} />
-                <Route path="/user-profile" element={<ProtectedRoute element={EditUserProfile} />} />
-                <Route path="/findteacher" element={<ProtectedRoute element={FindTeacher} />} />
+                <Route path="/categories" element={<ProtectedRoute element={<Categories />} />} />
+                <Route path="/profile" element={<ProtectedRoute element={<ViewUserPage />} />} />
+                <Route
+                    path="/admin"
+                    element={<ProtectedRoute element={<Admin />} allowedRoles={[roleConstans.ADMIN]} />}
+                />
+                <Route
+                    path="/teacher-profile"
+                    element={<ProtectedRoute element={<EditTeacherProfile />} allowedRoles={[roleConstans.TEACHER]} />}
+                />
+                <Route
+                    path="/user-profile"
+                    element={<ProtectedRoute element={<EditUserProfile />} allowedRoles={[roleConstans.USER]} />}
+                />
+                <Route path="/find-teacher" element={<ProtectedRoute element={<FindTeacher />} />} />
             </Routes>
 
             {isModalOpen && <MainModal toggleModal={toggleModal} />}

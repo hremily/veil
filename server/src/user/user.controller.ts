@@ -24,7 +24,7 @@ import * as mongoose from 'mongoose';
 import { Role } from '../utils/user-roles.constants';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
 import { resetPasswordDTO } from './dtos/reset-password.dto';
-import { MyFileInterceptor } from '../../interceptors/file-upload.interceptor';
+import { MyFileInterceptor } from '../interceptors/file-upload.interceptor';
 
 @Controller()
 export class UserController {
@@ -67,7 +67,8 @@ export class UserController {
   @Get('/user')
   async getProfile(@Session() session: any) {
     const { userId } = session;
-    return await this.authService.getUser(userId);
+    const user = await this.authService.getUser(userId);
+    return { userId: user._id, userRole: user.role, ...user };
   }
 
   @UseGuards(AdminGuard)

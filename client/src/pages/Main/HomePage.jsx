@@ -3,8 +3,15 @@ import React from 'react';
 import Questionary from '../../components/Questionary/Questionary';
 import TextMain from '../../components/TextMain/TextMain';
 import styles from './HomePage.css';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+    const navigate = useNavigate();
+
+    const handleTeacher = () => {
+        navigate('/find-teacher');
+    };
+
     return (
         <div className={styles.homeSection}>
             <section className={styles.main}>
@@ -19,7 +26,9 @@ const HomePage = () => {
                         </p>
                         <br />
                         <br />
-                        <button className={styles.findTeacherBtn}>Find Teacher</button>
+                        <button className={styles.findTeacherBtn} onClick={handleTeacher}>
+                            Find Teacher
+                        </button>
                     </div>
                 </div>
             </section>

@@ -52,6 +52,7 @@ export class AuthService {
   async getUser(id: string) {
     return await this.usersService.findOne(id);
   }
+  
   async resetPassword(@Body() body: resetPasswordDTO) {
     const user = await this.usersService.findByEmail(body.email);
 

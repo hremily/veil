@@ -1,29 +1,39 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import styles from './MainModal.module.css';
 
 const MainModal = ({ toggleModal }) => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        toggleModal();
+        navigate('/signout');
+    };
+
+    const handleProfileChange = () => {
+        toggleModal();
+        navigate('/user-profile');
+    };
+
     return (
         <div className={styles.modal} onClick={toggleModal}>
             <div className={styles.modalContent} onClick={(event) => event.stopPropagation()}>
-                {' '}
                 <span className={styles.close} onClick={toggleModal}>
                     &times;
                 </span>
                 <ul className={styles.modalList}>
                     <li className={styles.modalListItem}>
-                        <Link to="/logout" className={styles.modalLink}>
+                        <button onClick={handleLogout} className={styles.modalLink}>
                             <div className={styles.imageContainer}>
-                                <i className="fas fa-sign-out-alt"></i> Log out
+                                <img src="../images/logout.png" alt="signout" /> Log out
                             </div>
-                        </Link>
+                        </button>
                     </li>
                     <li className={styles.modalListItem}>
-                        <Link to="/user-profile" className={styles.modalLink} onClick={toggleModal}>
-                            <i className="fas fa-user-edit"></i> Change
-                        </Link>
+                        <button onClick={handleProfileChange} className={styles.modalLink}>
+                            <img src="../images/change.png" alt="change-profile" /> Change
+                        </button>
                     </li>
                 </ul>
             </div>
