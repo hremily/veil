@@ -1,34 +1,17 @@
 import React from 'react';
+import AuthForm from './AuthForm';
 
-import styles from './SignUpForm.module.css';
-
-function SignUpFormUser() {
+const SignUpFormUser = () => {
     return (
-        <div className={styles.signupWrap}>
-            <div className={styles.signupContainer}>
-                <div className={styles.formSection}>
-                    <h1>Create an Account</h1>
-                    <form>
-                        <input type="email" placeholder="Enter email" required />
-                        <input type="password" placeholder="Password" required />
-                        <button type="submit">Sign up</button>
-                    </form>
-                    <p>
-                        Sign up like
-                        <span className={styles.teacherLink}>
-                            <a href="/signupteacher"> teacher!</a>
-                        </span>
-                    </p>
-                    <p>
-                        Have an account?{' '}
-                        <span className={styles.signinLink}>
-                            <a href="/signin">Sign in</a>
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
+        <AuthForm
+            title="Create an Account"
+            buttonText="Sign up"
+            linkText="Sign up like a teacher!"
+            linkUrl="/signup-teacher"
+            linkText2="Have an account? Sign in"
+            linkUrl2="/signin"
+        />
     );
-}
+};
 
 export default SignUpFormUser;
