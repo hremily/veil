@@ -30,113 +30,133 @@
     margin: 5px 0;
   }
   
-.SignUp__signup-page {
+.SignUpForm-module__signupWrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.SignUpForm-module__formSection {
+    width: 100%;
+    max-width: 680px;
+    padding: 3rem;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 15px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ba68c8;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+button {
+    padding: 1rem;
+    background-color: #e75fff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #79206a;
+}
+
+.SignUpForm-module__formSection p {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: #989898;
+}
+
+.SignUpForm-module__teacherLink a,
+.SignUpForm-module__signinLink a {
+    color: #e75fff;
+    text-decoration: none;
+}
+
+.SignUpForm-module__teacherLink a:hover,
+.SignUpForm-module__signinLink a:hover {
+    color: #81297e;
+}
+
+.SignUp__signupPage {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e8dddd; 
     height: 100vh; 
-    padding: 20px; 
+    background-color: transparent; 
 }
 
-.SignUp__signup-container {
+.SignUp__containerPage {
     display: flex;
-    max-width: 900px; 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border-radius: 10px; 
-    overflow: hidden;
-    background-color: white; 
-}
-
-.SignUp__signup-left {
-    background-color: #fff;
-    width: 50%; 
-    padding: 40px;
-    display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: flex-start; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
     height: 100%; 
 }
 
-.SignUp__signup-right {
-    background-color: #f4ebf6; 
-    width: 50%; 
+.SignUp__signupLeft {
+    background-color: #fff;
+    width: 50%;
+    padding: 80px;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     height: 100%;
 }
 
-.SignUp__signup-image {
-    width: 80%; 
-    height: auto;
-    border-radius: 5px;
+.SignUp__signupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+}
+
+.SignUp__illustrationSection {
+    text-align: center;
 }
 
 .SignUp__logo {
-    font-size: 3rem; 
-    font-weight: bold; 
-    color: #a457e4; 
-    margin-bottom: 20px; 
+    width: 50px;
+    height: auto;
+    margin-right: 5px;
 }
 
-h2 {
-    font-size: 2rem; 
-    margin-bottom: 20px; 
-    color: #333; 
-}
-
-.SignUp__signup-form {
+.SignUp__signupRight {
+    width: 50%;
     display: flex;
-    flex-direction: column; 
-    width: 100%; 
-    max-width: 400px; 
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-.SignUp__input-field {
-    padding: 15px; 
-    margin: 10px 0; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    font-size: 1rem; 
-}
-
-.SignUp__submit-btn {
-    background-color: #c76cf7; 
-    color: white; 
-    padding: 15px; 
-    border: none; 
-    border-radius: 5px; 
-    font-size: 1rem; 
-    cursor: pointer; 
-    transition: background-color 0.3s;
-}
-
-.SignUp__submit-btn:hover {
-    background-color: #b64be1; 
-}
-
-.SignUp__enter-like {
-    margin-top: 20px; 
-    font-size: 1rem; 
-}
-
-.SignUp__student-link {
-    color: #c76cf7; 
-    cursor: pointer; 
-}
-
-.SignUp__sign-in {
-    margin-top: 10px; 
-}
-
-.SignUp__sign-in a {
-    color: #a457e4; 
-    text-decoration: none; 
-}
-
-.SignUp__sign-in a:hover {
-    text-decoration: underline; 
+.SignUp__signupImage {
+    width: 100%;
+    height: auto;
 }
 
