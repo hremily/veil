@@ -4,7 +4,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { Role } from 'src/utils/user-roles.costans';
+import { Role } from 'src/utils/user-roles.constants';
 
 export class AdminGuard implements CanActivate {
   canActivate(context: ExecutionContext) {

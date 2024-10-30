@@ -3,8 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { QuestionaryType } from './questionary.schema';
 import { CustomMailerService } from 'src/mail/mail.service';
-import { TeacherService } from 'src/teacher/teacher.service';
 import { UserType } from 'src/user/user.schema';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class QuestionaryService {
@@ -12,7 +12,7 @@ export class QuestionaryService {
     @InjectModel('Questionary') private questModel: Model<QuestionaryType>,
     @InjectModel('User') private userModel: Model<UserType>,
     private mailService: CustomMailerService,
-    private teacherService: TeacherService,
+    private userService: UserService,
   ) {}
 
   async create(
@@ -25,7 +25,7 @@ export class QuestionaryService {
     subject: string,
     description?: string,
   ) {
-    const currentTeacher = await this.teacherService.findByName(teacher);
+    const currentTeacher = await this.userService.findByName(teacher);
 
     if (!currentTeacher) {
       throw new NotFoundException('Teacher not found');
@@ -68,7 +68,7 @@ export class QuestionaryService {
       throw new NotFoundException('Quet not found');
     }
 
-    const user = await this.userModel.findByIdAndUpdate(questionary.userId, {
+    await this.userModel.findByIdAndUpdate(questionary.userId, {
       $pop: { questionaries: questionary._id },
     });
 

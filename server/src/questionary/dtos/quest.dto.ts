@@ -1,4 +1,11 @@
-import { IsEmail, IsNumber, IsObject, IsString, Max, Min } from 'class-validator';
+import {
+  IsEmail,
+  IsNumber,
+  IsObject,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 import { ObjectId } from 'mongodb';
 
 export class QuestionaryCreateDTO {

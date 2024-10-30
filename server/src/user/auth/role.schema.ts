@@ -1,11 +1,11 @@
-import { Schema } from "@nestjs/mongoose";
-import mongoose from "mongoose";
+import { Schema } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 
-Schema()
+Schema();
 export const RoleSchema = new mongoose.Schema({
-    value: {type: String, default: 'user'}
-})
+  value: { type: String, default: 'user' },
+});
 
-export type RoleType= {
-    value: {type: String}
-}
+export type RoleType = {
+  value: { type: string };
+};

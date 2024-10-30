@@ -9,6 +9,9 @@ import {
   Get,
   UseGuards,
   Query,
+  Patch,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
@@ -18,8 +21,10 @@ import { NotFoundException } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AdminGuard } from 'src/guards/admin.guard';
 import * as mongoose from 'mongoose';
-import { Role } from '../utils/user-roles.costans';
+import { Role } from '../utils/user-roles.constants';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
+import { resetPasswordDTO } from './dtos/reset-password.dto';
+import { MyFileInterceptor } from '../../interceptors/file-upload.interceptor';
 
 @Controller()
 export class UserController {
@@ -27,13 +32,27 @@ export class UserController {
     private userService: UserService,
     private authService: AuthService,
   ) {}
+
   @Post('/signupuser')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
     const role = Role.USER;
-    const user = await this.authService.signup(body.email, body.password, role);
-    session.userId = user._id;
-    session.userRole = user.role;
-    return user;
+    session.userId = await this.authService.signup(
+      body.email,
+      body.password,
+      role,
+    );
+    return session;
+  }
+
+  @Post('/signupteacher')
+  async createTeacher(@Body() body: CreateUserDTO, @Session() session: any) {
+    const role = Role.TEACHER;
+    session.userId = await this.authService.signup(
+      body.email,
+      body.password,
+      role,
+    );
+    return session;
   }
 
   @Post('/signin')
@@ -47,8 +66,8 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Get('/user')
   async getProfile(@Session() session: any) {
-    const { userId, userRole } = session;
-    return await this.authService.getUser(userId, userRole);
+    const { userId } = session;
+    return await this.authService.getUser(userId);
   }
 
   @UseGuards(AdminGuard)
@@ -61,6 +80,11 @@ export class UserController {
     }
   }
 
+  @Get('/teachers')
+  async allTeachers(@Query() pagination: PaginationDTO) {
+    return await this.userService.findAllTeachers(pagination);
+  }
+
   @Get('/:id')
   async findUser(@Param('id') id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -71,10 +95,34 @@ export class UserController {
 
   @UseGuards(AuthGuard)
   @Put('/:id')
-  async updateProfile(@Param('id') id: string, @Body() body: UpdateProfileDto) {
+  @UseInterceptors(MyFileInterceptor)
+  async updateProfile(
+    @Param('id') id: string,
+    @Body() body: UpdateProfileDto,
+    @UploadedFile() image,
+  ) {
+    if (image) {
+      body.image = image.path;
+    }
     return await this.userService.updateProfile(id, body);
   }
 
+  @Post('/reset')
+  async resetPassword(@Body() body: resetPasswordDTO) {
+    const resetPasswordData: resetPasswordDTO = { email: body.email };
+    return await this.authService.resetPassword(resetPasswordData);
+  }
+
+  @Patch('/reset/:resetToken')
+  async changePassword(
+    @Body() body: resetPasswordDTO,
+    @Param('resetToken') resetToken: string,
+  ) {
+    const { password } = body;
+    return await this.authService.changePassword(resetToken, password);
+  }
+
+  @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
   @Delete('/:id')
   async delete(@Param('id') id: string) {
