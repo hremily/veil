@@ -229,3 +229,5 @@ dist
 /.idea/git_toolbox_prj.xml
 /.idea/project_c2_remote.iml
 /.idea/vcs.xml
+
+/dist

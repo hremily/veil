@@ -65,6 +65,10 @@
     background-color: var(--background-color);
 }
 
+.nav {
+    font-size: 14px;
+}
+
 @media (max-width: 1024px) {
     .wrapper {
         padding: 10px 20px;

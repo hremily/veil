@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-right: 100px;
 }
 
 .formSection {
@@ -59,7 +60,6 @@ button:hover {
 
 .teacherLink a,
 .signinLink a {
-    font-size: 1.5rem;
     color: var(--background-link);
     text-decoration: none;
 }
@@ -68,7 +68,6 @@ button:hover {
 .signinLink a:hover {
     color: var(--background-link-hover);
 }
-
 @media (max-width: 1024px) {
     .formSection {
         padding: 2rem;

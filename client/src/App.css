@@ -33,3 +33,7 @@ body {
     --userInfo: #8b3999;
     --background-icons: #9b59b6;
 }
+
+.signUpContainer {
+    color: var(--primary-color);
+}

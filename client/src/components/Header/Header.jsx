@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MainModal from '../MainModal/MainModal';
-import useAuth from '../../hooks/useAuth';
+import { useAuth } from '../../context/AuthContext';
 import styles from './Header.module.css';
 
 function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const location = useLocation();
-    const { userRole, loading } = useAuth();
+    const { user, isAuthenticated, signout } = useAuth();
 
     const toggleModal = () => {
         setIsModalOpen((prev) => !prev);
@@ -17,12 +17,8 @@ function Header() {
         setIsModalOpen(false);
     }, [location]);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
     const getProfileLink = () => {
-        switch (userRole) {
+        switch (user?.role) {
             case 'TEACHER':
                 return '/teacher-profile';
             case 'USER':
@@ -48,7 +44,13 @@ function Header() {
                 </div>
                 <nav className={styles.nav}>
                     <Link to="/categories">Categories</Link>
-                    {userRole && <Link to={getProfileLink()}>Profile</Link>}
+                    {user ? (
+                        <>
+                            <Link to="/profile">Profile</Link>
+                        </>
+                    ) : (
+                        <Link to="/signin">Login</Link>
+                    )}
                     <button className={styles.settings} onClick={toggleModal}>
                         <img src={`../images/settings.png`} alt="settings" />
                     </button>
