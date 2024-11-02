@@ -10,9 +10,6 @@ export const UserSchema = new mongoose.Schema({
   image: { type: String, default: '' },
   description: { type: String, default: '' },
   price: { type: Number, default: 0 },
-  questionaries: [
-    { type: Schema.Types.ObjectId, ref: 'Questionary', required: true },
-  ],
   role: { type: String, ref: 'Role' },
   resetToken: { type: String },
   resetTokenExpiration: { type: Date },
@@ -27,7 +24,6 @@ export type UserType = {
   lessons: { type: string };
   image: string;
   description: { type: string };
-  questionaries: { type: object };
   role: { type: string };
   resetToken: string;
   resetTokenExpiration: Date;

@@ -18,16 +18,14 @@ import { join } from 'node:path';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot(
-      {
-        rootPath: join(__dirname, '..', 'client', 'build'),
-        serveRoot: '/client/',
-      },
-      {
-        rootPath: join(__dirname, '..', 'assets', 'userImage'),
-        serveRoot: '/server/assets/userImage',
-      },
-    ),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client', 'build'),
+      serveRoot: '/',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'userImage/'),
+      serveRoot: 'server/assets/',
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,

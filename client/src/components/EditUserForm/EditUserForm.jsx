@@ -4,7 +4,7 @@ import styles from './EditUserForm.module.css';
 
 const EditUserForm = () => {
     const { updateProfile, fetchUserById, error } = useUser();
-    const userId = JSON.parse(localStorage.getItem('user'))?.id;
+    const userId = JSON.parse(sessionStorage.getItem('session'))?.id;
     const [formData, setFormData] = useState({
         fullname: '',
         phone_number: '',

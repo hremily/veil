@@ -12,6 +12,7 @@ export const useUser = () => {
 };
 
 const useProvideUser = () => {
+    const [imageSrc, setImageSrc] = useState(null);
     const [user, setUser] = useState(null);
     const [users, setUsers] = useState([]);
     const [teachers, setTeachers] = useState([]);
@@ -102,7 +103,6 @@ const useProvideUser = () => {
             setError('Could not update profile');
         }
     };
-
     useEffect(() => {
         return () => setTeachers([]);
     }, []);

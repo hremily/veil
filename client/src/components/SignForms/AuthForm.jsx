@@ -12,8 +12,10 @@ const AuthForm = ({ title, buttonText, linkText, linkUrl, linkText2, linkUrl2 })
         event.preventDefault();
         if (buttonText === 'Sign in') {
             await auth.signin(email, password);
-        } else {
-            await auth.signup(email, password, 'user');
+        } else if (buttonText === 'Sign up as User') {
+            await auth.signupUser(email, password);
+        } else if (buttonText === 'Sign up as Teacher') {
+            await auth.signupTeacher(email, password);
         }
     };
 

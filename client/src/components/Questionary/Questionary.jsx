@@ -7,7 +7,6 @@ const Questionary = () => {
     const { fetchTeachers, teachers, error: loadError } = useUser();
     const { createQuestionaries } = useQuestionary();
     const [isDataFetched, setIsDataFetched] = useState(false);
-    const userId = JSON.parse(localStorage.getItem('user'))?.id;
 
     const [formData, setFormData] = useState({
         fullname: '',
@@ -42,18 +41,12 @@ const Questionary = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!userId) {
-            alert('You have to login');
-            return;
-        }
-
         try {
             await createQuestionaries(
                 formData.email,
                 formData.fullname,
                 formData.phone_number,
                 formData.age,
-                userId,
                 formData.teacher,
                 formData.subject,
                 formData.description,

@@ -6,7 +6,7 @@ const SignUpTeacherForm = () => {
     return (
         <AuthForm
             title="Create an Account"
-            buttonText="Sign up"
+            buttonText="Sign up as Teacher"
             linkText="Sign up like a student!"
             linkUrl={ROUTES.SIGNUP_USER}
             linkText2="Have an account? Sign in"

@@ -3,14 +3,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { QuestionaryType } from './questionary.schema';
 import { CustomMailerService } from 'src/mail/mail.service';
-import { UserType } from 'src/user/user.schema';
 import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class QuestionaryService {
   constructor(
     @InjectModel('Questionary') private questModel: Model<QuestionaryType>,
-    @InjectModel('User') private userModel: Model<UserType>,
     private mailService: CustomMailerService,
     private userService: UserService,
   ) {}
@@ -20,7 +18,6 @@ export class QuestionaryService {
     phone_number: string,
     email: string,
     age: number,
-    userId: string,
     teacher: string,
     subject: string,
     description?: string,
@@ -37,17 +34,12 @@ export class QuestionaryService {
       phone_number,
       email,
       age,
-      userId,
       subject,
       teacher,
       description,
     });
 
-    await this.userModel.findByIdAndUpdate(userId, {
-      $push: { questionaries: newQuest._id },
-    });
-
-    await this.mailService.sendEmail(
+    this.mailService.sendEmail(
       email,
       fullname,
       teacher,
@@ -59,24 +51,5 @@ export class QuestionaryService {
     );
 
     return newQuest;
-  }
-
-  async delete(id: string) {
-    const questionary = await this.questModel.findById(id);
-
-    if (!questionary) {
-      throw new NotFoundException('Questionary not found');
-    }
-    await this.userModel.findByIdAndUpdate(questionary.userId, {
-      $pull: { questionaries: questionary._id },
-    });
-
-    return await this.questModel.deleteOne({ _id: id });
-  }
-
-  async getQuestByUser(userId: string) {
-    const quest = await this.questModel.find({ userId }).exec();
-
-    return quest;
   }
 }

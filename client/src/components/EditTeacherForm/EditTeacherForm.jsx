@@ -5,7 +5,8 @@ import { subjects } from '../../../assets/subjects-constants.js';
 
 const EditTeacherForm = () => {
     const { fetchUserById, updateProfile } = useUser();
-    const userId = JSON.parse(localStorage.getItem('user'))?.id;
+    
+    const userId = JSON.parse(sessionStorage.getItem('session'))?.id;
 
     const [formData, setFormData] = useState({
         fullname: '',

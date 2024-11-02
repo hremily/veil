@@ -14,9 +14,15 @@ export const useAuth = () => {
 };
 
 const useProvideAuth = () => {
-    const [user, setUser] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(() => {
+        const storedUser = sessionStorage.getItem('session');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        const storedUser = sessionStorage.getItem('session');
+        return !!storedUser;
+    });
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const signin = async (email, password) => {
@@ -32,8 +38,8 @@ const useProvideAuth = () => {
             if (response.ok) {
                 setUser(data);
                 setIsAuthenticated(true);
-                localStorage.setItem(
-                    'user',
+                sessionStorage.setItem(
+                    'session',
                     JSON.stringify({ id: data._id, role: data.role, fullname: data.fullname }),
                 );
                 navigate(ROUTES.HOME);

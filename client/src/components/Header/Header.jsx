@@ -9,6 +9,7 @@ function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const location = useLocation();
     const { user, isAuthenticated, signout } = useAuth();
+    const userId = JSON.parse(sessionStorage.getItem('session'))?.id;
     const [isDarkTheme, setIsDarkTheme] = useState(() => {
         return localStorage.getItem('theme') === 'dark';
     });
@@ -55,7 +56,7 @@ function Header() {
                     <Link to={ROUTES.CATEGORIES}>Categories</Link>
                     {user ? (
                         <>
-                            <Link to={`/profile/${user._id}`}>Profile</Link>
+                            <Link to={`/profile/${userId}`}>Profile</Link>
                         </>
                     ) : (
                         <Link to={ROUTES.SIGNIN}>Login</Link>
