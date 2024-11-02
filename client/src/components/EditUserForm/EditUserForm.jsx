@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useUser } from '../../context/userContext.js';
 import styles from './EditUserForm.module.css';
 
 const EditUserForm = () => {
+    const { updateProfile, fetchUserById, error } = useUser();
+    const userId = JSON.parse(localStorage.getItem('user'))?.id;
     const [formData, setFormData] = useState({
         fullname: '',
         phone_number: '',
@@ -9,44 +12,57 @@ const EditUserForm = () => {
         password: '',
         years: '',
         subject: '',
+        image: null,
     });
     const [userQuestionnaires, setUserQuestionnaires] = useState([]);
 
     useEffect(() => {
-        const fetchUserData = async () => {
+        const loadUserData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/user');
-                const data = await response.json();
-                setFormData(data);
-
-                const questionnairesResponse = await fetch(`http://localhost:3000/${data.user._id}`);
-                const questionnaires = await questionnairesResponse.json();
-                setUserQuestionnaires(questionnaires);
-            } catch (error) {
-                console.error('Something wrong', error);
+                const user = await fetchUserById(userId);
+                setFormData({
+                    fullname: user.fullname || '',
+                    phone_number: user.phone_number || '',
+                    email: user.email || '',
+                    password: '',
+                    years: user.years || '',
+                    subject: user.subject || '',
+                    image: null,
+                });
+                setUserQuestionnaires(user.questionnaires || []);
+            } catch (err) {
+                console.error('Error loading user data:', err);
             }
         };
 
-        fetchUserData();
+        loadUserData();
     }, []);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value, type, files } = e.target;
+        if (type === 'file') {
+            setFormData((prevData) => ({
+                ...prevData,
+                image: files[0],
+            }));
+        } else {
+            setFormData((prevData) => ({ ...prevData, [name]: value }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const profileData = new FormData();
+
+        for (const key in formData) {
+            profileData.append(key, formData[key]);
+        }
+
         try {
-            await fetch(`http://localhost:3000/${data.user._id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            alert('Success');
-        } catch (error) {
-            console.error('Something wrong: ', error);
+            await updateProfile(userId, profileData);
+            alert('Profile updated successfully');
+        } catch (err) {
+            console.error('Failed to update profile:', err);
         }
     };
 
@@ -88,7 +104,7 @@ const EditUserForm = () => {
                         />
                     </div>
                     <div className={styles.divideGroup}>
-                        <select name="years" value={formData.years} onChange={handleChange}>
+                        <select name="years">
                             <option value="">Age of child</option>
                             {[...Array(14).keys()].map((i) => (
                                 <option key={i} value={6 + i}>
@@ -104,7 +120,7 @@ const EditUserForm = () => {
                             placeholder="Subject"
                         />
                     </div>
-                    <div className={styles.userQuestionaries}>
+                    <div className={styles.userQuestionnaires}>
                         <ul className={styles.questList}>
                             {userQuestionnaires.map((quest, index) => (
                                 <li key={index} className={styles.quest}>
@@ -117,9 +133,10 @@ const EditUserForm = () => {
                 </form>
             </div>
             <div className={styles.imgContainer}>
-                <input type="file" name="image" />
-                <img src="../images/edit-image.png" alt="Profile" />
+                <input type="file" name="image" onChange={handleChange} accept="image/*" />
+                {formData.image && <img src={URL.createObjectURL(formData.image)} alt="Profile Preview" />}
             </div>
+            {error && <p className={styles.error}>{error}</p>}
         </div>
     );
 };

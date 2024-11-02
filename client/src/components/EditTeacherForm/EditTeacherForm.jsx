@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useUser } from '../../context/userContext.js';
 import styles from './EditTeacherForm.module.css';
+import { subjects } from '../../../assets/subjects-constants.js';
 
 const EditTeacherForm = () => {
+    const { fetchUserById, updateProfile } = useUser();
+    const userId = JSON.parse(localStorage.getItem('user'))?.id;
+
     const [formData, setFormData] = useState({
         fullname: '',
         email: '',
@@ -11,22 +16,24 @@ const EditTeacherForm = () => {
         price: '',
         experience: '',
         description: '',
+        image: null,
     });
+    const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
         const fetchTeacherData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/user');
-                const data = await response.json();
+                const data = await fetchUserById(userId);
                 setFormData({
                     fullname: data.fullname || '',
                     email: data.email || '',
                     phone_number: data.phone_number || '',
                     password: '',
-                    subject: data.subject || '',
+                    subject: data.lesso || '',
                     price: data.price || '',
                     experience: data.experience || '',
                     description: data.description || '',
+                    image: data.image || null,
                 });
             } catch (error) {
                 console.error('Error fetching teacher data:', error);
@@ -44,24 +51,29 @@ const EditTeacherForm = () => {
         }));
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setSelectedImage(URL.createObjectURL(file));
+            setFormData((prevData) => ({
+                ...prevData,
+                image: file,
+            }));
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const formDataToSend = new FormData();
+        Object.keys(formData).forEach((key) => {
+            formDataToSend.append(key, formData[key]);
+        });
+
         try {
-            const response = await fetch(`http://localhost:3000/${data.user._id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            const result = await response.json();
-            if (response.ok) {
-                console.log('Profile updated successfully:', result);
-            } else {
-                console.error('Error updating profile:', result);
-            }
+            const result = await updateProfile(userId, formDataToSend);
+            console.log('Profile updated successfully:', result);
         } catch (error) {
-            console.error('Error submitting form:', error);
+            console.error('Error updating profile:', error);
         }
     };
 
@@ -94,20 +106,15 @@ const EditTeacherForm = () => {
                             onChange={handleChange}
                             placeholder="Phone number"
                         />
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            placeholder="********"
-                        />
+                        <input type="password" name="password" onChange={handleChange} placeholder="********" />
                     </div>
                     <div className={styles.divideGroup}>
-                        <select>
-                            {subjects.map((subject, index) => (
-                                <option key={index} value={subject} className={styles.subject}>
-                                    {subject}
-                                </option>
+                        <select name="subject" value={formData.subject} onChange={handleChange}>
+                            <option value="" disabled>
+                                Select a subject
+                            </option>
+                            {subjects.map((subject) => (
+                                <option value={subject.name}>{subject.name}</option>
                             ))}
                         </select>
                         <input
@@ -132,12 +139,12 @@ const EditTeacherForm = () => {
                             placeholder="Write a short description about you"
                         />
                     </div>
+                    <div className={styles.imgContainer}>
+                        <input type="file" name="image" onChange={handleImageChange} />
+                        {selectedImage && <img src={selectedImage} alt="Profile preview" />}
+                    </div>
                     <button type="submit">Save</button>
                 </form>
-            </div>
-            <div className={styles.imgContainer}>
-                <input type="file" name="image" />
-                <img src="../images/edit-image.png" alt="Profile" />
             </div>
         </div>
     );

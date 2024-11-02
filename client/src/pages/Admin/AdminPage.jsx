@@ -1,48 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/UserCard/Card';
+import { useUser } from '../../context/userContext';
 import styles from './AdminPage.css';
 
 const AdminPage = () => {
-    const [users, setUsers] = useState([]);
+    const { users, fetchAllUsers, deleteUser, error } = useUser();
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(10);
-    const [totalUsers, setTotalUsers] = useState(0);
-    const [error, setError] = useState('');
+    const usersPerPage = 10;
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch(`http://localhost:3000/users?page=${currentPage}&limit=${usersPerPage}`, {
-                    method: 'GET',
-                    credentials: 'include',
-                });
-
-                if (!response.ok) throw new Error('Failed to fetch users');
-                const data = await response.json();
-                setUsers(data.users);
-                setTotalUsers(data.total);
-            } catch (err) {
-                setError('Failed to load users');
-            }
-        };
-
-        fetchUsers();
-    }, [currentPage, usersPerPage]);
+        fetchAllUsers(currentPage, usersPerPage);
+    }, [currentPage]);
 
     const handleDelete = async (userId) => {
-        try {
-            await fetch(`http://localhost:3000/${userId}`, {
-                method: 'DELETE',
-                credentials: 'include',
-            });
-
-            setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
-        } catch (err) {
-            console.error('Failed to delete user:', err);
-        }
+        await deleteUser(userId);
     };
 
-    const totalPages = Math.ceil(totalUsers / usersPerPage);
+    const totalPages = Math.ceil(users.length / usersPerPage);
 
     const renderPagination = () => (
         <div className={styles.pagination}>

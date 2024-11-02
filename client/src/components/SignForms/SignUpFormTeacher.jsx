@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthForm from './AuthForm';
+import { ROUTES } from '../../../assets/pages-routes';
 
 const SignUpTeacherForm = () => {
     return (
@@ -7,9 +8,9 @@ const SignUpTeacherForm = () => {
             title="Create an Account"
             buttonText="Sign up"
             linkText="Sign up like a student!"
-            linkUrl="/signup-user"
+            linkUrl={ROUTES.SIGNUP_USER}
             linkText2="Have an account? Sign in"
-            linkUrl2="/signin"
+            linkUrl2={ROUTES.SIGNIN}
         />
     );
 };

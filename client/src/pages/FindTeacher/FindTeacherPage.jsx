@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Questionary from '../../components/Questionary/Questionary';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
 import styles from './FindTeacherPage.css';
+import { useUser } from '../../context/userContext';
 
-const FindTeacherPage = ({ location }) => {
-    const { selectedCategory } = location.state;
+const FindTeacherPage = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const selectedCategory = location.state?.selectedCategory;
+    const { teachers, fetchTeachers, error } = useUser();
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [teachers, setTeachers] = useState([]);
+    const [isDataFetched, setIsDataFetched] = useState(false);
 
     useEffect(() => {
-        const fetchTeachers = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/teachers?subjectId=${selectedCategory}`, {
-                    method: 'GET',
-                    credentials: 'include',
-                });
-
-                if (!response.ok) throw new Error('Failed to fetch teachers');
-                const data = await response.json();
-                setTeachers(data);
-            } catch (error) {
-                console.error(error);
+                await fetchTeachers(selectedCategory);
+                setIsDataFetched(true);
+            } catch (err) {
+                setError('Could not load data');
             }
         };
 
-        if (selectedCategory) {
-            fetchTeachers();
+        if (!isDataFetched) {
+            fetchData();
         }
-    }, [selectedCategory]);
+    }, [selectedCategory, navigate]);
 
     const previousTeacher = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? teachers.length - 1 : prevIndex - 1));
@@ -52,12 +51,14 @@ const FindTeacherPage = ({ location }) => {
                     </div>
                 </div>
                 <div className={styles.carouselContent}>
+                    {error && <p className={styles.error}>{error}</p>}
                     {teachers.length > 0 ? (
                         <TeacherCard
                             name={teachers[currentIndex].fullname}
                             description={teachers[currentIndex].description}
                             lessons={teachers[currentIndex].lessons}
                             imgSrc={teachers[currentIndex].image}
+                            id={teachers[currentIndex]._id}
                         />
                     ) : (
                         <p>No teachers available for this category.</p>

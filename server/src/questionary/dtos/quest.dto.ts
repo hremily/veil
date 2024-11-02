@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsNumber,
   IsObject,
+  isString,
   IsString,
   Max,
   Min,
@@ -23,8 +24,8 @@ export class QuestionaryCreateDTO {
   @IsNumber()
   age: number;
 
-  @IsObject()
-  userId: ObjectId;
+  @IsString()
+  userId: string;
 
   @IsString()
   teacher: string;

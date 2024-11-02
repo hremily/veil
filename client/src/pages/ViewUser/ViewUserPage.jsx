@@ -1,44 +1,40 @@
 import React, { useEffect, useState } from 'react';
+import { useUser } from '../../context/userContext';
 import styles from './ViewUserPage.css';
+import { useParams } from 'react-router-dom';
 
 const ViewUserPage = () => {
-    const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
-    const userId = JSON.parse(sessionStorage.getItem('user'))?.id;
+    const { fetchUserById, user, setUser } = useUser();
+    const userId = JSON.parse(localStorage.getItem('user'))?.id;
+    const { id } = useParams();
+    const [imageUrl, setImageUrl] = useState('');
 
     useEffect(() => {
-        const fetchUserProfile = async () => {
+        const loadUserData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/${userId}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user profile');
+                const fetchedUser = await fetchUserById(userId);
+                setUser(fetchedUser);
+                if (fetchedUser.image && fetchedUser.image.length > 0) {
+                    setImageUrl(`http://localhost:9000/server/assets/userImage/${fetchedUser.image}`);
+                } else {
+                    setImageUrl('http://localhost:9000/public/images/edit-image.png');
                 }
-
-                const data = await response.json();
-                setUser(data);
             } catch (err) {
-                setError(err.message);
+                setError('Could not load user data. Please try again later.');
+                console.error('Error fetching user data:', err);
             }
         };
 
-        if (userId) {
-            fetchUserProfile();
-        }
-    }, [userId]);
+        loadUserData();
+    }, []);
 
     return (
         <div className={styles.mainContainer}>
             <div className={styles.minHScreen}>
                 <div className={styles.container}>
                     <div className={styles.imageSection}>
-                        <img alt="User Image" height="600" src="../images/edit-image.png" width="400" />
+                        <img src={imageUrl} alt="User" height="600" width="400" />
                     </div>
                     <div className={styles.contentSection}>
                         {error ? (
@@ -46,12 +42,12 @@ const ViewUserPage = () => {
                         ) : user ? (
                             <>
                                 {user.image && <img src={user.image} alt={`${user.fullname}'s profile`} />}
-                                {user.fullname && <h1>{user.fullname}</h1>}
-                                {user.description && <h2>{user.description}</h2>}
-                                {user.experience && <p>{user.experience}</p>}
-                                {user.price !== undefined && <p>{user.price}</p>}
-                                {user.email && <p>{user.email}</p>}
-                                {user.phone_number && <p>{user.phone_number}</p>}
+                                <h1>{user.fullname}</h1>
+                                <h2>{user.description}</h2>
+                                <p>{user.experience}</p>
+                                <p>{user.price}</p>
+                                <p>{user.email}</p>
+                                <p>{user.phone_number}</p>
                             </>
                         ) : (
                             <p>Loading user data...</p>

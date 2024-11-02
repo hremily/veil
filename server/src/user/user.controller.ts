@@ -94,7 +94,13 @@ export class UserController {
     return await this.userService.findOne(id);
   }
 
-  @UseGuards(AuthGuard)
+  @Get('/:id/image')
+  async getUserImage(@Param('id') id: string) {
+    const user = await this.userService.findOne(id);
+
+    return { image: user.image };
+  }
+
   @Put('/:id')
   @UseInterceptors(MyFileInterceptor)
   async updateProfile(
@@ -123,7 +129,6 @@ export class UserController {
     return await this.authService.changePassword(resetToken, password);
   }
 
-  @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
   @Delete('/:id')
   async delete(@Param('id') id: string) {

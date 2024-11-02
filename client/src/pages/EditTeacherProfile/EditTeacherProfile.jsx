@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-
+import { useUser } from '../../context/userContext';
 import EditTeacherForm from '../../components/EditTeacherForm/EditTeacherForm';
 import styles from './EditTeacherProfile.css';
 
 const EditTeacherProfile = () => {
+    const { handleUpdateProfile } = useUser();
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const handleImageClick = () => {
-        document.querySelector('#image').click();
-    };
-
-    const handleImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            setSelectedImage(URL.createObjectURL(file));
+    const handleSubmit = async (profileData) => {
+        try {
+            await handleUpdateProfile(profileData.userId, profileData);
+            alert('Profile updated successfully');
+        } catch (error) {
+            console.error('Failed to update profile:', error);
         }
     };
 
@@ -21,7 +20,7 @@ const EditTeacherProfile = () => {
         <div className={styles.editTeacherProfile}>
             <div className={styles.editTeacherProfile__content}>
                 <div className={styles.formContainer}>
-                    <EditTeacherForm />
+                    <EditTeacherForm onSubmit={handleSubmit} />
                 </div>
             </div>
         </div>

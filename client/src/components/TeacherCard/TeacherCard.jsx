@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './TeacherCard.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const TeacherCard = ({ id, name, description, skills, image }) => {
+const TeacherCard = ({ id, name, description, lessons, image }) => {
     const navigate = useNavigate();
 
     const handleCardClick = () => {
-        navigate(`/teachers/${id}`);
+        navigate(`/profile/${id}`);
     };
 
     return (
@@ -20,11 +20,7 @@ const TeacherCard = ({ id, name, description, skills, image }) => {
                     <h2>{name}</h2>
                 </div>
                 <p>{description}</p>
-                <ul>
-                    {skills.map((skill, index) => (
-                        <li key={index}>{skill}</li>
-                    ))}
-                </ul>
+                <p>{lessons}</p>
             </div>
         </div>
     );

@@ -1,30 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Questionary.module.css';
+import { useUser } from '../../context/userContext';
+import { useQuestionary } from '../../context/questionaryContext';
 
 const Questionary = () => {
+    const { fetchTeachers, teachers, error: loadError } = useUser();
+    const { createQuestionaries } = useQuestionary();
+    const [isDataFetched, setIsDataFetched] = useState(false);
+    const userId = JSON.parse(localStorage.getItem('user'))?.id;
+
     const [formData, setFormData] = useState({
         fullname: '',
         email: '',
+        phone_number: '',
         age: '',
         teacher: '',
         subject: '',
+        description: '',
     });
     const [error, setError] = useState('');
-    const [teachers, setTeachers] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const loadTeachers = async () => {
             try {
-                const response = await fetch('http://localhost:3000/teachers');
-                if (!response.ok) throw new Error('Failed to fetch teachers');
-                const data = await response.json();
-                setTeachers(data);
+                await fetchTeachers();
+                setIsDataFetched(true);
             } catch (err) {
                 setError('Could not load data');
             }
         };
-
-        fetchData();
+        if (!isDataFetched) {
+            loadTeachers();
+        }
     }, []);
 
     const handleChange = (e) => {
@@ -34,15 +41,33 @@ const Questionary = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!userId) {
+            alert('You have to login');
+            return;
+        }
+
         try {
-            const response = await fetch('http://localhost:3000/send', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
+            await createQuestionaries(
+                formData.email,
+                formData.fullname,
+                formData.phone_number,
+                formData.age,
+                userId,
+                formData.teacher,
+                formData.subject,
+                formData.description,
+            );
+
+            setFormData({
+                fullname: '',
+                email: '',
+                phone_number: '',
+                age: '',
+                teacher: '',
+                subject: '',
+                description: '',
             });
-            if (!response.ok) throw new Error('Failed to submit form');
-            setFormData({ fullname: '', email: '', age: '', teacher: '', subject: '' });
-            alert('Form submitted successfully!');
         } catch (err) {
             setError('Failed to submit the form');
         }
@@ -51,7 +76,7 @@ const Questionary = () => {
     return (
         <div className={styles.formContainer}>
             <div className={styles.formWrapper}>
-                {error && <p className={styles.error}>{error}</p>}
+                {(error || loadError) && <p className={styles.error}>{error || loadError}</p>}
                 <form className={styles.formGroup} onSubmit={handleSubmit}>
                     <div className={styles.container}>
                         <div className={styles.topElements}>
@@ -81,6 +106,15 @@ const Questionary = () => {
                             required
                         />
                         <input
+                            type="text"
+                            name="phone_number"
+                            placeholder="Phone Number"
+                            className={styles.phone_number}
+                            value={formData.phone_number}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
                             type="number"
                             name="age"
                             placeholder="Years"
@@ -91,13 +125,13 @@ const Questionary = () => {
                         />
                     </div>
                     <div className={styles.flexContainer}>
-                        <select name="teacher" onChange={handleChange} required>
-                            <option value="" disabled selected>
+                        <select name="teacher" value={formData.teacher} onChange={handleChange} required>
+                            <option value="" disabled>
                                 Choose teacher
                             </option>
                             {teachers.map((teacher) => (
-                                <option key={teacher.id} value={teacher.name}>
-                                    {teacher.name}
+                                <option key={teacher.id} value={teacher.fullname}>
+                                    {teacher.fullname}
                                 </option>
                             ))}
                         </select>
@@ -110,6 +144,13 @@ const Questionary = () => {
                             onChange={handleChange}
                         />
                     </div>
+                    <textarea
+                        name="description"
+                        placeholder="Description"
+                        className={styles.description}
+                        value={formData.description}
+                        onChange={handleChange}
+                    />
                     <button type="submit" className={styles.button}>
                         Send
                     </button>
@@ -118,5 +159,4 @@ const Questionary = () => {
         </div>
     );
 };
-
 export default Questionary;

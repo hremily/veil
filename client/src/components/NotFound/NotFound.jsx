@@ -7,7 +7,7 @@ const NotFound = () => {
             <div className={styles.wrapper}>
                 <div className={styles.container}>
                     <h1>Something is wrong!</h1>
-                    <p>Go the home page</p>
+                    <p>Go the home page or login to your account</p>
                 </div>
             </div>
         </>

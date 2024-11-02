@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './MainModal.module.css';
 import { roleConstans } from '../../../assets/role-constants';
-const MainModal = ({ toggleModal }) => {
+import { ROUTES } from '../../../assets/pages-routes';
+
+const MainModal = ({ toggleModal, handleThemeChange, isDarkTheme }) => {
     const navigate = useNavigate();
-    const { signout } = useAuth();
-    const { user } = useAuth();
-    const userRole = user?.role;
+    const { signout, user } = useAuth();
+    const userRole = user?.role.toUpperCase();
 
     const handleLogout = () => {
         toggleModal();
@@ -17,21 +18,16 @@ const MainModal = ({ toggleModal }) => {
 
     const handleProfileChange = () => {
         toggleModal();
-        if (userRole == roleConstans.USER) {
-            navigate('/teacher-profile');
-        } else if (userRole == roleConstans.USER) {
-            navigate('/user-profile');
-        } else if (userRole == roleConstans.ADMIN) {
-            navigate('/admin');
-        }
-    };
+        console.log('User Role:', userRole);
 
-    const handleThemeChange = () => {
-        toggleModal();
-        document.documentElement.style.setProperty('--primary-color', '#333');
-        document.documentElement.style.setProperty('--secondary-color', '#eaeaea');
-        document.documentElement.style.setProperty('--background-color', '#553A59');
-        document.documentElement.style.setProperty('--text-color', '#ba68c8');
+        const roleRoute = {
+            [roleConstans.TEACHER]: ROUTES.TEACHER_PROFILE,
+            [roleConstans.USER]: ROUTES.USER_PROFILE,
+            [roleConstans.ADMIN]: ROUTES.ADMIN,
+        };
+        const route = roleRoute[userRole];
+        console.log(route);
+        navigate(route);
     };
 
     return (
@@ -53,10 +49,15 @@ const MainModal = ({ toggleModal }) => {
                             <img src="../images/change.png" alt="change-profile" /> Change
                         </button>
                     </li>
-
                     <li className={styles.modalListItem}>
                         <button onClick={handleThemeChange} className={styles.modalLink}>
-                            <img src="../images/dark.png" alt="dark-theme" /> Dark
+                            <div className={styles.imageContainer}>
+                                <img
+                                    src={isDarkTheme ? '../images/dark.png' : '../images/light.png'}
+                                    alt="theme-toggle"
+                                />
+                                {isDarkTheme ? 'Dark' : 'Light'}
+                            </div>
                         </button>
                     </li>
                 </ul>

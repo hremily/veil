@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { AuthGuard } from './guards/auth.guard';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -17,9 +18,16 @@ import { join } from 'node:path';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'client', 'build'),
-    }),
+    ServeStaticModule.forRoot(
+      {
+        rootPath: join(__dirname, '..', 'client', 'build'),
+        serveRoot: '/client/',
+      },
+      {
+        rootPath: join(__dirname, '..', 'assets', 'userImage'),
+        serveRoot: '/server/assets/userImage',
+      },
+    ),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
@@ -52,6 +60,6 @@ import { join } from 'node:path';
     QuestionaryModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserService, CustomMailerService],
+  providers: [AppService, UserService, CustomMailerService, AuthGuard],
 })
 export class AppModule {}

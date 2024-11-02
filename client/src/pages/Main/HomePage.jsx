@@ -4,12 +4,13 @@ import Questionary from '../../components/Questionary/Questionary';
 import TextMain from '../../components/TextMain/TextMain';
 import styles from './HomePage.css';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../assets/pages-routes';
 
 const HomePage = () => {
     const navigate = useNavigate();
 
     const handleTeacher = () => {
-        navigate('/find-teacher');
+        navigate(ROUTES.CATEGORIES);
     };
 
     return (

@@ -49,10 +49,13 @@ export class AuthService {
     }
   }
 
-  async getUser(id: string) {
-    return await this.usersService.findOne(id);
+  async getUser(userId: string) {
+    if (!userId) {
+      throw new NotFoundException('User not found');
+    }
+    return this.usersService.findOne(userId);
   }
-  
+
   async resetPassword(@Body() body: resetPasswordDTO) {
     const user = await this.usersService.findByEmail(body.email);
 

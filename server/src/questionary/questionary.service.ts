@@ -65,14 +65,13 @@ export class QuestionaryService {
     const questionary = await this.questModel.findById(id);
 
     if (!questionary) {
-      throw new NotFoundException('Quet not found');
+      throw new NotFoundException('Questionary not found');
     }
-
     await this.userModel.findByIdAndUpdate(questionary.userId, {
-      $pop: { questionaries: questionary._id },
+      $pull: { questionaries: questionary._id },
     });
 
-    return await this.questModel.deleteOne({ id });
+    return await this.questModel.deleteOne({ _id: id });
   }
 
   async getQuestByUser(userId: string) {
