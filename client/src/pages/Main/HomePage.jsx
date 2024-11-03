@@ -14,8 +14,8 @@ const HomePage = () => {
     };
 
     return (
-        <div className={styles.homeSection}>
-            <section className={styles.main}>
+        <div className={styles.homeSection} data-cy="main-page">
+            <section className={styles.main} data-cy="main-container">
                 <div className={styles.imageContainer}>
                     <img src="../images/boys-main.png" alt="Illustration" className={styles.image} />
                     <div className={styles.textOverlay}>

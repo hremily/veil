@@ -17,7 +17,7 @@ const EditTeacherProfile = () => {
     };
 
     return (
-        <div className={styles.editTeacherProfile}>
+        <div className={styles.editTeacherProfile} data-cy="edit-teacher-page">
             <div className={styles.editTeacherProfile__content}>
                 <div className={styles.formContainer}>
                     <EditTeacherForm onSubmit={handleSubmit} />

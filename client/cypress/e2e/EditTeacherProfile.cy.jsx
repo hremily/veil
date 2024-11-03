@@ -1,4 +1,4 @@
-describe('Edit User Profile', () => {
+describe('Edit Teaecher Profile', () => {
     beforeEach(() => {
         cy.visitApp();
         cy.getByDataCy('login-link').click();
@@ -9,7 +9,7 @@ describe('Edit User Profile', () => {
         cy.getByDataCy('change-profile').click();
     });
 
-    it('should render EditUserForm', () => {
-        cy.getByDataCy('edit-page').should('exist');
+    it('should render Edit Teacher Form', () => {
+        cy.getByDataCy('edit-teacher-page').should('exist');
     });
 });

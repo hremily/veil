@@ -20,7 +20,7 @@ const AuthForm = ({ title, buttonText, linkText, linkUrl, linkText2, linkUrl2 })
     };
 
     return (
-        <div className={styles.signupWrap}>
+        <div className={styles.signupWrap} data-cy="auth-form">
             <div className={styles.signupContainer}>
                 <div className={styles.formSection}>
                     <h1>{title}</h1>
@@ -31,21 +31,27 @@ const AuthForm = ({ title, buttonText, linkText, linkUrl, linkText2, linkUrl2 })
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            data-cy="email-input"
                         />
                         <input
                             type="password"
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            data-cy="password-input"
                             required
                         />
-                        <button type="submit">{buttonText}</button>
+                        <button type="submit" data-cy="submit-button">
+                            {buttonText}
+                        </button>
                     </form>
                     {linkText && (
                         <p>
                             {linkText}{' '}
                             <span className={styles.signinLink}>
-                                <a href={linkUrl}>Sign up</a>
+                                <a href={linkUrl} data-cy="link-url">
+                                    Sign up
+                                </a>
                             </span>
                         </p>
                     )}

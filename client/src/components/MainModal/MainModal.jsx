@@ -45,7 +45,7 @@ const MainModal = ({ toggleModal, handleThemeChange, isDarkTheme }) => {
                         </button>
                     </li>
                     <li className={styles.modalListItem}>
-                        <button onClick={handleProfileChange} className={styles.modalLink}>
+                        <button onClick={handleProfileChange} className={styles.modalLink} data-cy="change-profile">
                             <img src="../images/change.png" alt="change-profile" /> Change
                         </button>
                     </li>

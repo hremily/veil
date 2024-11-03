@@ -43,6 +43,7 @@ const Categories = () => {
                                 key={subject.id}
                                 onClick={() => handleCategorySelect(subject.name)}
                                 style={{ cursor: 'pointer' }}
+                                data-cy="subject-item"
                             >
                                 <span style={{ backgroundColor: subject.color }}>
                                     {subject.id.toString().padStart(2, '0')}

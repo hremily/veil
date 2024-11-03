@@ -17,7 +17,7 @@ describe('Reset Token Component', () => {
         cy.mount(<ResetToken />);
     });
 
-    it('should render  reset token', () => {
+    it('should render reset token', () => {
         cy.getByDataCy('reset-token-section').should('exist');
     });
 });

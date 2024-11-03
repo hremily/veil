@@ -18,3 +18,7 @@ import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.Commands.add('visitApp', () => {
+    cy.visit(`http://localhost:9000`);
+});

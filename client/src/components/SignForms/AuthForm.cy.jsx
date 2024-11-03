@@ -1,6 +1,5 @@
 import React from 'react';
 import AuthForm from './AuthForm';
-import { AuthContext } from '../../context/AuthContext';
 
 describe('<AuthForm />', () => {
     beforeEach(() => {

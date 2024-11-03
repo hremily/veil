@@ -41,7 +41,7 @@ function Header() {
     };
 
     return (
-        <header>
+        <header data-cy="header">
             <div className={styles.wrapper}>
                 <div className={styles.illustrationSection}>
                     <div className={styles.logoWrapper}>
@@ -53,15 +53,21 @@ function Header() {
                     </div>
                 </div>
                 <nav className={styles.nav}>
-                    <Link to={ROUTES.CATEGORIES}>Categories</Link>
+                    <Link to={ROUTES.CATEGORIES} data-cy="categories-link">
+                        Categories
+                    </Link>
                     {user ? (
                         <>
-                            <Link to={`/profile/${userId}`}>Profile</Link>
+                            <Link to={`/profile/${userId}`} data-cy="profile-link">
+                                Profile
+                            </Link>
                         </>
                     ) : (
-                        <Link to={ROUTES.SIGNIN}>Login</Link>
+                        <Link to={ROUTES.SIGNIN} data-cy="login-link">
+                            Login
+                        </Link>
                     )}
-                    <button className={styles.settings} onClick={toggleModal}>
+                    <button className={styles.settings} onClick={toggleModal} data-cy="settings-button">
                         <img src={`../images/settings.png`} alt="settings" />
                     </button>
                 </nav>
@@ -70,6 +76,7 @@ function Header() {
                         toggleModal={toggleModal}
                         handleThemeChange={handleThemeChange}
                         isDarkTheme={isDarkTheme}
+                        data-cy="main-modal"
                     />
                 )}
             </div>
