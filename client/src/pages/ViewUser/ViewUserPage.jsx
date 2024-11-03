@@ -2,23 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../../context/userContext';
 import styles from './ViewUserPage.css';
 import { useParams } from 'react-router-dom';
+import imageDefault from '../../../public/images/editImage.png';
 
 const ViewUserPage = () => {
     const [error, setError] = useState(null);
     const { fetchUserById, user, setUser } = useUser();
-    const userId = JSON.parse(localStorage.getItem('user'))?.id;
+    const userId = JSON.parse(sessionStorage.getItem('session'))?.id;
     const { id } = useParams();
     const [imageUrl, setImageUrl] = useState('');
 
     useEffect(() => {
         const loadUserData = async () => {
             try {
-                const fetchedUser = await fetchUserById(userId);
+                const fetchedUser = await fetchUserById(id);
                 setUser(fetchedUser);
-                if (fetchedUser.image && fetchedUser.image.length > 0) {
-                    setImageUrl(`http://localhost:9000/server/assets/userImage/${fetchedUser.image}`);
+                if (fetchedUser.image && fetchedUser.image != '') {
+                    setImageUrl(`http://localhost:3000/${id}/image`);
                 } else {
-                    setImageUrl('http://localhost:9000/public/images/edit-image.png');
+                    setImageUrl(imageDefault);
                 }
             } catch (err) {
                 setError('Could not load user data. Please try again later.');
@@ -41,7 +42,6 @@ const ViewUserPage = () => {
                             <p>{error}</p>
                         ) : user ? (
                             <>
-                                {user.image && <img src={user.image} alt={`${user.fullname}'s profile`} />}
                                 <h1>{user.fullname}</h1>
                                 <h2>{user.description}</h2>
                                 <p>{user.experience}</p>

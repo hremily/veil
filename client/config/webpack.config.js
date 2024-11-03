@@ -5,15 +5,12 @@ const CopyPlugin = require('copy-webpack-plugin');
 const basicConfig = {
     entry: path.resolve(__dirname, '../src/index.js'),
     output: {
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, '../client/build'),
         filename: 'bundle.js',
     },
     plugins: [
         new HtmlWebPackPlugin({
             template: path.resolve(__dirname, '../templates/index.html'),
-        }),
-        new CopyPlugin({
-            patterns: [{ from: path.resolve(__dirname, '../assets'), to: path.resolve(__dirname, '../dist/assets') }],
         }),
     ],
     module: {
@@ -26,6 +23,18 @@ const basicConfig = {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-env', '@babel/preset-react'],
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i, // Add this rule for image files
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].[ext]', // Preserve the original path and name
+                            outputPath: 'images/', // Output directory for images in the build
                         },
                     },
                 ],

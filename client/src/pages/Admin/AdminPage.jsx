@@ -4,19 +4,19 @@ import { useUser } from '../../context/userContext';
 import styles from './AdminPage.css';
 
 const AdminPage = () => {
-    const { users, fetchAllUsers, deleteUser, error } = useUser();
+    const { users, fetchAllUsers, deleteUser, error, totalUsersCount } = useUser();
     const [currentPage, setCurrentPage] = useState(1);
     const usersPerPage = 10;
 
     useEffect(() => {
         fetchAllUsers(currentPage, usersPerPage);
-    }, [currentPage]);
-
+    }, []); 
     const handleDelete = async (userId) => {
         await deleteUser(userId);
+        fetchAllUsers(currentPage, usersPerPage);
     };
 
-    const totalPages = Math.ceil(users.length / usersPerPage);
+    const totalPages = Math.ceil(totalUsersCount / usersPerPage);
 
     const renderPagination = () => (
         <div className={styles.pagination}>
@@ -39,7 +39,6 @@ const AdminPage = () => {
                 {users.map((user) => (
                     <Card
                         key={user._id}
-                        imgSrc={user.image || './images/edit-image.png'}
                         name={user.fullname}
                         role={user.role}
                         phone={user.phone_number || 'N/A'}

@@ -85,7 +85,7 @@ const useProvideAuth = () => {
             if (response.ok) {
                 setUser(null);
                 setIsAuthenticated(false);
-                localStorage.removeItem('user');
+                sessionStorage.removeItem('session');
                 navigate(ROUTES.HOME);
             }
         } catch (err) {

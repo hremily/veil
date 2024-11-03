@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './TeacherCard.module.css';
 import { useNavigate } from 'react-router-dom';
+import imageDefault from '../../../public/images/editImage.png';
 
 const TeacherCard = ({ id, name, description, lessons, image }) => {
     const navigate = useNavigate();
+    const [imageUrl, setImageUrl] = useState('');
+
+    useEffect(() => {
+        setImageUrl(`http://localhost:3000/${id}/image`);
+    });
 
     const handleCardClick = () => {
         navigate(`/profile/${id}`);
@@ -12,7 +18,7 @@ const TeacherCard = ({ id, name, description, lessons, image }) => {
     return (
         <div className={styles.teacherCard} onClick={handleCardClick}>
             <div className={styles.teacherImage}>
-                <img src={image} alt={name} />
+                <img src={imageUrl || imageDefault} alt="teacher-image" />
             </div>
             <div className={styles.teacherInfo}>
                 <div className={styles.teacherHeader}>

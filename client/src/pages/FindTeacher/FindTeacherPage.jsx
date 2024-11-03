@@ -4,6 +4,7 @@ import Questionary from '../../components/Questionary/Questionary';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
 import styles from './FindTeacherPage.css';
 import { useUser } from '../../context/userContext';
+import imageDefault from '../../../public/images/editImage.png';
 
 const FindTeacherPage = () => {
     const location = useLocation();
@@ -12,6 +13,7 @@ const FindTeacherPage = () => {
     const { teachers, fetchTeachers, error } = useUser();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDataFetched, setIsDataFetched] = useState(false);
+    const [imageUrls, setImageUrls] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,14 +21,14 @@ const FindTeacherPage = () => {
                 await fetchTeachers(selectedCategory);
                 setIsDataFetched(true);
             } catch (err) {
-                setError('Could not load data');
+                console.error('Could not load data:', err);
             }
         };
 
         if (!isDataFetched) {
             fetchData();
         }
-    }, [selectedCategory, navigate]);
+    }, [selectedCategory, isDataFetched, fetchTeachers]);
 
     const previousTeacher = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? teachers.length - 1 : prevIndex - 1));
@@ -54,11 +56,10 @@ const FindTeacherPage = () => {
                     {error && <p className={styles.error}>{error}</p>}
                     {teachers.length > 0 ? (
                         <TeacherCard
-                            name={teachers[currentIndex].fullname}
-                            description={teachers[currentIndex].description}
-                            lessons={teachers[currentIndex].lessons}
-                            imgSrc={teachers[currentIndex].image}
-                            id={teachers[currentIndex]._id}
+                            name={teachers[currentIndex]?.fullname || 'Unknown'}
+                            description={teachers[currentIndex]?.description || 'No description'}
+                            lessons={teachers[currentIndex]?.lessons || 'No lessons'}
+                            id={teachers[currentIndex]?._id || 'N/A'}
                         />
                     ) : (
                         <p>No teachers available for this category.</p>

@@ -7,7 +7,7 @@ export const UserSchema = new mongoose.Schema({
   phone_number: { type: String, default: '' },
   experience: { type: String, default: '' },
   lessons: { type: String, default: '' },
-  image: { type: String, default: '' },
+  image: { type: String, default: null },
   description: { type: String, default: '' },
   price: { type: Number, default: 0 },
   role: { type: String, ref: 'Role' },

@@ -32,6 +32,12 @@ body {
 }
 
 .pagination .active {
-    background-color: #007bff;
+    background-color: var(--button-color);
+    width: 50px;
+    margin: 10px;
     color: white;
+}
+
+.pagination button:hover {
+    background-color: var(--button-color-hover);
 }

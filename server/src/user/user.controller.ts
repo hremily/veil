@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Param,
+  Res,
   Post,
   Put,
   Session,
@@ -13,6 +14,7 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
 import { CreateUserDTO } from './dtos/create-user.dto';
@@ -95,10 +97,14 @@ export class UserController {
   }
 
   @Get('/:id/image')
-  async getUserImage(@Param('id') id: string) {
+  async getUserImage(@Param('id') id: string, @Res() res: Response) {
     const user = await this.userService.findOne(id);
-
-    return { image: user.image };
+    if (user && user.image) {
+      const filePath = `assets/userImage/${user.image.replace(/^.*[\\\/]/, '')}`;
+      return res.sendFile(filePath, { root: '.' });
+    } else {
+      return res.status(404).send('Image not found');
+    }
   }
 
   @Put('/:id')
