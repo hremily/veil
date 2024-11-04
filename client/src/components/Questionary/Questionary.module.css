@@ -54,8 +54,10 @@
     margin-bottom: 20px;
 }
 
-input,
-select {
+.flexContainer input,
+select,
+.teacher,
+.description {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -66,7 +68,8 @@ select {
     background-color: var(--secondary-input-color);
 }
 
-select {
+select,
+.teacher {
     width: 120%;
     padding: 10px;
     border-radius: 10px;
@@ -111,6 +114,13 @@ button {
     width: 100%;
     display: block;
     margin: 10px auto 0 auto;
+}
+.description {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 7px;
+    border-radius: 20px;
+    margin-top: 5px;
+    width: 99%;
 }
 
 @media (max-width: 1024px) {
