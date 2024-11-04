@@ -4,6 +4,7 @@ import MainModal from '../MainModal/MainModal';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Header.module.css';
 import { ROUTES } from '../../../assets/pages-routes';
+import { IoMdSettings } from 'react-icons/io';
 
 function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,7 +69,7 @@ function Header() {
                         </Link>
                     )}
                     <button className={styles.settings} onClick={toggleModal} data-cy="settings-button">
-                        <img src={`../images/settings.png`} alt="settings" />
+                        <IoMdSettings style={{ color: '#ba68c8', fontSize: '2em' }} />
                     </button>
                 </nav>
                 {isModalOpen && (

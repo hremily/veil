@@ -5,6 +5,10 @@ import { useAuth } from '../../context/AuthContext';
 import styles from './MainModal.module.css';
 import { roleConstans } from '../../../assets/role-constants';
 import { ROUTES } from '../../../assets/pages-routes';
+import { CiLogout } from 'react-icons/ci';
+import { RiProfileLine } from 'react-icons/ri';
+import { MdDarkMode } from 'react-icons/md';
+import { MdSunny } from 'react-icons/md';
 
 const MainModal = ({ toggleModal, handleThemeChange, isDarkTheme }) => {
     const navigate = useNavigate();
@@ -39,24 +43,24 @@ const MainModal = ({ toggleModal, handleThemeChange, isDarkTheme }) => {
                 <ul className={styles.modalList}>
                     <li className={styles.modalListItem}>
                         <button onClick={handleLogout} className={styles.modalLink}>
-                            <div className={styles.imageContainer}>
-                                <img src="../images/logout.png" alt="signout" /> Log out
+                            <div className={styles.imageContainerModal}>
+                                <CiLogout />
+                                <p>Log out</p>
                             </div>
                         </button>
                     </li>
                     <li className={styles.modalListItem}>
                         <button onClick={handleProfileChange} className={styles.modalLink} data-cy="change-profile">
-                            <img src="../images/change.png" alt="change-profile" /> Change
+                            <div className={styles.imageContainerModal}>
+                                <RiProfileLine /> <p>Change</p>
+                            </div>
                         </button>
                     </li>
                     <li className={styles.modalListItem}>
                         <button onClick={handleThemeChange} className={styles.modalLink}>
-                            <div className={styles.imageContainer}>
-                                <img
-                                    src={isDarkTheme ? '../images/dark.png' : '../images/light.png'}
-                                    alt="theme-toggle"
-                                />
-                                {isDarkTheme ? 'Dark' : 'Light'}
+                            <div className={styles.imageContainerModal}>
+                                {isDarkTheme ? <MdDarkMode /> : <MdSunny />}
+                                <p> {isDarkTheme ? 'Dark' : 'Light'}</p>
                             </div>
                         </button>
                     </li>

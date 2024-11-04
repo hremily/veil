@@ -8,13 +8,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:9000',
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? 'https://veil-q3heeeujs-hremilys-projects.vercel.app'
+        : 'http://localhost:9000',
     credentials: true,
   });
 
   app.use(
     session({
-      secret: secret,
+      secret: process.env.SESSION_SECRET || secret,
       resave: false,
       saveUninitialized: false,
       cookie: { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 },

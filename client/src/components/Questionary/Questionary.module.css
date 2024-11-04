@@ -9,6 +9,7 @@
     max-width: 1200px;
     margin: 0 auto;
     gap: 20px;
+    padding: 50px;
 }
 
 .formGroup {
@@ -120,7 +121,7 @@ button {
     padding: 7px;
     border-radius: 20px;
     margin-top: 5px;
-    width: 99%;
+    width: 98%;
 }
 
 @media (max-width: 1024px) {
