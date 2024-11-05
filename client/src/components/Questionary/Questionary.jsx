@@ -118,7 +118,7 @@ const Questionary = () => {
                         />
                     </div>
                     <div className={styles.flexContainer}>
-                        <select name="teacher" value={formData.teacher} onChange={handleChange} required>
+                        <select name="teacher" value={formData.teacher} className={styles.teacher} onChange={handleChange} required>
                             <option value="" disabled>
                                 Choose teacher
                             </option>

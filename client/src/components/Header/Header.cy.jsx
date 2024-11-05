@@ -30,14 +30,12 @@ describe('<Header />', () => {
     });
 
     it('displays login link when user is not authenticated', () => {
-        // Reset the stub for unauthenticated state
         cy.stub(React, 'useAuth').returns({
             user: null,
             isAuthenticated: false,
             signout: cy.stub(),
         });
 
-        // Remount Header to reflect the unauthenticated state
         cy.mountWithProviders(<Header />);
         cy.getByDataCy('login-link').should('exist');
         cy.getByDataCy('profile-link').should('not.exist');

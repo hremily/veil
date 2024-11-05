@@ -14,8 +14,6 @@ const EditUserForm = () => {
         subject: '',
         image: null,
     });
-    const [userQuestionnaires, setUserQuestionnaires] = useState([]);
-
     useEffect(() => {
         const loadUserData = async () => {
             try {
@@ -29,7 +27,6 @@ const EditUserForm = () => {
                     subject: user.subject || '',
                     image: null,
                 });
-                setUserQuestionnaires(user.questionnaires || []);
             } catch (err) {
                 console.error('Error loading user data:', err);
             }
@@ -104,7 +101,7 @@ const EditUserForm = () => {
                         />
                     </div>
                     <div className={styles.divideGroup}>
-                        <select name="years">
+                        <select name="years" className={styles.years}>
                             <option value="">Age of child</option>
                             {[...Array(14).keys()].map((i) => (
                                 <option key={i} value={6 + i}>
@@ -119,15 +116,6 @@ const EditUserForm = () => {
                             onChange={handleChange}
                             placeholder="Subject"
                         />
-                    </div>
-                    <div className={styles.userQuestionnaires}>
-                        <ul className={styles.questList}>
-                            {userQuestionnaires.map((quest, index) => (
-                                <li key={index} className={styles.quest}>
-                                    {quest.name} <button type="button">Delete</button>
-                                </li>
-                            ))}
-                        </ul>
                     </div>
                     <button type="submit">Save</button>
                 </form>

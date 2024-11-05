@@ -68,6 +68,11 @@ body {
     flex-direction: column;
     max-height: 100%;
     overflow-y: scroll;
+    scrollbar-width: none; /* приховує вертикальну смугу прокрутки в Firefox */
+}
+
+.subjectContainer::-webkit-scrollbar {
+    display: none; /* приховує вертикальну смугу прокрутки в Chrome, Safari та Edge */
 }
 
 .mainContent .right .subject {

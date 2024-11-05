@@ -19,8 +19,6 @@ import './commands';
 import { mount } from 'cypress/react18';
 import { MemoryRouter } from 'react-router-dom';
 
-import { AuthProvider } from '../../src/providers/AuthProvider';
-
 Cypress.Commands.add('mount', mount);
 
 // Custom command to mount a component with necessary providers
