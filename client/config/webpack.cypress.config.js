@@ -34,6 +34,9 @@ const config = {
             },
         ],
     },
+    devServer: {
+        port: 9000,
+    },
 };
 
 module.exports = merge(basicConfig, config);
