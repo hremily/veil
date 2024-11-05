@@ -1,6 +1,7 @@
 const path = require('node:path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const basicConfig = {
     entry: path.resolve(__dirname, '../src/index.js'),
@@ -9,6 +10,15 @@ const basicConfig = {
         filename: 'bundle.js',
     },
     plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    context: path.resolve(__dirname, '../', 'public/images'),
+                    from: '**/*',
+                    to: path.resolve(__dirname, '../dist', 'public/images'),
+                },
+            ],
+        }),
         new HtmlWebPackPlugin({
             template: path.resolve(__dirname, '../templates/index.html'),
         }),
@@ -33,8 +43,8 @@ const basicConfig = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[path][name].[ext]', 
-                            outputPath: 'images/', 
+                            name: '[path][name].[ext]',
+                            outputPath: 'images/',
                         },
                     },
                 ],
