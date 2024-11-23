@@ -23,7 +23,7 @@ const ResetPassword = () => {
     };
 
     return (
-        <div className={styles.reset}>
+        <div className={styles.reset} data-cy="reset-form-section">
             <form onSubmit={handleSubmit}>
                 <p>Enter the new password to change:</p>
                 <input

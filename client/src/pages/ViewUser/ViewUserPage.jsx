@@ -31,7 +31,7 @@ const ViewUserPage = () => {
     }, []);
 
     return (
-        <div className={styles.mainContainer}>
+        <div className={styles.mainContainer} data-cy="profile-page">
             <div className={styles.minHScreen}>
                 <div className={styles.container}>
                     <div className={styles.imageSection}>

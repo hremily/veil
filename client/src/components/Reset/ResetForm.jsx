@@ -18,7 +18,7 @@ const Reset = () => {
     };
 
     return (
-        <div className={styles.reset}>
+        <div className={styles.reset} data-cy="reset-form-section">
             <form onSubmit={handleSubmit}>
                 <p>Enter your email for resetting password:</p>
                 <input

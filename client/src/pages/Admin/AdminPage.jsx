@@ -10,7 +10,7 @@ const AdminPage = () => {
 
     useEffect(() => {
         fetchAllUsers(currentPage, usersPerPage);
-    }, []); 
+    }, []);
     const handleDelete = async (userId) => {
         await deleteUser(userId);
         fetchAllUsers(currentPage, usersPerPage);
@@ -33,7 +33,7 @@ const AdminPage = () => {
     );
 
     return (
-        <div className={styles.adminPage}>
+        <div className={styles.adminPage} data-cy="admin-page">
             {error && <p className={styles.error}>{error}</p>}
             <div className={styles.container}>
                 {users.map((user) => (

@@ -28,13 +28,13 @@ const basicConfig = {
                 ],
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i, // Add this rule for image files
+                test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[path][name].[ext]', // Preserve the original path and name
-                            outputPath: 'images/', // Output directory for images in the build
+                            name: '[path][name].[ext]', 
+                            outputPath: 'images/', 
                         },
                     },
                 ],

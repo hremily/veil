@@ -4,6 +4,7 @@ import MainModal from '../MainModal/MainModal';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Header.module.css';
 import { ROUTES } from '../../../assets/pages-routes';
+import { IoMdSettings } from 'react-icons/io';
 
 function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +42,7 @@ function Header() {
     };
 
     return (
-        <header>
+        <header data-cy="header">
             <div className={styles.wrapper}>
                 <div className={styles.illustrationSection}>
                     <div className={styles.logoWrapper}>
@@ -53,16 +54,22 @@ function Header() {
                     </div>
                 </div>
                 <nav className={styles.nav}>
-                    <Link to={ROUTES.CATEGORIES}>Categories</Link>
+                    <Link to={ROUTES.CATEGORIES} data-cy="categories-link">
+                        Categories
+                    </Link>
                     {user ? (
                         <>
-                            <Link to={`/profile/${userId}`}>Profile</Link>
+                            <Link to={`/profile/${userId}`} data-cy="profile-link">
+                                Profile
+                            </Link>
                         </>
                     ) : (
-                        <Link to={ROUTES.SIGNIN}>Login</Link>
+                        <Link to={ROUTES.SIGNIN} data-cy="login-link">
+                            Login
+                        </Link>
                     )}
-                    <button className={styles.settings} onClick={toggleModal}>
-                        <img src={`../images/settings.png`} alt="settings" />
+                    <button className={styles.settings} onClick={toggleModal} data-cy="settings-button">
+                        <IoMdSettings style={{ color: '#ba68c8', fontSize: '2em' }} />
                     </button>
                 </nav>
                 {isModalOpen && (
@@ -70,6 +77,7 @@ function Header() {
                         toggleModal={toggleModal}
                         handleThemeChange={handleThemeChange}
                         isDarkTheme={isDarkTheme}
+                        data-cy="main-modal"
                     />
                 )}
             </div>
