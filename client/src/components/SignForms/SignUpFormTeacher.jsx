@@ -3,6 +3,7 @@ import AuthForm from './AuthForm';
 import { ROUTES } from '../../../assets/pages-routes';
 
 const SignUpTeacherForm = () => {
+const SignUpTeacherForm = () => {
     return (
         <AuthForm
             title="Create an Account"
@@ -13,6 +14,7 @@ const SignUpTeacherForm = () => {
             linkUrl2={ROUTES.SIGNIN}
         />
     );
+};
 };
 
 export default SignUpTeacherForm;

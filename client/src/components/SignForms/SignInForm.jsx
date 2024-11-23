@@ -3,6 +3,7 @@ import AuthForm from './AuthForm';
 import { ROUTES } from '../../../assets/pages-routes';
 
 const SignIn = () => {
+const SignIn = () => {
     return (
         <AuthForm
             title="Enter to the Account"
@@ -13,6 +14,7 @@ const SignIn = () => {
             linkUrl2={ROUTES.RESET}
         />
     );
+};
 };
 
 export default SignIn;
