@@ -1,34 +1,45 @@
-import React, { useState } from 'react';
-
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Questionary from '../../components/Questionary/Questionary';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
 import styles from './FindTeacherPage.css';
+import { useUser } from '../../context/userContext';
+import imageDefault from '../../../public/images/editImage.png';
 
 const FindTeacherPage = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const selectedCategory = location.state?.selectedCategory;
+    const { teachers, fetchTeachers, error } = useUser();
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isDataFetched, setIsDataFetched] = useState(false);
+    const [imageUrls, setImageUrls] = useState({});
 
-    const teachers = [
-        {
-            name: 'Grab Emilia',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-            skills: ['Backend Development', 'Database Development', 'API/REST/CRUD Development'],
-            image: '../images/edit-image.png',
-        },
-    ];
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await fetchTeachers(selectedCategory);
+                setIsDataFetched(true);
+            } catch (err) {
+                console.error('Could not load data:', err);
+            }
+        };
+
+        if (!isDataFetched) {
+            fetchData();
+        }
+    }, [selectedCategory, isDataFetched, fetchTeachers]);
 
     const previousTeacher = () => {
-        setCurrentIndex((previousIndex) => (previousIndex === 0 ? teachers.length - 1 : previousIndex - 1));
+        setCurrentIndex((prevIndex) => (prevIndex === 0 ? teachers.length - 1 : prevIndex - 1));
     };
 
     const nextTeacher = () => {
-        setCurrentIndex((previousIndex) => (previousIndex === teachers.length - 1 ? 0 : previousIndex + 1));
+        setCurrentIndex((prevIndex) => (prevIndex === teachers.length - 1 ? 0 : prevIndex + 1));
     };
 
     return (
         <div className={styles.wrapper}>
-            <Header />
             <div className={styles.teachersSection}>
                 <div className={styles.teachersHeader}>
                     <h1>Our Teachers</h1>
@@ -42,19 +53,23 @@ const FindTeacherPage = () => {
                     </div>
                 </div>
                 <div className={styles.carouselContent}>
-                    <TeacherCard
-                        name={teachers[currentIndex].name}
-                        description={teachers[currentIndex].description}
-                        skills={teachers[currentIndex].skills}
-                        image={teachers[currentIndex].image}
-                    />
+                    {error && <p className={styles.error}>{error}</p>}
+                    {teachers.length > 0 ? (
+                        <TeacherCard
+                            name={teachers[currentIndex]?.fullname || 'Unknown'}
+                            description={teachers[currentIndex]?.description || 'No description'}
+                            lessons={teachers[currentIndex]?.lessons || 'No lessons'}
+                            id={teachers[currentIndex]?._id || 'N/A'}
+                        />
+                    ) : (
+                        <p>No teachers available for this category.</p>
+                    )}
                 </div>
             </div>
             <div className={styles.flexContainer}>
                 <Questionary />
                 <img src="../images/children-main.png" alt="children" className={styles.imageForm} />
             </div>
-            <Footer />
         </div>
     );
 };

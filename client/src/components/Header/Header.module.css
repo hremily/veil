@@ -28,6 +28,7 @@
     font-size: 2.5rem;
     font-weight: bold;
     color: var(--primary-color);
+    /**color: #ba68c8;**/
 }
 
 .homeLink {
@@ -45,7 +46,7 @@
 
 .nav a {
     margin-right: 20px;
-    color: var(--text-color);
+    color: var(--primary-color);
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
@@ -58,6 +59,14 @@
 .modal {
     position: fixed;
     /* top:; */
+}
+
+.settings {
+    background-color: var(--background-color);
+}
+
+.nav {
+    font-size: 14px;
 }
 
 @media (max-width: 1024px) {

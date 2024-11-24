@@ -1,12 +1,24 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import styles from './TeacherCard.module.css';
+import { useNavigate } from 'react-router-dom';
+import imageDefault from '../../../public/images/editImage.png';
 
-const TeacherCard = ({ name, description, skills, image }) => {
+const TeacherCard = ({ id, name, description, lessons, image }) => {
+    const navigate = useNavigate();
+    const [imageUrl, setImageUrl] = useState('');
+
+    useEffect(() => {
+        setImageUrl(`http://localhost:3000/${id}/image`);
+    });
+
+    const handleCardClick = () => {
+        navigate(`/profile/${id}`);
+    };
+
     return (
-        <div className={styles.teacherCard}>
+        <div className={styles.teacherCard} onClick={handleCardClick}>
             <div className={styles.teacherImage}>
-                <img src={image} alt={name} />
+                <img src={imageUrl || imageDefault} alt="teacher-image" />
             </div>
             <div className={styles.teacherInfo}>
                 <div className={styles.teacherHeader}>
@@ -14,11 +26,7 @@ const TeacherCard = ({ name, description, skills, image }) => {
                     <h2>{name}</h2>
                 </div>
                 <p>{description}</p>
-                <ul>
-                    {skills.map((skill, index) => (
-                        <li key={index}>{skill}</li>
-                    ))}
-                </ul>
+                <p>{lessons}</p>
             </div>
         </div>
     );

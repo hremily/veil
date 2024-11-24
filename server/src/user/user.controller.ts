@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Param,
+  Res,
   Post,
   Put,
   Session,
@@ -13,6 +14,7 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
 import { CreateUserDTO } from './dtos/create-user.dto';
@@ -24,7 +26,7 @@ import * as mongoose from 'mongoose';
 import { Role } from '../utils/user-roles.constants';
 import { PaginationDTO } from '../user/dtos/pagination.dto';
 import { resetPasswordDTO } from './dtos/reset-password.dto';
-import { MyFileInterceptor } from '../../interceptors/file-upload.interceptor';
+import { MyFileInterceptor } from '../interceptors/file-upload.interceptor';
 
 @Controller()
 export class UserController {
@@ -67,7 +69,8 @@ export class UserController {
   @Get('/user')
   async getProfile(@Session() session: any) {
     const { userId } = session;
-    return await this.authService.getUser(userId);
+    const user = await this.authService.getUser(userId);
+    return { userId: user._id, userRole: user.role, ...user };
   }
 
   @UseGuards(AdminGuard)
@@ -93,7 +96,17 @@ export class UserController {
     return await this.userService.findOne(id);
   }
 
-  @UseGuards(AuthGuard)
+  @Get('/:id/image')
+  async getUserImage(@Param('id') id: string, @Res() res: Response) {
+    const user = await this.userService.findOne(id);
+    if (user && user.image) {
+      const filePath = `assets/userImage/${user.image.replace(/^.*[\\\/]/, '')}`;
+      return res.sendFile(filePath, { root: '.' });
+    } else {
+      return res.status(404).send('Image not found');
+    }
+  }
+
   @Put('/:id')
   @UseInterceptors(MyFileInterceptor)
   async updateProfile(
@@ -122,7 +135,6 @@ export class UserController {
     return await this.authService.changePassword(resetToken, password);
   }
 
-  @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
   @Delete('/:id')
   async delete(@Param('id') id: string) {

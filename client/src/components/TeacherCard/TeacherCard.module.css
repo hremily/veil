@@ -3,7 +3,7 @@
     align-items: center;
     padding: 30px;
     border-radius: 10px;
-    background-color: var(--background-color);
+    background-color: #eaeaea;
     border: 1px solid #ccc;
     /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
     width: 150%;
@@ -43,13 +43,13 @@
 
 .teacherInfo h2 {
     font-size: 24px;
-    color: var(--teacher-title);
+    color: #ff6500;
     margin: 0;
 }
 
 .teacherInfo p {
     font-size: 14px;
-    color: var(--text-color-form);
+    color: #999;
     margin: 10px 0;
 }
 
@@ -63,44 +63,4 @@
 .teacherInfo li {
     font-size: 16px;
     color: #333;
-}
-
-@media (max-width: 768px) {
-    .teacherCard {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .teacherImage {
-        margin-bottom: 20px;
-    }
-
-    .teacherInfo {
-        max-width: 100%;
-    }
-
-    .teacherInfo h2 {
-        font-size: 22px;
-    }
-
-    .teacherInfo p,
-    .teacherInfo li {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    .teacherImage img {
-        width: 180px;
-        height: 160px;
-    }
-
-    .teacherInfo h2 {
-        font-size: 20px;
-    }
-
-    .teacherInfo p,
-    .teacherInfo li {
-        font-size: 13px;
-    }
 }

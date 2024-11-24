@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserType } from './user.schema';
@@ -119,8 +123,13 @@ export class UserService {
 
   async delete(id: string) {
     if (!id) {
-      throw new NotFoundException('Unauthorized user');
+      throw new BadRequestException('User ID must be provided');
     }
-    return await this.userModel.findByIdAndDelete(id);
+
+    const deletedUser = await this.userModel.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      throw new NotFoundException('User not found');
+    }
   }
 }

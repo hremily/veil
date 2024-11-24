@@ -1,60 +1,54 @@
-import React, { useState } from 'react';
-
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
+import React, { useState, useEffect } from 'react';
 import Card from '../../components/UserCard/Card';
+import { useUser } from '../../context/userContext';
 import styles from './AdminPage.css';
 
 const AdminPage = () => {
-    const [users, setUsers] = useState([
-        {
-            imgSrc: './images/edit-image.png',
-            name: 'User`s fullname',
-            role: 'User`s role',
-            phone: 'User`s phone',
-        },
-        {
-            imgSrc: './images/edit-image.png',
-            name: 'User`s fullname',
-            role: 'User`s role',
-            phone: 'User`s phone',
-        },
-        {
-            imgSrc: './images/edit-image.png',
-            name: 'User`s fullname',
-            role: 'User`s role',
-            phone: 'User`s phone',
-        },
-        {
-            imgSrc: './images/edit-image.png',
-            name: 'User`s fullname',
-            role: 'User`s role',
-            phone: 'User`s phone',
-        },
-    ]);
+    const { users, fetchAllUsers, deleteUser, error, totalUsersCount } = useUser();
+    const [currentPage, setCurrentPage] = useState(1);
+    const usersPerPage = 10;
 
-    const handleDelete = (index) => {
-        const newUsers = users.filter((_, index_) => index_ !== index);
-        setUsers(newUsers);
+    useEffect(() => {
+        fetchAllUsers(currentPage, usersPerPage);
+    }, []);
+    const handleDelete = async (userId) => {
+        await deleteUser(userId);
+        fetchAllUsers(currentPage, usersPerPage);
     };
 
+    const totalPages = Math.ceil(totalUsersCount / usersPerPage);
+
+    const renderPagination = () => (
+        <div className={styles.pagination}>
+            {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                    key={index + 1}
+                    onClick={() => setCurrentPage(index + 1)}
+                    className={currentPage === index + 1 ? styles.active : ''}
+                >
+                    {index + 1}
+                </button>
+            ))}
+        </div>
+    );
+
     return (
-        <div className={styles.adminPage}>
-            <Header />
+        <div className={styles.adminPage} data-cy="admin-page">
+            {error && <p className={styles.error}>{error}</p>}
             <div className={styles.container}>
-                {users.map((user, index) => (
+                {users.map((user) => (
                     <Card
-                        key={index}
-                        imgSrc={user.imgSrc}
-                        name={user.name}
+                        key={user._id}
+                        name={user.fullname}
                         role={user.role}
-                        phone={user.phone}
-                        onDelete={() => handleDelete(index)}
+                        phone={user.phone_number || 'N/A'}
+                        onDelete={() => handleDelete(user._id)}
                     />
                 ))}
             </div>
-            <Footer />
+            {renderPagination()}
         </div>
     );
 };
+
 export default AdminPage;

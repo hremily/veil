@@ -1,45 +1,60 @@
-import React from 'react';
-
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Categories.css';
+import { subjects } from '../../../assets/subjects-constants';
+import { ROUTES } from '../../../assets/pages-routes';
 
 const Categories = () => {
-    const subjects = [
-        { id: 1, color: '#ffeb3b' },
-        { id: 2, color: '#ff9800' },
-        { id: 3, color: '#8bc34a' },
-        { id: 4, color: '#00bcd4' },
-        { id: 5, color: '#3f51b5' },
-        { id: 6, color: '#9c27b0' },
-        { id: 7, color: '#e91e63' },
-        { id: 8, color: '#673ab7' },
-        { id: 9, color: '#009688' },
-        { id: 10, color: '#795548' },
-    ];
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleCategorySelect = (name) => {
+        if (name) {
+            console.log('Selected category ID:', name);
+            navigate(ROUTES.FIND_TEACHER, { state: { selectedCategory: name } });
+        } else {
+            setError('Invalid category selected.');
+        }
+    };
 
     return (
         <div className={styles.wrapper}>
-            <Header />
             <div className={styles.mainContent}>
                 <div className={styles.left}>
-                    <img className={styles.descriptionImg} src="../images/description.png" alt="description" />
-                    <button className={styles.consultationBtn}>Get a consultation</button>
+                    <img className={styles.descriptionImg} src="/images/description.png" alt="description" />
+                    <button className={styles.consultationBtn}>
+                        <article className="contact__option">
+                            <a
+                                href="https://t.me/millunchik"
+                                target="__blank"
+                                rel="noopener noreferrer"
+                                className="btn"
+                            >
+                                Get a consultation
+                            </a>
+                        </article>
+                    </button>
                 </div>
                 <div className={styles.right}>
                     <div className={styles.subjectContainer}>
                         {subjects.map((subject) => (
-                            <div className={styles.subject} key={subject.id}>
+                            <div
+                                className={styles.subject}
+                                key={subject.id}
+                                onClick={() => handleCategorySelect(subject.name)}
+                                style={{ cursor: 'pointer' }}
+                                data-cy="subject-item"
+                            >
                                 <span style={{ backgroundColor: subject.color }}>
                                     {subject.id.toString().padStart(2, '0')}
                                 </span>
-                                <p>Subject name</p>
+                                <p>{subject.name}</p>
                             </div>
                         ))}
                     </div>
+                    {error && <p className={styles.error}>{error}</p>}
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };

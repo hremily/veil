@@ -1,16 +1,33 @@
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
-
 import styles from './Card.module.css';
+import imageDefault from '../../../public/images/editImage.png';
 
-const Card = ({ imgSrc, name, role, phone, onDelete }) => {
+const Card = ({ imgPath, name, role, phone, onDelete }) => {
+    const [imageUrl, setImageUrl] = useState(imageDefault);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        if (imgPath && imgPath !== '') {
+            setImageUrl(imgPath);
+        } else {
+            setImageUrl(imageDefault);
+        }
+    }, [imgPath]);
+
     return (
         <div className={styles.card}>
-            <img src={imgSrc} alt={`Image of ${name}`} height="200" width="200" />
+            <div className={styles.imageSection}>
+                {error ? (
+                    <p>Error loading image</p>
+                ) : (
+                    <img src={imageUrl} alt={`Image of ${name}`} height="200" width="200" />
+                )}
+            </div>
             <div className={styles.userData}>
-                <div className={styles.name}>{name}</div>
-                <div className={styles.role}>{role}</div>
-                <div className={styles.phone}>{phone}</div>
+                <h1 className={styles.name}>{name}</h1>
+                <h2 className={styles.role}>{role}</h2>
+                <p className={styles.phone}>{phone}</p>
             </div>
             <button onClick={onDelete} className={styles.deleteButton}>
                 <img src="../images/delete.png" alt="delete" />
@@ -20,7 +37,7 @@ const Card = ({ imgSrc, name, role, phone, onDelete }) => {
 };
 
 Card.propTypes = {
-    imgSrc: PropTypes.string.isRequired,
+    imgPath: PropTypes.string,
     name: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,

@@ -1,8 +1,13 @@
-* {
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     font-size: 1rem;
     font-family: Arial, Helvetica, sans-serif;
+    color: var(--primary-color);
 }
 
 :root {
@@ -17,7 +22,7 @@
     --secondary-input-color: #f1f1f1;
     --footer-background: #a95cb8;
     --footer-icons-hover: #f0e68c;
-    --text-color: #0000;
+    --text-color: #000000;
     --secondary-text-color: #333;
     --elements: #ba68c844;
     --green-details: #29bc63;
@@ -27,4 +32,9 @@
     --background-color-main-details: #dca0f8;
     --userInfo: #8b3999;
     --background-icons: #9b59b6;
+    --background-dark-color: #553a59;
+}
+
+.signUpContainer {
+    color: var(--primary-color);
 }

@@ -15,6 +15,7 @@
 
 .card img {
     width: 100%;
+    height: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -27,7 +28,7 @@
     margin: 10px 0;
 }
 
-.role,
+.lessons,
 .phone {
     font-size: 14px;
     background-color: var(--secondary-color);
@@ -55,6 +56,12 @@
     background-color: var(--secondary-color);
     border: none;
     cursor: pointer;
+    width: 100%;
+}
+
+.deleteButton img {
+    width: 20%;
+    height: 70%;
 }
 
 .adminPage {
@@ -102,7 +109,7 @@
         font-size: 14px;
     }
 
-    .role,
+    .lessons,
     .phone {
         font-size: 11px;
     }

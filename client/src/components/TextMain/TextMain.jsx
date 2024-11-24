@@ -4,7 +4,7 @@ import styles from './TextMain.module.css';
 
 function TextMain() {
     return (
-        <div className={styles.TextContainer}>
+        <div className={styles.TextContainer} data-cy="text-for-main-page">
             <div className={styles.featuresContainer}>
                 <div className={styles.featureBox}>
                     <h1 className={styles.whySchool}>Why our school?</h1>

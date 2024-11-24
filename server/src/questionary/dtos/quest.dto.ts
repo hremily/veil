@@ -1,12 +1,4 @@
-import {
-  IsEmail,
-  IsNumber,
-  IsObject,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
-import { ObjectId } from 'mongodb';
+import { IsEmail, IsNumber, IsString, Max, Min } from 'class-validator';
 
 export class QuestionaryCreateDTO {
   @IsString()
@@ -22,9 +14,6 @@ export class QuestionaryCreateDTO {
 
   @IsNumber()
   age: number;
-
-  @IsObject()
-  userId: ObjectId;
 
   @IsString()
   teacher: string;

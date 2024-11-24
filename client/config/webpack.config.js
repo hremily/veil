@@ -1,10 +1,11 @@
 const path = require('node:path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const basicConfig = {
     entry: path.resolve(__dirname, '../src/index.js'),
     output: {
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, '../client/build'),
         filename: 'bundle.js',
     },
     plugins: [
@@ -26,6 +27,18 @@ const basicConfig = {
                     },
                 ],
             },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].[ext]', 
+                            outputPath: 'images/', 
+                        },
+                    },
+                ],
+            },
         ],
     },
     resolve: {
@@ -36,6 +49,7 @@ const basicConfig = {
     },
     devServer: {
         port: 9000,
+        historyApiFallback: true,
     },
 };
 

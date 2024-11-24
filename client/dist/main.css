@@ -1,39 +1,1909 @@
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--primary-color);
+}
+
+:root {
+    --primary-color: #ba68c8;
+    --secondary-color: #ffffff;
+    --text-color-form: #999999;
+    --background-color: #eaeaea;
+    --button-color: #d632ff;
+    --secondary-button-color: #f0b6ff;
+    --button-color-hover: #921faf;
+    --input-color: #f9f9f9;
+    --secondary-input-color: #f1f1f1;
+    --footer-background: #a95cb8;
+    --footer-icons-hover: #f0e68c;
+    --text-color: #000000;
+    --secondary-text-color: #333;
+    --elements: #ba68c844;
+    --green-details: #29bc63;
+    --teacher-title: #ff4500;
+    --background-link: #e75fff;
+    --background-link-hover: #9c3fac;
+    --background-color-main-details: #dca0f8;
+    --userInfo: #8b3999;
+    --background-icons: #9b59b6;
+    --background-dark-color: #553a59;
+}
+
+.App__signUpContainer {
+    color: var(--primary-color);
+}
+
 .Footer-module__footer {
-    background-color: #a95cb8; /* Колір фону */
+    background-color: var(--footer-background);
     padding: 20px 0;
     text-align: center;
-    color: white;
+    color: var(--secondary-color);
     font-family: 'Arial', sans-serif;
     position: relative;
     bottom: 0;
     width: 100%;
-  }
-  
-  .Footer-module__footerContent {
+}
+
+.Footer-module__footerContent {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .Footer-module__icons a {
-    color: white;
+}
+
+@media (min-width: 768px) {
+    .Footer-module__footerContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Footer-module__icons {
+        order: 1;
+    }
+
+    .Footer-module__footer p {
+        order: 2;
+        margin: 0 20px;
+    }
+}
+
+.Footer-module__icons a {
+    color: var(--secondary-color);
     margin: 0 10px;
     text-decoration: none;
     font-size: 24px;
-  }
-  
-  .Footer-module__icons a:hover {
-    color: #f0e68c; /* Колір при наведенні */
-  }
-  
-  .Footer-module__footer p {
+}
+
+.Footer-module__icons a:hover {
+    color: var(--footer-icons-hover);
+}
+
+.Footer-module__footer p {
     margin: 5px 0;
-  }
-  
+}
+
+@media (max-width: 767px) {
+    .Footer-module__icons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .Footer-module__footer p {
+        margin: 10px 0;
+    }
+}
+
+.MainModal-module__modal {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 5px;
+    width: 100px;
+    top: 60px;
+    right: 10px;
+    background-color: var(--secondary-color);
+}
+
+.MainModal-module__modalСontent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    text-align: left;
+}
+
+.MainModal-module__close {
+    color: var(--secondary-color);
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+.MainModal-module__modalLink {
+    background-color: var(--secondary-color);
+    padding: 2px;
+    color: var(--text-color);
+}
+
+.MainModal-module__dark-theme {
+    --secondary-color: #eaeaea;
+    --background-color: #553a59;
+}
+
+.MainModal-module__light-theme {
+    --secondary-color: #ffffff;
+    --background-color: #eaeaea;
+}
+
+@media (max-width: 768px) {
+    .MainModal-module__modal {
+        width: 80%;
+        top: 50px;
+        right: 10%;
+    }
+}
+
+@media (max-width: 768px) {
+    ul li {
+        font-size: 14px;
+    }
+
+    .MainModal-module__close {
+        font-size: 16px;
+    }
+}
+
+.Header-module__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background-color: var(--background-color);
+    height: 80px;
+    position: relative;
+    z-index: 10;
+}
+
+.Header-module__illustrationSection {
+    display: flex;
+    align-items: center;
+}
+
+.Header-module__logoWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.Header-module__logo {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.Header-module__logoText {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    /**color: #ba68c8;**/
+}
+
+.Header-module__homeLink {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.Header-module__nav {
+    display: flex;
+    align-items: center;
+}
+
+.Header-module__nav a {
+    margin-right: 20px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Header-module__nav a:hover {
+    text-decoration: underline;
+}
+
+.Header-module__modal {
+    position: fixed;
+    /* top:; */
+}
+
+.Header-module__settings {
+    background-color: var(--background-color);
+}
+
+.Header-module__nav {
+    font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+    .Header-module__wrapper {
+        padding: 10px 20px;
+    }
+
+    .Header-module__logo {
+        width: 40px;
+    }
+
+    .Header-module__logoText {
+        font-size: 2rem;
+    }
+
+    .Header-module__nav a {
+        font-size: 18px;
+        margin-right: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .Header-module__wrapper {
+        padding: 10px;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .Header-module__logoWrapper {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .Header-module__nav {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .Header-module__nav a {
+        font-size: 18px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .Header-module__logo {
+        width: 30px;
+    }
+
+    .Header-module__logoText {
+        font-size: 1.5rem;
+    }
+
+    .Header-module__homeLink {
+        font-size: 1.2rem;
+    }
+
+    .Header-module__nav a {
+        font-size: 16px;
+    }
+}
+
+.Card-module__card {
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.Card-module__card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.Card-module__name {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: var(--secondary-color);
+    color: var(--userInfo);
+    margin: 10px 0;
+}
+
+.Card-module__lessons,
+.Card-module__phone {
+    font-size: 14px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.Card-module__icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.Card-module__icons i {
+    font-size: 20px;
+    color: var(--background-icons);
+    margin: 0 5px;
+}
+
+.Card-module__userData {
+    background-color: var(--secondary-color);
+}
+
+.Card-module__deleteButton {
+    background-color: var(--secondary-color);
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.Card-module__deleteButton img {
+    width: 20%;
+    height: 70%;
+}
+
+.Card-module__adminPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Card-module__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .Card-module__card {
+        width: 150px;
+        padding: 15px;
+    }
+
+    .Card-module__name {
+        font-size: 16px;
+    }
+
+    .Card-module__role,
+    .Card-module__phone {
+        font-size: 12px;
+    }
+
+    .Card-module__icons i {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Card-module__card {
+        width: 100%;
+        margin: 5px 0;
+        padding: 10px;
+    }
+
+    .Card-module__name {
+        font-size: 14px;
+    }
+
+    .Card-module__lessons,
+    .Card-module__phone {
+        font-size: 11px;
+    }
+
+    .Card-module__icons i {
+        font-size: 16px;
+    }
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+.AdminPage__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.AdminPage__card {
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    padding: 20px;
+}
+
+.AdminPage__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.AdminPage__pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.AdminPage__pagination .AdminPage__active {
+    background-color: #007bff;
+    color: white;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.Categories__mainContent {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    background-image: url(ad518d7e956832c38d0b.png);
+    background-size: cover;
+    height: 100vh;
+    overflow-y: auto;
+    flex-direction: row;
+}
+
+.Categories__mainContent .Categories__left {
+    max-width: 40%;
+    margin-right: 20px;
+}
+
+.Categories__mainContent .Categories__left h2 {
+    font-size: 24px;
+    color: #000;
+}
+
+.Categories__mainContent .Categories__left h2 span {
+    background-color: var(--background-color-main-details);
+    padding: 0 5px;
+}
+
+.Categories__mainContent .Categories__left .Categories__cost {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.Categories__mainContent .Categories__left .Categories__cost .Categories__old-price {
+    text-decoration: line-through;
+    color: var(--text-color-form);
+}
+
+.Categories__mainContent .Categories__left .Categories__cost .Categories__new-price {
+    font-size: 32px;
+    color: #d32f2f;
+}
+
+.Categories__mainContent .Categories__left .Categories__consultation-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--secondary-button-color);
+    color: var(--secondary-colorcolor);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.Categories__mainContent .Categories__right {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.Categories__subjectContainer {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+.Categories__mainContent .Categories__right .Categories__subject {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    width: 100%;
+    height: 80px;
+    transition: all 0.3s ease;
+}
+
+.Categories__mainContent .Categories__right .Categories__subject span {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #ffeb3b;
+    color: #000;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.Categories__mainContent .Categories__right .Categories__subject:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+}
+
+a {
+    color: var(--background-link);
+    text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    .Categories__mainContent {
+        flex-direction: column;
+        padding: 20px;
+        height: auto;
+    }
+
+    .Categories__mainContent .Categories__left {
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .Categories__mainContent .Categories__right {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .Categories__mainContent .Categories__left h2 {
+        font-size: 20px;
+    }
+
+    .Categories__mainContent .Categories__left .Categories__cost {
+        font-size: 16px;
+    }
+
+    .Categories__mainContent .Categories__left .Categories__cost .Categories__new-price {
+        font-size: 28px;
+    }
+
+    .Categories__mainContent .Categories__left .Categories__consultation-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .Categories__mainContent .Categories__right .Categories__subject {
+        height: 70px;
+        padding: 15px;
+    }
+
+    .Categories__mainContent .Categories__right .Categories__subject span {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        line-height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Categories__descriptionImg {
+        display: none;
+    }
+
+    .Categories__mainContent .Categories__left h2 {
+        font-size: 18px;
+    }
+
+    .Categories__mainContent .Categories__left .Categories__cost {
+        font-size: 14px;
+    }
+
+    .Categories__mainContent .Categories__left .Categories__cost .Categories__new-price {
+        font-size: 24px;
+    }
+
+    .Categories__mainContent .Categories__left .Categories__consultation-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .Categories__mainContent .Categories__right .Categories__subject {
+        height: 60px;
+        padding: 10px;
+    }
+
+    .Categories__mainContent .Categories__right .Categories__subject span {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        line-height: 35px;
+    }
+}
+
+.EditTeacherForm-module__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: auto;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 12px;
+}
+
+.EditTeacherForm-module__formContainer {
+    flex: 1;
+    margin-right: 20px;
+    margin-bottom: 50px;
+}
+
+h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.EditTeacherForm-module__formContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+.EditTeacherForm-module__divideGroup {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.EditTeacherForm-module__divideGroup input,
+.EditTeacherForm-module__divideGroup select {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: var(--secondary-color);
+    color: var(--text-color-form);
+}
+
+.EditTeacherForm-module__imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.EditTeacherForm-module__imgContainer img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    max-height: 300px;
+}
+
+button {
+    background-color: var(--button-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-color-hover);
+}
+
+.EditTeacherForm-module__questList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--text-color-form);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--text-color-form);
+}
+
+.EditTeacherForm-module__questList input {
+    flex: 2;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    /*background-color: var(--input-color);*/
+    font-size: 1.2rem;
+}
+
+.EditTeacherForm-module__questList button {
+    width: auto;
+    background-color: var(--secondary-button-color);
+    color: #675454;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 0;
+}
+
+.EditTeacherForm-module__questList button:hover {
+    background-color: var(--button-color-hover);
+    color: var(--secondary-color);
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+textarea,
+select.EditTeacherForm-module__subject {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    background-color: var(--secondary-input-color);
+    transition: box-shadow 0.3s ease;
+}
+
+.EditTeacherForm-module__imgContainer input[type='file'] {
+    bottom: 10px;
+    left: 110px;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1024px) {
+    .EditTeacherForm-module__wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .EditTeacherForm-module__formContainer {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .EditTeacherForm-module__imgContainer {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .EditTeacherForm-module__wrapper {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .EditTeacherForm-module__formContainer {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .EditTeacherForm-module__divideGroup {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .EditTeacherForm-module__imgContainer {
+        width: 100%;
+    }
+
+    .EditTeacherForm-module__questList {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .EditTeacherForm-module__questList input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .EditTeacherForm-module__questList button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .EditTeacherForm-module__wrapper {
+        padding: 5px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .EditTeacherForm-module__formContainer {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .EditTeacherForm-module__divideGroup {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .EditTeacherForm-module__divideGroup input,
+    .EditTeacherForm-module__divideGroup select {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .EditTeacherForm-module__imgContainer {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .EditTeacherForm-module__imgContainer img {
+        max-height: 200px;
+    }
+
+    .EditTeacherForm-module__questList {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .EditTeacherForm-module__questList input {
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .EditTeacherForm-module__questList button {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+.EditTeacherProfile__editTeacherProfile {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+}
+
+.EditUserForm-module__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: auto;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 12px;
+}
+
+.EditUserForm-module__formContainer {
+    flex: 1;
+    margin-right: 20px;
+    margin-bottom: 50px;
+}
+
+h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.EditUserForm-module__formContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+.EditUserForm-module__divideGroup {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.EditUserForm-module__divideGroup input,
+select {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: var(--secondary-input-color);
+}
+.EditUserForm-module__divideGroup select {
+    color: var(--text-color-form);
+}
+
+.EditUserForm-module__imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.EditUserForm-module__imgContainer img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    max-height: 300px;
+}
+
+button {
+    background-color: var(--button-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-color-hover);
+}
+
+.EditUserForm-module__questList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.EditUserForm-module__questList input {
+    flex: 2;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    /*background-color: var(--input-color);*/
+    font-size: 1.2rem;
+}
+
+.EditUserForm-module__questList button {
+    width: auto;
+    background-color: var(--secondary-button-color);
+    color: #675454;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 0;
+}
+
+.EditUserForm-module__questList button:hover {
+    background-color: var(--button-color-hover);
+    color: var(--secondary-color);
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    background-color: var(--secondary-input-color);
+    transition: box-shadow 0.3s ease;
+}
+
+.EditUserForm-module__imgContainer input[type='file'] {
+    bottom: 10px;
+    left: 110px;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1024px) {
+    .EditUserForm-module__wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .EditUserForm-module__formContainer {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .EditUserForm-module__imgContainer {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .EditUserForm-module__wrapper {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .EditUserForm-module__formContainer {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .EditUserForm-module__divideGroup {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .EditUserForm-module__imgContainer {
+        width: 100%;
+    }
+
+    .EditUserForm-module__questList {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .EditUserForm-module__questList input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .EditUserForm-module__questList button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .EditUserForm-module__wrapper {
+        padding: 5px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .EditUserForm-module__formContainer {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .EditUserForm-module__divideGroup {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .EditUserForm-module__divideGroup input,
+    .EditUserForm-module__divideGroup select {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .EditUserForm-module__imgContainer {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .EditUserForm-module__imgContainer img {
+        max-height: 200px;
+    }
+
+    .EditUserForm-module__questList {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .EditUserForm-module__questList input {
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .EditUserForm-module__questList button {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+}
+
+.Questionary-module__formContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--background-color);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.Questionary-module__formGroup {
+    flex: 1;
+}
+
+.Questionary-module__container {
+    text-align: center;
+}
+
+.Questionary-module__topElements {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.Questionary-module__element {
+    background-color: var(--elements);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.Questionary-module__logo {
+    background-color: #ba68c8;
+    color: var(--secondary-color);
+    font-size: 36px;
+    font-weight: bold;
+    padding: 20px 40px;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.Questionary-module__logo:hover {
+    transform: scale(1.05);
+}
+
+.Questionary-module__header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    color: var(--text-color-form);
+    background-color: var(--secondary-input-color);
+}
+
+select {
+    width: 120%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.Questionary-module__flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}
+
+.Questionary-module__flex-container > * {
+    flex: 1;
+    margin: 5px 0;
+}
+
+.Questionary-module__flex-container .Questionary-module__email,
+.Questionary-module__flex-container .Questionary-module__years {
+    width: 100%;
+}
+
+.Questionary-module__flex-container > * {
+    flex: 1;
+    margin: 5px 0;
+}
+
+.Questionary-module__fullname,
+.Questionary-module__email,
+.Questionary-module__years,
+.Questionary-module__select {
+    width: 100%;
+}
+
+button {
+    background-color: var(--button-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    margin: 10px auto 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .Questionary-module__formContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .Questionary-module__flex-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .Questionary-module__topElements {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .Questionary-module__element {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .Questionary-module__logo {
+        font-size: 28px;
+        padding: 15px 30px;
+    }
+
+    .Questionary-module__topElements {
+        flex-direction: column;
+    }
+
+    .Questionary-module__element {
+        margin: 5px 0;
+    }
+
+    input,
+    select {
+        font-size: 12px;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Questionary-module__logo {
+        font-size: 22px;
+        padding: 10px 20px;
+    }
+
+    .Questionary-module__element {
+        padding: 8px 16px;
+        margin: 5px 0;
+    }
+
+    input,
+    select {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    button {
+        padding: 6px 12px;
+    }
+}
+
+.TeacherCard-module__teacherCard {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+    width: 150%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.TeacherCard-module__teacherImage {
+    margin-right: 20px;
+}
+
+.TeacherCard-module__teacherImage img {
+    border-radius: 15%;
+    width: 220px;
+    height: 200px;
+}
+
+.TeacherCard-module__teacherInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 300px;
+}
+
+.TeacherCard-module__teacherHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.TeacherCard-module__circle {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.TeacherCard-module__teacherInfo h2 {
+    font-size: 24px;
+    color: #ff6500;
+    margin: 0;
+}
+
+.TeacherCard-module__teacherInfo p {
+    font-size: 14px;
+    color: #999;
+    margin: 10px 0;
+}
+
+.TeacherCard-module__teacherInfo ul {
+    justify-content: left;
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.TeacherCard-module__teacherInfo li {
+    font-size: 16px;
+    color: #333;
+}
+
+.FindTeacherPage__flexContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: var(--background-color);
+    flex-wrap: wrap;
+}
+
+.FindTeacherPage__imageForm {
+    width: 40%;
+    height: auto;
+    padding: 5px;
+}
+
+.FindTeacherPage__teachersSection {
+    width: 100%;
+    text-align: center;
+    background-image: url(ad518d7e956832c38d0b.png);
+    background-size: cover;
+    background-color: var(--background-color);
+    height: 95vh;
+    overflow-y: auto;
+    margin: 0;
+}
+
+.FindTeacherPage__teachersHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.FindTeacherPage__teachersHeader h1 {
+    font-size: 32px;
+    margin-right: auto;
+}
+
+.FindTeacherPage__buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.FindTeacherPage__prev-button,
+.FindTeacherPage__next-button {
+    background-color: var(--green-details);
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    color: var(--secondary-color);
+    margin-left: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.FindTeacherPage__prev-button:hover,
+.FindTeacherPage__next-button:hover {
+    background-color: var(--teacher-title);
+}
+
+.FindTeacherPage__carouselContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.FindTeacherPage__cardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    padding: 40px;
+    background-color: var(--secondary-input-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    flex-wrap: wrap;
+}
+
+.FindTeacherPage__teacherCard {
+    width: 100%;
+}
+
+.FindTeacherPage__teacherImage img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.FindTeacherPage__teacherInfo {
+    margin-left: 20px;
+}
+
+.FindTeacherPage__teacherInfo h2 {
+    font-size: 24px;
+    color: #ff6500;
+}
+
+.FindTeacherPage__teacherInfo p {
+    font-size: 14px;
+    color: #999;
+}
+
+.FindTeacherPage__teacherInfo ul {
+    list-style: none;
+    padding: 0;
+}
+
+.FindTeacherPage__teacherInfo li {
+    font-size: 16px;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .FindTeacherPage__flexContainer {
+        flex-direction: column;
+    }
+
+    .FindTeacherPage__imageForm {
+        width: 60%;
+    }
+
+    .FindTeacherPage__teachersHeader h1 {
+        font-size: 28px;
+    }
+
+    .FindTeacherPage__cardContainer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .FindTeacherPage__imageForm {
+        width: 100%;
+    }
+
+    .FindTeacherPage__teachersHeader h1 {
+        font-size: 24px;
+    }
+
+    .FindTeacherPage__cardContainer {
+        padding: 10px;
+    }
+
+    .FindTeacherPage__teacherImage img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .FindTeacherPage__teacherInfo h2 {
+        font-size: 20px;
+    }
+
+    .FindTeacherPage__teacherInfo p,
+    .FindTeacherPage__teacherInfo li {
+        font-size: 13px;
+    }
+}
+
+.TextMain-module__TextContainer {
+    padding: 20px;
+    background-color: var(--text-color);
+    color: var(--background-color);
+    text-align: center;
+}
+
+.TextMain-module__mainElement {
+    margin-bottom: 40px;
+}
+
+.TextMain-module__featuresContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.TextMain-module__featureBox,
+.TextMain-module__featureBoxPurple {
+    background-color: var(--background-color-main-details);
+    padding: 20px;
+    width: 300px;
+    height: 200px;
+    color: var(--secondary-color);
+    text-align: center;
+    border-radius: 10px;
+}
+
+.TextMain-module__featureBox {
+    background-color: var(--secondary-color);
+}
+
+.TextMain-module__featureBox img,
+.TextMain-module__featureBoxPurple img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.TextMain-module__featureBox h1,
+.TextMain-module__featureBoxPurple h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.TextMain-module__featureBox p,
+.TextMain-module__featureBoxPurple p {
+    font-size: 16px;
+}
+
+.TextMain-module__featureBoxPurple h1 {
+    color: var(--secondary-color);
+}
+
+.TextMain-module__featureBox p {
+    color: var(--text-color);
+}
+
+.TextMain-module__whySchool {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .TextMain-module__featureBox,
+    .TextMain-module__featureBoxPurple {
+        width: 100%;
+        height: auto;
+    }
+
+    .TextMain-module__featuresContainer {
+        gap: 10px;
+    }
+
+    .TextMain-module__featureBox h1,
+    .TextMain-module__featureBoxPurple h1 {
+        font-size: 20px;
+    }
+
+    .TextMain-module__featureBox p,
+    .TextMain-module__featureBoxPurple p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .TextMain-module__TextContainer {
+        padding: 15px;
+    }
+
+    .TextMain-module__mainElement {
+        margin-bottom: 20px;
+    }
+
+    .TextMain-module__featureBox h1,
+    .TextMain-module__featureBoxPurple h1 {
+        font-size: 18px;
+    }
+
+    .TextMain-module__featureBox p,
+    .TextMain-module__featureBoxPurple p {
+        font-size: 12px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.HomePage__homeSection {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--secondary-text-color);
+}
+
+.HomePage__imageContainer {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.HomePage__main {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+.HomePage__image {
+    width: 100%;
+    height: auto;
+}
+
+.HomePage__textOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-color);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: var(--background-color);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.HomePage__communicationSkills h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.HomePage__communicationSkills span {
+    color: var(--primary-color);
+}
+
+.HomePage__communicationSkills p {
+    margin: 20px 0;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.HomePage__findTeacherBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    border-radius: 75px;
+}
+
+.HomePage__findTeacherBtn:hover {
+    background-color: var(--button-color-hover);
+}
+
+.HomePage__quest {
+    padding: 50px;
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.HomePage__flexContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.HomePage__imageForm {
+    width: 50%;
+    height: auto;
+    padding: 5px;
+}
+
+@media (max-width: 768px) {
+    .HomePage__imageContainer {
+        display: none;
+    }
+
+    .HomePage__findTeacherBtn {
+        width: 50%;
+        padding: 20px;
+    }
+
+    .HomePage__communicationSkills h1 {
+        font-size: 36px;
+    }
+
+    .HomePage__communicationSkills p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .HomePage__communicationSkills h1 {
+        font-size: 28px;
+    }
+
+    .HomePage__communicationSkills p {
+        font-size: 14px;
+    }
+
+    .HomePage__findTeacherBtn {
+        padding: 8px 16px;
+    }
+}
+
+.Logo-module__logo {
+    width: 50px;
+    height: auto;
+    margin-right: 5px;
+}
+
 .SignUpForm-module__signupWrap {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-right: 100px;
 }
 
 .SignUpForm-module__formSection {
@@ -45,14 +1915,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: var(--secondary-color);
     border-radius: 15px;
 }
 
 h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: #ba68c8;
+    color: var(--primary-color);
 }
 
 form {
@@ -71,8 +1941,8 @@ input {
 
 button {
     padding: 1rem;
-    background-color: #e75fff;
-    color: white;
+    background-color: var(--button-color);
+    color: var(--secondary-color);
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -80,32 +1950,114 @@ button {
 }
 
 button:hover {
-    background-color: #79206a;
+    background-color: var(--button-color-hove);
 }
 
 .SignUpForm-module__formSection p {
     margin-top: 1rem;
     font-size: 1.5rem;
-    color: #989898;
+    color: var(--text-color-form);
 }
 
 .SignUpForm-module__teacherLink a,
 .SignUpForm-module__signinLink a {
-    color: #e75fff;
+    color: var(--background-link);
     text-decoration: none;
 }
 
 .SignUpForm-module__teacherLink a:hover,
 .SignUpForm-module__signinLink a:hover {
-    color: #81297e;
+    color: var(--background-link-hover);
+}
+@media (max-width: 1024px) {
+    .SignUpForm-module__formSection {
+        padding: 2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    input {
+        font-size: 0.95rem;
+        padding: 0.9rem;
+    }
+
+    button {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .SignUpForm-module__formSection p {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .SignUpForm-module__formSection {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    input {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    button {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .SignUpForm-module__formSection p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .SignUpForm-module__formSection {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    input {
+        font-size: 0.85rem;
+        padding: 0.7rem;
+    }
+
+    button {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+    }
+
+    .SignUpForm-module__formSection p {
+        font-size: 1.1rem;
+    }
+}
+
+.Pic-module__signupImage {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 480px) {
+    .Pic-module__signupImage {
+        display: none;
+    }
 }
 
 .SignUp__signupPage {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
-    background-color: transparent; 
+    height: 100vh;
+    background-color: transparent;
 }
 
 .SignUp__containerPage {
@@ -113,12 +2065,12 @@ button:hover {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
 }
 
 .SignUp__signupLeft {
-    background-color: #fff;
+    background-color: var(--secondary-color);
     width: 50%;
     padding: 80px;
     display: flex;
@@ -141,12 +2093,6 @@ button:hover {
     text-align: center;
 }
 
-.SignUp__logo {
-    width: 50px;
-    height: auto;
-    margin-right: 5px;
-}
-
 .SignUp__signupRight {
     width: 50%;
     display: flex;
@@ -155,8 +2101,232 @@ button:hover {
     height: 100%;
 }
 
-.SignUp__signupImage {
+@media (max-width: 768px) {
+    .SignUp__containerPage {
+        flex-direction: column;
+    }
+
+    .SignUp__signupLeft,
+    .SignUp__signupRight {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .SignUp__illustrationSection {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .SignUp__signupLeft {
+        padding: 10px;
+    }
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+.ViewUserPage__mainContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.ViewUserPage__minHScreen {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 20px;
+}
+
+.ViewUserPage__container {
+    display: flex;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 800px;
+    max-width: 90%;
+    height: auto;
+}
+
+.ViewUserPage__imageSection {
+    flex: 1;
+}
+
+.ViewUserPage__imageSection img {
     width: 100%;
     height: auto;
+    object-fit: cover;
+}
+
+.ViewUserPage__contentSection {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+}
+
+.ViewUserPage__contentSection h1 {
+    color: var(--primary-color);
+    font-size: 36px;
+    margin: 0;
+}
+
+.ViewUserPage__contentSection h2 {
+    color: var(--text-color);
+    font-size: 18px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.ViewUserPage__contentSection p {
+    color: var(--text-color-form);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.ViewUserPage__editButton {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+}
+
+footer {
+    background-color: var(--secondary-input-color);
+    padding: 10px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .ViewUserPage__contentSection h1 {
+        font-size: 28px;
+    }
+
+    .ViewUserPage__contentSection h2 {
+        font-size: 16px;
+    }
+
+    .ViewUserPage__contentSection p {
+        font-size: 15px;
+    }
+
+    .ViewUserPage__editButton {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ViewUserPage__container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .ViewUserPage__imageSection img {
+        height: 200px;
+    }
+
+    .ViewUserPage__contentSection {
+        padding: 15px;
+    }
+
+    .ViewUserPage__contentSection h1 {
+        font-size: 24px;
+    }
+
+    .ViewUserPage__contentSection h2 {
+        font-size: 14px;
+    }
+
+    .ViewUserPage__contentSection p {
+        font-size: 14px;
+    }
+
+    .ViewUserPage__editButton {
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ViewUserPage__contentSection h1 {
+        font-size: 20px;
+    }
+
+    .ViewUserPage__contentSection h2 {
+        font-size: 12px;
+    }
+
+    .ViewUserPage__contentSection p {
+        font-size: 12px;
+    }
+}
+
+.Reset-module__reset {
+    background-image: url(ad518d7e956832c38d0b.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.Reset-module__container {
+    color: var(--primary-color);
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.Reset-module__reset form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.Reset-module__reset input,
+.Reset-module__reset button {
+    width: 50%;
+    height: 40px;
+}
+
+.NotFound-module__wrapper {
+    background-image: url(ad518d7e956832c38d0b.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.NotFound-module__container {
+    color: var(--primary-color);
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
 }
 

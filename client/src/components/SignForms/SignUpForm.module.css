@@ -68,7 +68,6 @@ button:hover {
 .signinLink a:hover {
     color: var(--background-link-hover);
 }
-
 @media (max-width: 1024px) {
     .formSection {
         padding: 2rem;
